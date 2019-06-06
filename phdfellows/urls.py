@@ -1,0 +1,15 @@
+from django.conf.urls import url, include
+from django.contrib.auth import views as auth_views
+
+from phdfellows import views
+from phdadmission.views import HomePage
+
+app_name='phdfellows'
+
+urlpatterns = [
+    url(r'^$', HomePage.as_view(), name='home'),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
+    url(r'login/$',auth_views.LoginView.as_view(),name = 'login'),
+]

@@ -71,18 +71,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'phdadmission.wsgi.application'
 
-
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sirkpjad@gmail.com'
+EMAIL_HOST_PASSWORD = 'Believe@00'
+EMAIL_PORT = 587
+AUTH_USER_EMAIL_UNIQUE = True
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'phd_admission',
-        'USER': 'root',
-        'PASSWORD': 'IITRopar@123',
-        'HOST': 'localhost',
-        'PORT': '3386',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'NAME': 'phd_admission',
+        # 'USER': 'root',
+        # 'PASSWORD': 'IITRopar@123',
+        # 'HOST': 'localhost',
+        # 'PORT': '3386',
     }
 }
 
