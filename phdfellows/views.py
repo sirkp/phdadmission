@@ -9,9 +9,22 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from phdfellows.models import PhdFellows
 from django.contrib.auth import get_user_model
-
+from django.views.generic import (View,TemplateView,
+                                    ListView,DetailView,CreateView,UpdateView,
+                                    DeleteView)
 UserModel = get_user_model()
+
+class HomePage(TemplateView):
+    model = PhdFellows
+    template_name = 'phdfellows/homepage.html'
+    # def get_context_data(self,**kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['injectme'] = 'BASIC INJECTION!'
+    #     # injectme is the key
+    #     return context
+
 
 def signup(request):
     if request.method == 'POST':
