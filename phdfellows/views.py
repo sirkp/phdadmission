@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        PermissionRequiredMixin)
 from phdfellows.forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -16,9 +18,13 @@ from django.views.generic import (View,TemplateView,
                                     DeleteView)
 UserModel = get_user_model()
 
-class HomePage(TemplateView):
+class HomePage(LoginRequiredMixin,TemplateView):
     model = PhdFellows
     template_name = 'phdfellows/homepage.html'
+    # def get(self, request):
+    #     user = self.request.user
+    #     print(user)
+    #     return render(request, self.template_name)
     # def get_context_data(self,**kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context['injectme'] = 'BASIC INJECTION!'
@@ -26,18 +32,16 @@ class HomePage(TemplateView):
     #     return context
 
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            email = request.POST['email']
+            user_email = request.POST['email']
             user = form.save(commit=False)
             user.is_active = False
+            user.username = user_email
             user.save()
-            myuser = UserModel.objects.get(email__exact=email)
-            myuser.username = email
-            myuser.save()
-            print(myuser)
             current_site = get_current_site(request)
             message = render_to_string('acc_active_email.html', {
                 'user':user, 'domain':current_site.domain,
@@ -52,7 +56,6 @@ def signup(request):
     else:
         form = SignupForm()
     return render(request, 'phdfellows/signup.html', {'form': form})
-
 
 def activate(request, uidb64, token):
     try:

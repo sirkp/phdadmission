@@ -4,13 +4,14 @@
 {% block body %}
 
   <div class="container">
-    <h1>Log In</h1>
-    <form method = "POST">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <input type="submit" class="btn btn-primary" value="Login">
-      <p>Note:Your registered email is your username</p>
-    </form>
+        <h1>Log In</h1>
+        <form method = "POST">
+          {% csrf_token %}
+
+          {% bootstrap_form form %}
+          <input type="submit" class="btn btn-primary" value="Login">
+          <p>Note:Your registered email is your username</p>
+        </form>
   </div>
 
 {% endblock %}
