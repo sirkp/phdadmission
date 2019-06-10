@@ -8,6 +8,11 @@
     <form><button type="submit" class="btn btn-primary" formaction="{% url 'phdfellows:logout' %}">Logout</button></form>
     <form><button type="submit" class="btn btn-warning" formaction="{% url 'phdfellows:application' %}">Apply</button></form>
   </div>
+  <div class="centerstage">
+    {% for application in applications %}
+      <h1><a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.email}}</a></h1>
+    {% endfor %}
+  </div>
 
   {% else %}
       <div class="container">

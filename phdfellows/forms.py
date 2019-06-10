@@ -25,11 +25,9 @@ class SignupForm(UserCreationForm):
 class ApplicationForm(forms.ModelForm):
     class Meta():
         model = Application
-        exclude = ('user','application_no','first_name','last_name','email')
+        exclude = ('submitted_at','current_status','previous_status','user','application_no','first_name','last_name','email')
 
-    # def get_initial(self,*args,**kwargs):
-    #     super().__init__(*args,**kwargs)
-    #     self.fields['user']=self.request.user
-    #     self.fields['first_name']=self.request.user.first_name
-    #     self.fields['last_name']=self.request.user.first_name
-    #     self.fields['email']=self.request.user.email
+    def __init__(self, *args, **kwargs):
+        super(ApplicationForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].required = False

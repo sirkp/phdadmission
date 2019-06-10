@@ -1,5 +1,6 @@
 from django.db import models
-import datetime
+from datetime import date
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import User,AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.core.validators import RegexValidator
@@ -20,7 +21,7 @@ class Application(models.Model):
     ]
     category = models.CharField(choices=category_choices, default='General',max_length=10)
 
-    having_disability = models.BooleanField(default=False)
+    having_disability = models.BooleanField("Disabled",default=False)
     research_area_choices = [
         ('Machine Learning','Machine Learning'),
         ('Cloud Computing','Cloud Computing'),
@@ -29,6 +30,12 @@ class Application(models.Model):
         ('Cryptography','Cryptography'),
     ]
     research_area = models.CharField(choices=research_area_choices,max_length=50)
+
+    applying_for_list = [
+        ('PhD','PhD'),
+        ('MS','MS'),
+    ]
+    applying_for = models.CharField(choices=applying_for_list,max_length=5)
 
     enrollment_type_list = [
         ('Full time','Full time'),
@@ -42,9 +49,9 @@ class Application(models.Model):
 
     email = models.EmailField(max_length=200)
 
-    date_of_birth = models.DateTimeField(datetime.date.today())
+    date_of_birth = models.DateField(_("Date of Birth"),default=date.today)
 
-    martial_status = models.BooleanField(default=False)
+    married = models.BooleanField(default=False)
 
     gender_list = [
         ('Male','Male'),
@@ -53,7 +60,7 @@ class Application(models.Model):
     ]
     gender = models.CharField(choices=gender_list,max_length=20)
 
-    phone_no = models.CharField(max_length=13)
+    phone_no = models.CharField("Phone Number(With Country Code)",max_length=13)
 
     address = models.TextField()
 
@@ -61,9 +68,9 @@ class Application(models.Model):
 
     city = models.CharField(max_length=50)
 
-    pin_code = models.IntegerField(validators=[RegexValidator(regex='^.{6}$',message='Length has to be 6', code='nomatch')])
+    pin_code = models.CharField(validators=[RegexValidator(regex='^.{6}$',message='Length has to be 6', code='nomatch')],max_length=6)
 
-    score_in_ug = models.FloatField()
+    score_in_ug = models.FloatField("Score in UG",null=True)
 
     scale_score_list = [
         ('0-5 CGPA','0-5 CGPA',),
@@ -79,19 +86,19 @@ class Application(models.Model):
         ('ECE','ECE'),
         ('CE','CE'),
     ]
-    ug_discipline = models.CharField(choices=ug_discipline_list,max_length=20)
+    ug_discipline = models.CharField("UG Discipline",choices=ug_discipline_list,max_length=20)
 
-    ug_college_or_university = models.CharField('UG College/University')
+    ug_college_or_university = models.CharField('UG College/University',max_length=200)
 
-    pg_passed_or_expected_to_pass_in_year = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')])
+    pg_passed_or_expected_to_pass_in_year = models.IntegerField("PG Passed Year or Expected to Pass in Year",validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4',code='nomatch')],null=True)
 
-    score_in_pg = models.FloatField()
+    score_in_pg = models.FloatField("Score in PG",null=True)
 
     scale_of_score_pg = models.CharField("Scale of Score",choices=scale_score_list, max_length=20)
 
-    pg_discipline = models.CharField(choices=ug_discipline_list,max_length=50)
+    pg_discipline = models.CharField("PG Discipline",choices=ug_discipline_list,max_length=50)
 
-    ug_college_or_university = models.CharField('UG College/University', max_length=20)
+    pg_college_or_university = models.CharField('PG College/University', max_length=200)
 
     qualifying_examination_list = [
         ("GATE","GATE"),
@@ -101,13 +108,13 @@ class Application(models.Model):
 
     branch_code_for_qualifying_exam = models.CharField(choices=ug_discipline_list, max_length=10)
 
-    qualifying_exam_score_valid_upto = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')])
+    qualifying_exam_score_valid_upto = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')],null=True)
 
-    all_india_rank_in_qualifying_exam = models.IntegerField()
+    all_india_rank_in_qualifying_exam = models.IntegerField("All India rank in Qualifying Exam",null=True)
 
-    score_in_qualifying_exam = models.IntegerField()
+    score_in_qualifying_exam = models.FloatField(null=True)
 
-    work_experience_in_year = models.IntegerField("Work Experpience(in years)")
+    work_experience_in_year = models.CharField("Work Experpience(in years)",max_length=3)
 
     type_of_work_list = [
         ('Teaching','Teaching'),
@@ -117,10 +124,27 @@ class Application(models.Model):
     ]
     type_of_work = models.CharField(choices=type_of_work_list,max_length=50)
 
-    no_of_peer_reviewed_publications = models.IntegerField()
+    no_of_peer_reviewed_publications = models.IntegerField(null=True)
 
-    no_of_patents_granted = models.IntegerField()
+    no_of_patents_granted = models.IntegerField(null=True)
 
     guide_preference_1 = models.CharField(max_length=200)
     guide_preference_2 = models.CharField(max_length=200)
     guide_preference_3 = models.CharField(max_length=200)
+
+    status_list = [
+        ('Draft','Draft'),
+        ('Submitted','Submitted'),
+        ('Shortlisted for Test','Shortlisted for Test'),
+        ('Shortlisted for Interview','Shortlisted for Interview'),
+        ('Selected','Selected'),
+        ('Rejected','Rejected'),
+    ]
+    current_status = models.CharField(default='Draft',choices=status_list,max_length=30)
+
+    previous_status = models.CharField(max_length=30)
+
+    submitted_at = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.first_name+" "+self.last_name+"("+self.user.username+")"

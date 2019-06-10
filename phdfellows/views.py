@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from phdfellows.models import PhdFellows
+from phdfellows.models import PhdFellows,Application
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.views.generic import (View,TemplateView,
@@ -20,9 +20,14 @@ from django.views.generic import (View,TemplateView,
                                     DeleteView)
 UserModel = get_user_model()
 
-class HomePage(LoginRequiredMixin,TemplateView):
+class HomePage(LoginRequiredMixin,ListView):
+    login_url = '/login'
     model = PhdFellows
     template_name = 'phdfellows/homepage.html'
+    context_object_name = 'applications'
+
+    def get_queryset(self):
+        return Application.objects.filter(email=self.request.user.email)
     # def get(self, request):
     #     user = self.request.user
     #     print(user)
@@ -72,6 +77,15 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+# class ApplicationListView(LoginRequiredMixin, ListView):
+#     login_url = '/login'
+#     model = Application
+#     template_name = 'phdfellows/homepage.html'
+#     context_object_name = 'applications'
+#
+#     def get_queryset(self):
+#         return Application.objects.filter(email=self.request.user.email)
+
 class ApplicationCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login'
     form_class = ApplicationForm
@@ -90,3 +104,9 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
     # def form_valid(self, form):
     #     form.instance.user = self.request.user
     #     return super(ApplicationCreateView, self).form_valid(form)
+class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/login'
+    model = Application
+    form_class = ApplicationForm
+    success_url = reverse_lazy('phdfellows:home')
+    template_name = 'phdfellows/application.html'
