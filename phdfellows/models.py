@@ -9,9 +9,8 @@ class PhdFellows(User,PermissionsMixin):
         return self.first_name+" "+self.last_name
 
 class Application(models.Model):
-    phdfellow = models.OneToOneField(User, on_delete=models.CASCADE)
-    application_no = models.IntegerField(validators=[RegexValidator(regex='^.{11}$',message='Length has to be 11', code='nomatch')], unique=True)
-
+    user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    # application_no = models.IntegerField(validators=[RegexValidator(regex='^.{11}$',message='Length has to be 11', code='nomatch')], unique=True)
     category_choices = [
         ('SC','SC'),
         ('OBC','OBC'),
@@ -40,6 +39,8 @@ class Application(models.Model):
     first_name = models.CharField(max_length=200)
 
     last_name = models.CharField(max_length=200)
+
+    email = models.EmailField(max_length=200)
 
     date_of_birth = models.DateTimeField(datetime.date.today())
 

@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
-from phdfellows.forms import SignupForm
+from phdfellows.forms import SignupForm, ApplicationForm
+from phdfellows import forms
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -12,6 +13,7 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from phdfellows.models import PhdFellows
+from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.views.generic import (View,TemplateView,
                                     ListView,DetailView,CreateView,UpdateView,
@@ -69,3 +71,22 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+class ApplicationCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login'
+    form_class = ApplicationForm
+    success_url = reverse_lazy('phdfellows:home')
+    template_name = 'phdfellows/application.html'
+
+    def form_valid(self, form):## connecting the post with user
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.first_name = self.request.user.first_name
+        self.object.last_name = self.request.user.last_name
+        self.object.email = self.request.user.email
+        self.object.save()
+        return super().form_valid(form)
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super(ApplicationCreateView, self).form_valid(form)

@@ -6,6 +6,7 @@
     <h1>Welcome  {{user.first_name}} {{user.last_name}}</h1>
     <p></p>
     <form><button type="submit" class="btn btn-primary" formaction="{% url 'phdfellows:logout' %}">Logout</button></form>
+    <form><button type="submit" class="btn btn-warning" formaction="{% url 'phdfellows:application' %}">Apply</button></form>
   </div>
 
   {% else %}
