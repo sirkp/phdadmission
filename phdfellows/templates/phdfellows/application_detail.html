@@ -3,5 +3,8 @@
 {% block body %}
   <div class="jumbotron">
     <h1>Welcome to Detail Page {{ application_detail.first_name}} {{application_detail.last_name }} </h1>
+    <p>Category: {{application_detail.category}}</p>
+    <p>Specially Abled : {{application_detail.having_disability}}</p>
+    <p>Research Area: {{application_detail.research_area}}</p>
   </div>
 {% endblock %}
