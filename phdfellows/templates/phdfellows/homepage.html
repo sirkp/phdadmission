@@ -11,8 +11,11 @@
   <div class="centerstage">
       {% for application in applications %}
         {% ifequal application.current_status "Draft" %}
-          <h1><a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.email}}</a></h1>
+          <h3><a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.email }} {{application.current_status}}</a></h3>
+        {% else %}
+          <h3><a href="{% url 'phdfellows:application_detail' pk=application.pk %}">{{application.email }} {{application.current_status}}</a></h3>
         {% endifequal %}
+
       {% endfor %}
   </div>
 

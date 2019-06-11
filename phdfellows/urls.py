@@ -15,6 +15,5 @@ urlpatterns = [
     url(r'logout/$',auth_views.LogoutView.as_view(),name = 'logout'),
     url(r'application/$',views.ApplicationCreateView.as_view(),name = 'application'),
     url(r'update/(?P<pk>\d+)/$',views.ApplicationUpdateView.as_view(),name = 'update'),
-    # url(r'application/submit/$',views.SubmitApplication.as_view(),name = 'submit'),
-
+    url(r'application_detail/(?P<pk>\d+)/$',views.ApplicationDetailView.as_view(),name = 'application_detail'),
 ]

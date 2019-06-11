@@ -117,6 +117,10 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
             self.object.save()
         return super().form_valid(form)
 
+class ApplicationDetailView(LoginRequiredMixin,DetailView):
+    context_object_name = 'application_detail'
+    model = Application
+    template_name = 'phdfellows/application_detail.html'
 # ###############
 # ###############
 # class SubmitApplication(LoginRequiredMixin,View):
