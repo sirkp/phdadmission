@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from phdfellows.models import PhdFellows,Application
 from django.urls import reverse_lazy
+from django.views import View
 from django.contrib.auth import get_user_model
 from django.views.generic import (View,TemplateView,
                                     ListView,DetailView,CreateView,UpdateView,
@@ -92,7 +93,7 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('phdfellows:home')
     template_name = 'phdfellows/application.html'
 
-    def form_valid(self, form):## connecting the post with user
+    def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.first_name = self.request.user.first_name
@@ -101,12 +102,32 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     return super(ApplicationCreateView, self).form_valid(form)
 class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login'
     model = Application
     form_class = ApplicationForm
     success_url = reverse_lazy('phdfellows:home')
     template_name = 'phdfellows/application.html'
+
+    def form_valid(self, form):
+        if('submit_application' in self.request.POST):
+            self.object = form.save(commit=False)
+            self.object.previous_status = self.object.current_status
+            self.object.current_status = "Submitted"
+            self.object.save()
+        return super().form_valid(form)
+
+# ###############
+# ###############
+# class SubmitApplication(LoginRequiredMixin,View):
+#     login_url = '/login'
+#     form_class = ApplicationSubmitForm
+#     success_url = reverse_lazy('phdfellows:home')
+#
+#     def form_valid(self, form):
+#         self.object = form.save(commit=False)
+#         self.object.previous_status = self.object.current_status
+#         self.object.current_status = "Submitted"
+#         return super().form_valid(form)
+# #################
+# ##################

@@ -7,7 +7,8 @@
     {% csrf_token %}
 
     {% bootstrap_form form %}
-    <input type="submit" class="btn btn-primary" value="Save as Draft">
+    <input type="submit" name='save_as_draft' class="btn btn-primary" value="Save as Draft">
+    <input type="submit" name='submit_application' class="btn btn-primary" value="Submit">
   </form>
 </div>
 {% endblock %}

@@ -70,7 +70,7 @@ class Application(models.Model):
 
     pin_code = models.CharField(validators=[RegexValidator(regex='^.{6}$',message='Length has to be 6', code='nomatch')],max_length=6)
 
-    score_in_ug = models.FloatField("Score in UG",null=True)
+    score_in_ug = models.FloatField("Score in UG",)
 
     scale_score_list = [
         ('0-5 CGPA','0-5 CGPA',),
@@ -90,9 +90,9 @@ class Application(models.Model):
 
     ug_college_or_university = models.CharField('UG College/University',max_length=200)
 
-    pg_passed_or_expected_to_pass_in_year = models.IntegerField("PG Passed Year or Expected to Pass in Year",validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4',code='nomatch')],null=True)
+    pg_passed_or_expected_to_pass_in_year = models.IntegerField("PG Passed Year or Expected to Pass in Year",validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4',code='nomatch')],)
 
-    score_in_pg = models.FloatField("Score in PG",null=True)
+    score_in_pg = models.FloatField("Score in PG",)
 
     scale_of_score_pg = models.CharField("Scale of Score",choices=scale_score_list, max_length=20)
 
@@ -108,11 +108,11 @@ class Application(models.Model):
 
     branch_code_for_qualifying_exam = models.CharField(choices=ug_discipline_list, max_length=10)
 
-    qualifying_exam_score_valid_upto = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')],null=True)
+    qualifying_exam_score_valid_upto = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')],)
 
-    all_india_rank_in_qualifying_exam = models.IntegerField("All India rank in Qualifying Exam",null=True)
+    all_india_rank_in_qualifying_exam = models.IntegerField("All India rank in Qualifying Exam",)
 
-    score_in_qualifying_exam = models.FloatField(null=True)
+    score_in_qualifying_exam = models.FloatField()
 
     work_experience_in_year = models.CharField("Work Experpience(in years)",max_length=3)
 
@@ -124,9 +124,9 @@ class Application(models.Model):
     ]
     type_of_work = models.CharField(choices=type_of_work_list,max_length=50)
 
-    no_of_peer_reviewed_publications = models.IntegerField(null=True)
+    no_of_peer_reviewed_publications = models.IntegerField()
 
-    no_of_patents_granted = models.IntegerField(null=True)
+    no_of_patents_granted = models.IntegerField()
 
     guide_preference_1 = models.CharField(max_length=200)
     guide_preference_2 = models.CharField(max_length=200)
@@ -144,7 +144,7 @@ class Application(models.Model):
 
     previous_status = models.CharField(max_length=30)
 
-    submitted_at = models.DateTimeField(null=True)
+    submitted_at = models.DateTimeField()
 
     def __str__(self):
         return self.first_name+" "+self.last_name+"("+self.user.username+")"

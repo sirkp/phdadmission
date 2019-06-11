@@ -9,9 +9,11 @@
     <form><button type="submit" class="btn btn-warning" formaction="{% url 'phdfellows:application' %}">Apply</button></form>
   </div>
   <div class="centerstage">
-    {% for application in applications %}
-      <h1><a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.email}}</a></h1>
-    {% endfor %}
+      {% for application in applications %}
+        {% ifequal application.current_status "Draft" %}
+          <h1><a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.email}}</a></h1>
+        {% endifequal %}
+      {% endfor %}
   </div>
 
   {% else %}
