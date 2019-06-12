@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block body %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
 <div class="container">
   <h1>Application Form</h1>
   <form method = "POST">

@@ -1,4 +1,5 @@
 from django import forms
+from bootstrap_datepicker_plus import DatePickerInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from phdfellows.models import PhdFellows,Application
@@ -26,6 +27,7 @@ class ApplicationForm(forms.ModelForm):
     class Meta():
         model = Application
         exclude = ('submitted_at','current_status','previous_status','user','application_no','first_name','last_name','email')
+        widgets = {'date_of_birth': DatePickerInput()}
 
     def __init__(self, *args, **kwargs):
         super(ApplicationForm, self).__init__(*args, **kwargs)
