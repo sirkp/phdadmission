@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+import datetime
+from django.utils.timezone import make_aware
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -112,6 +114,13 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         if('submit_application' in self.request.POST):
             self.object = form.save(commit=False)
+            my_time=datetime.datetime.now()
+            my_time=make_aware(my_time)
+            n=Application.objects.filter(submitted_at__year=my_time.year,
+                submitted_at__month=my_time.month, submitted_at__day=my_time.day,
+                current_status='Submitted').count() + 1
+            app_no = ((my_time.year*100 + my_time.month)*100 + my_time.day)*1000 + n
+            self.object.application_no = app_no
             self.object.previous_status = self.object.current_status
             self.object.current_status = "Submitted"
             self.object.save()
