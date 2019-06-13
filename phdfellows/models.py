@@ -48,7 +48,7 @@ class Application(models.Model):
 
     email = models.EmailField(max_length=200)
 
-    date_of_birth = models.DateField(_("Date of Birth"))
+    date_of_birth = models.DateField(_("Date of Birth"),null=True)
 
     married = models.BooleanField(default=False)
 

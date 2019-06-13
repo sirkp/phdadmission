@@ -2,16 +2,16 @@
 {% load bootstrap4 %}
 {% block body %}
   <div class="jumbotron">
-    <h1>Welcome to Detail Page {{ application_detail.first_name}} {{application_detail.last_name }} </h1>
     <h1>Welcome to Detail Page {{ application_detail.first_name}} {{application_detail.last_name }} </h1><br>
     <hr><br>
+    <p>Roll NO/Application NO : {{application_detail.application_no}}</p>
     <p>FirstName : {{application_detail.first_name}}</p>
     <p>Last Name : {{application_detail.last_name}}</p>
     <p>Gender : {{application_detail.gender}}</p>
     <p>Date of Birth : {{application_detail.date_of_birth}}</p>
     <p>Marital Status : {{application_detail.married}}</p>
     <p>Email : {{application_detail.email}}</p>
-    <p>Phone Number : {{application_detail.phone_number}}</p>
+    <p>Phone Number : {{application_detail.phone_no}}</p>
     <p>Address : {{application_detail.address}}</p>
     <p>City : {{application_detail.city}}</p>
     <p>State : {{application_detail.state}}</p>
@@ -20,7 +20,7 @@
     <p>Category : {{application_detail.category}}</p>
     <p>Research Area : {{application_detail.research_area}}</p>
     <p>Applying For : {{application_detail.applying_for}}</p>
-    <p>Enrollment Type : {{application_detail.enrollment_type</p>
+    <p>Enrollment Type : {{application_detail.enrollment_type}}</p>
     <p>UG Score : {{application_detail.score_in_ug}}  Out of (Scale) : {{application_detail.scale_of_score_ug}}</p>
     <p>UG Discipline : {{application_detail.ug_discipline}}</p>
     <p>UG Institute : {{application_detail.ug_college_or_university}}</p>
