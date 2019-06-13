@@ -6,13 +6,25 @@
     Phd Admission
 {% endblock %}
 
-
 {% block body %}
   <div class="container">
     <div class="jumbotron">
       <h1>Welcome to Phd Admission</h1>
-      <a href="{% url 'phdfellows:login' %}">Log in</a><br>
-      <a href="{% url 'phdfellows:signup' %}">Sign Up</a>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7" ><h2>Announcements</h2></div>
+            <div class="col-md-5">
+              <h2>Log In</h2>
+              <form method = "POST">
+                {% csrf_token %}
+
+                {% bootstrap_form form %}
+                <input type="submit" class="btn btn-primary" value="Login">
+                <a href="{% url 'phdfellows:signup' %}">Sign Up</a>
+              </form>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

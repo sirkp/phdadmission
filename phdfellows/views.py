@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
-from phdfellows.forms import SignupForm, ApplicationForm
+from phdfellows.forms import SignupForm, ApplicationForm,LoginForm
 from phdfellows import forms
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -17,31 +17,28 @@ from django.core.mail import EmailMessage
 from phdfellows.models import PhdFellows,Application
 from django.urls import reverse_lazy
 from django.views import View
+from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model
 from django.views.generic import (View,TemplateView,
                                     ListView,DetailView,CreateView,UpdateView,
                                     DeleteView)
 UserModel = get_user_model()
 
+
+
 class HomePage(LoginRequiredMixin,ListView):
-    login_url = '/login'
+    login_url = 'home'
     model = PhdFellows
     template_name = 'phdfellows/homepage.html'
     context_object_name = 'applications'
 
     def get_queryset(self):
         return Application.objects.filter(email=self.request.user.email)
-    # def get(self, request):
-    #     user = self.request.user
-    #     print(user)
-    #     return render(request, self.template_name)
-    # def get_context_data(self,**kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['injectme'] = 'BASIC INJECTION!'
-    #     # injectme is the key
-    #     return context
 
-
+class CustomLoginView(LoginView):
+    model = LoginView
+    form_class = LoginForm
+    template_name = 'home.html'
 
 def signup(request):
     if request.method == 'POST':
@@ -80,17 +77,8 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
-# class ApplicationListView(LoginRequiredMixin, ListView):
-#     login_url = '/login'
-#     model = Application
-#     template_name = 'phdfellows/homepage.html'
-#     context_object_name = 'applications'
-#
-#     def get_queryset(self):
-#         return Application.objects.filter(email=self.request.user.email)
-
 class ApplicationCreateView(LoginRequiredMixin, CreateView):
-    login_url = '/login'
+    login_url = 'home'
     form_class = ApplicationForm
     success_url = reverse_lazy('phdfellows:home')
     template_name = 'phdfellows/application.html'
@@ -105,7 +93,7 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = '/login'
+    login_url = 'home'
     model = Application
     form_class = ApplicationForm
     success_url = reverse_lazy('phdfellows:home')
@@ -130,17 +118,3 @@ class ApplicationDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'application_detail'
     model = Application
     template_name = 'phdfellows/application_detail.html'
-# ###############
-# ###############
-# class SubmitApplication(LoginRequiredMixin,View):
-#     login_url = '/login'
-#     form_class = ApplicationSubmitForm
-#     success_url = reverse_lazy('phdfellows:home')
-#
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.previous_status = self.object.current_status
-#         self.object.current_status = "Submitted"
-#         return super().form_valid(form)
-# #################
-# ##################

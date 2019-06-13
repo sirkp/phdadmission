@@ -1,9 +1,16 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from bootstrap_datepicker_plus import DatePickerInput
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from phdfellows.models import PhdFellows,Application
 from django.utils.translation import ugettext_lazy as _
+
+class LoginForm(AuthenticationForm):
+    model = User
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].label = "Email"
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
@@ -286,24 +293,3 @@ class ApplicationForm(forms.ModelForm):
             if (no_of_patents_granted == None):
                 raise forms.ValidationError(_("No of patents granted is required"))
             return no_of_patents_granted
-
-# ##################################
-# ##################################
-# class ApplicationSubmitForm(forms.ModelForm):
-#     class Meta():
-#         model = Application
-#         exclude = ('submitted_at','current_status','previous_status','user','application_no','first_name','last_name','email')
-#
-#     def clean(self):
-#         if 'save_as_draft' in self.data:
-#             print('save_as_draft')
-#             for field in self.fields:
-#                 self.fields[field].required = False
-#                 self.fields[field].null = True
-#         elif 'submit_application' in self.data:
-#             print('submit_application')
-#             for field in self.fields:
-#                 if (self.fields[field]):
-#                     raise forms.ValidationError(_("Field is required"))
-# ##########################
-# ##############################
