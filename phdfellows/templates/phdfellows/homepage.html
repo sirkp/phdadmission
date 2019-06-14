@@ -5,24 +5,17 @@
   <div class="container">
     <h1>Welcome  {{user.first_name}} {{user.last_name}}</h1>
     <p></p>
-    <form><button type="submit" class="btn btn-primary" formaction="{% url 'phdfellows:logout' %}">Logout</button></form>
-    <form><button type="submit" class="btn btn-warning" formaction="{% url 'phdfellows:application' %}">Apply</button></form>
+    <a href="{% url 'phdfellows:logout' %}" class="btn btn-primary">Logout</a>
+    <a href="{% url 'phdfellows:application' %}" class="btn btn-primary">Apply</a>
   </div>
-  <div class="centerstage">
+  <div class="container">
       {% for application in applications %}
         {% ifequal application.current_status "Draft" %}
           <h3><a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.email }} {{application.current_status}}</a></h3>
         {% else %}
           <h3><a href="{% url 'phdfellows:application_detail' pk=application.pk %}">{{application.email }} {{application.current_status}}</a></h3>
         {% endifequal %}
-
       {% endfor %}
   </div>
-
-  {% else %}
-      <div class="container">
-        <h1>Pleae Login!</h1>
-        <form><button type="submit" class="btn btn-primary" formaction="{% url 'phdfellows:login' %}">Login</button></form>
-      </div>
   {% endif %}
 {% endblock %}

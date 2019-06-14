@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
+{% block body %}
+  {% if user.is_authenticated %}
+    <div class="container">
+      <h2>Wencccome  {{user.first_name}} {{user.last_name}}</h2>
+      <p></p>
+      <a href="{% url 'faculty:faculty_logout' %}" class="btn btn-primary">Logout</a>
+    </div>
+  {% endif %}
+{% endblock %}

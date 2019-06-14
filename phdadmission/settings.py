@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'phdfellows',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    'faculty'
 ]
 
 MIDDLEWARE = [
@@ -134,5 +135,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = 'phdfellows:home'

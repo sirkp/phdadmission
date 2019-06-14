@@ -21,6 +21,8 @@ from phdfellows import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.CustomLoginView.as_view(),name='home'),
-    path('accounts/',include('phdfellows.urls',namespace='phdfellows')),
-    path('accounts/',include('django.contrib.auth.urls')),
+    path('phdfellows/',include('phdfellows.urls',namespace='phdfellows')),
+    path('phdfellows/',include('django.contrib.auth.urls')),
+    path('faculty/',include('faculty.urls',namespace='faculty')),
+    path('faculty/',include('django.contrib.auth.urls')),
 ]

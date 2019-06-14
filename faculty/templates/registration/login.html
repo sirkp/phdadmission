@@ -3,15 +3,16 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {{ form.media }}
+
 {% block body %}
-<div class="container">
-  <h1>Application Form</h1>
+<div class="jumbotron">
+  <h2>Staff Log In</h2>
   <form method = "POST">
     {% csrf_token %}
 
     {% bootstrap_form form %}
-    <input type="submit" name='save_as_draft' class="btn btn-primary" value="Save as Draft">
-    <input type="submit" name='submit_application' class="btn btn-primary" value="Submit">
+    <input type="submit" class="btn btn-primary" value="Login">
+    <a href="{% url 'faculty:faculty_signup' %}">Sign Up</a>
   </form>
 </div>
 {% endblock %}

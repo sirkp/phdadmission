@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 import datetime
 from django.utils.timezone import make_aware
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
@@ -19,8 +19,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model
-from django.views.generic import (View,TemplateView,
-                                    ListView,DetailView,CreateView,UpdateView,
+from django.views.generic import (RedirectView, View, TemplateView,
+                                    ListView, DetailView, CreateView, UpdateView,
                                     DeleteView)
 UserModel = get_user_model()
 
@@ -35,10 +35,13 @@ class HomePage(LoginRequiredMixin,ListView):
     def get_queryset(self):
         return Application.objects.filter(email=self.request.user.email)
 
-class CustomLoginView(LoginView):
+class CustomLoginView(LoginView,RedirectView):
     model = LoginView
     form_class = LoginForm
     template_name = 'home.html'
+
+    def get_redirect_url(self):
+        return reverse('phdfellows:home')
 
 def signup(request):
     if request.method == 'POST':

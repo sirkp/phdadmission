@@ -1,13 +1,12 @@
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django import forms
 from bootstrap_datepicker_plus import DatePickerInput
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from phdfellows.models import PhdFellows,Application
 from django.utils.translation import ugettext_lazy as _
 
 class LoginForm(AuthenticationForm):
-    model = User
+    model = PhdFellows
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].label = "Email"
