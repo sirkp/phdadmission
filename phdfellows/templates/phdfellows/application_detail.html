@@ -2,43 +2,80 @@
 {% load bootstrap4 %}
 {% block body %}
   <div class="jumbotron">
+    
     <h1>Welcome to Detail Page {{ application_detail.first_name}} {{application_detail.last_name }} </h1><br>
     <hr><br>
+
     <p>Roll NO/Application NO : {{application_detail.application_no}}</p>
-    <p>FirstName : {{application_detail.first_name}}</p>
-    <p>Last Name : {{application_detail.last_name}}</p>
-    <p>Gender : {{application_detail.gender}}</p>
-    <p>Date of Birth : {{application_detail.date_of_birth}}</p>
-    <p>Marital Status : {{application_detail.married}}</p>
-    <p>Email : {{application_detail.email}}</p>
-    <p>Phone Number : {{application_detail.phone_no}}</p>
+
+    <div class="container"><div class="row">
+    <div class="col-md-6">FirstName : {{application_detail.first_name}}</div>
+	<div class="col-md-6">Last Name : {{application_detail.last_name}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-3">Gender : {{application_detail.gender}}</div>
+    <div class="col-md-3">Marital Status : {{application_detail.married}}</div>
+    <div class="col-md-3">Category : {{application_detail.category}}</div>
+    <div class="col-md-3">Specially Abled? : {{application_detail.having_disability}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-4">Email : {{application_detail.email}}</div>
+    <div class="col-md-4">Phone Number : {{application_detail.phone_no}}</div>
+    <div class="col-md-4">Date of Birth : {{application_detail.date_of_birth}}</div>
+	</div></div>
+
     <p>Address : {{application_detail.address}}</p>
-    <p>City : {{application_detail.city}}</p>
-    <p>State : {{application_detail.state}}</p>
-    <p>PIN Code : {{application_detail.pin_code}}</p>
-    <p>Specially Abled? : {{application_detail.having_disability}}</p>
-    <p>Category : {{application_detail.category}}</p>
-    <p>Research Area : {{application_detail.research_area}}</p>
-    <p>Applying For : {{application_detail.applying_for}}</p>
-    <p>Enrollment Type : {{application_detail.enrollment_type}}</p>
-    <p>UG Score : {{application_detail.score_in_ug}}  Out of (Scale) : {{application_detail.scale_of_score_ug}}</p>
-    <p>UG Discipline : {{application_detail.ug_discipline}}</p>
-    <p>UG Institute : {{application_detail.ug_college_or_university}}</p>
-    <p>PG Completion year : {{application_detail.pg_passed_or_expected_to_pass_in_year}} </p>
-    <p>PG Score : {{application_detail.score_in_pg}}  Out of (Scale) : {{application_detail.scale_of_score_pg}}</p>
-    <p>PG Discipline : {{application_detail.pg_discipline}}</p>
-    <p>PG Institute : {{application_detail.pg_college_or_university}}</p>
-    <p>Qualifying Examination : {{application_detail.qualifying_examination}}</p>
-    <p>Branch Code : {{application_detail.branch_code_for_qualifying_exam}}</p>
-    <p>Score in Qualifying Examination : {{application_detail.score_in_qualifying_exam}}</p>
-    <p>AIR in Qualifying Exam : {{application_detail.all_india_rank_in_qualifying_exam}}</p>
-    <p>Qualifying Exam Score Validity : {{application_detail.qualifying_exam_score_valid_upto}}</p>
-    <p>Work Experience (Years) : {{application_detail.work_experience_in_year}}</p>
-    <p>Type of Work : {{application_detail.type_of_work}}</p>
-    <p>Peer Reviewed Publications : {{application_detail.no_of_peer_reviewed_publications}}</p>
-    <p>Patents Granted : {{application_detail.no_of_patents_granted}}</p>
-    <p>Current Status : {{application_detail.current_status}}</p>
-    <p>Previous Status : {{application_detail.previous_status}}</p>
-    <p>Submitted At : {{application_detail.submitted_at}}</p>
+
+    <div class="container"><div class="row">
+    <div class="col-md-4">City : {{application_detail.city}}</div>
+    <div class="col-md-4">State : {{application_detail.state}}</div>
+    <div class="col-md-4">PIN Code : {{application_detail.pin_code}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-4">Research Area : {{application_detail.research_area}}</div>
+    <div class="col-md-4">Applying For : {{application_detail.applying_for}}</div>
+    <div class="col-md-4">Enrollment Type : {{application_detail.enrollment_type}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-4">UG Score : {{application_detail.score_in_ug}}  Out of (Scale) : {{application_detail.scale_of_score_ug}}</div>
+    <div class="col-md-3">UG Discipline : {{application_detail.ug_discipline}}</div>
+    <div class="col-md-5">UG Institute : {{application_detail.ug_college_or_university}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-4">PG Completion year : {{application_detail.pg_passed_or_expected_to_pass_in_year}} </div>
+    <div class="col-md-4">PG Score : {{application_detail.score_in_pg}}  Out of (Scale) : {{application_detail.scale_of_score_pg}}</div>
+    <div class="col-md-4">PG Discipline : {{application_detail.pg_discipline}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-7">PG Institute : {{application_detail.pg_college_or_university}}</div>
+    <div class="col-md-5">Qualifying Examination : {{application_detail.qualifying_examination}}</div>
+	</div></div>
+
+    <div class="container"><div class="row">
+    <div class="col-md-2">Branch Code : {{application_detail.branch_code_for_qualifying_exam}}</div>
+    <div class="col-md-3">Score in Qualifying Examination : {{application_detail.score_in_qualifying_exam}}</div>
+    <div class="col-md-3">AIR in Qualifying Exam : {{application_detail.all_india_rank_in_qualifying_exam}}</div>
+    <div class="col-md-4">Qualifying Exam Score Validity : {{application_detail.qualifying_exam_score_valid_upto}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-4">Work Experience (Years) : {{application_detail.work_experience_in_year}}</div>
+    <div class="col-md-3">Type of Work : {{application_detail.type_of_work}}</div>
+    <div class="col-md-3">Peer Reviewed Publications : {{application_detail.no_of_peer_reviewed_publications}}</div>
+    <div class="col-md-2">Patents Granted : {{application_detail.no_of_patents_granted}}</div>
+	</div></div>
+
+	<div class="container"><div class="row">
+    <div class="col-md-4">Current Status : {{application_detail.current_status}}</div>
+    <div class="col-md-4">Previous Status : {{application_detail.previous_status}}</div>
+    <div class="col-md-4">Submitted At : {{application_detail.submitted_at}}</div>
+	</div></div>
+
   </div>
 {% endblock %}
