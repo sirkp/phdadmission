@@ -6,10 +6,10 @@
 {% block body %}
   <div class="container">
     <h1>Application Form</h1>
-    <form action="{% url 'phdfellows:application' %}" method = "POST">
+    <form action="{% url 'phdfellows:update' pk=application.pk %}" method = "POST">
       {% csrf_token %}
-
-      <div class="form-group"><label for="id_category">Category</label><select name="category" class="form-control" title="" id="id_category">
+      {% bootstrap_form_errors form %}
+      <div class="form-group">{{ form.category.errors }}<label for="id_category">Category</label><select name="category" class="form-control" title="" id="id_category">
         <option value="">Select</option>
         <option value="SC" {% ifequal application.category 'SC'  %}selected{% endifequal %}>SC</option>
         <option value="OBC" {% ifequal application.category 'OBC'  %}selected{% endifequal %}>OBC</option>

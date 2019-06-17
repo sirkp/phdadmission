@@ -100,7 +100,7 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
     model = Application
     form_class = ApplicationForm
     success_url = reverse_lazy('phdfellows:home')
-    template_name = 'phdfellows/application.html'
+    template_name = 'phdfellows/application_update.html'
 
     def form_valid(self, form):
         if('submit_application' in self.request.POST):

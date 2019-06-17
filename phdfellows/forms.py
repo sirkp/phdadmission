@@ -30,10 +30,11 @@ class SignupForm(UserCreationForm):
         return email
 
 class ApplicationForm(forms.ModelForm):
+    date_of_birth = forms.DateField(input_formats=['%Y-%m-%d'])
     class Meta():
         model = Application
         exclude = ('submitted_at','current_status','previous_status','user','application_no','first_name','last_name','email')
-        widgets = {'date_of_birth': DatePickerInput(format='%d/%m/%Y')}
+        # widgets = {'date_of_birth': DatePickerInput(format='%d/%m/%Y')}
 
     def __init__(self, *args, **kwargs):
         super(ApplicationForm, self).__init__(*args, **kwargs)
@@ -121,6 +122,15 @@ class ApplicationForm(forms.ModelForm):
             if (city == ''):
                 raise forms.ValidationError(_("City is required"))
             return city
+
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data.get('date_of_birth')
+        if 'save_as_draft' in self.data:
+            return date_of_birth
+        elif 'submit_application' in self.data:
+            if (date_of_birth == None):
+                raise forms.ValidationError(_("Date of birth is required"))
+            return date_of_birth
 
     def clean_pin_code(self):
         pin_code = self.cleaned_data.get('pin_code')

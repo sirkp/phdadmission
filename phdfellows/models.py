@@ -12,35 +12,39 @@ class PhdFellows(User,PermissionsMixin):
 class Application(models.Model):
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     category_choices = [
+        ('','Select'),
         ('SC','SC'),
         ('OBC','OBC'),
         ('ST','ST'),
         ('EWS','EWS'),
         ('General','General'),
     ]
-    category = models.CharField(choices=category_choices, default='General',max_length=10)
+    category = models.CharField(choices=category_choices, default='Select',max_length=10)
 
     having_disability = models.BooleanField("Disabled",default=False)
     research_area_choices = [
+        ('','Select'),
         ('Machine Learning','Machine Learning'),
         ('Cloud Computing','Cloud Computing'),
         ('Airtifial Intelligence','Airtifial Intelligence'),
         ('Software Development','Software Development'),
         ('Cryptography','Cryptography'),
     ]
-    research_area = models.CharField(choices=research_area_choices,max_length=50)
+    research_area = models.CharField(default='Select',choices=research_area_choices,max_length=50)
 
     applying_for_list = [
+        ('','Select'),
         ('PhD','PhD'),
         ('MS','MS'),
     ]
-    applying_for = models.CharField(choices=applying_for_list,max_length=5)
+    applying_for = models.CharField(choices=applying_for_list,default='Select',max_length=5)
 
     enrollment_type_list = [
+        ('','Select'),
         ('Full time','Full time'),
         ('Part time','Part time'),
     ]
-    enrollment_type = models.CharField(choices=enrollment_type_list,max_length=50)
+    enrollment_type = models.CharField(default='Select',choices=enrollment_type_list,max_length=50)
 
     first_name = models.CharField(max_length=200)
 
@@ -53,11 +57,12 @@ class Application(models.Model):
     married = models.BooleanField(default=False)
 
     gender_list = [
+        ('','Select'),
         ('Male','Male'),
         ('Female','Female'),
         ('Other','Other'),
     ]
-    gender = models.CharField(choices=gender_list,max_length=20)
+    gender = models.CharField(default='Select',choices=gender_list,max_length=20)
 
     phone_no = models.CharField("Phone Number(With Country Code)",max_length=13)
 
@@ -72,20 +77,22 @@ class Application(models.Model):
     score_in_ug = models.FloatField("Score in UG",default=None ,null=True)
 
     scale_score_list = [
+        ('','Select'),
         ('0-5 CGPA','0-5 CGPA',),
         ('0-10 CGPA','0-10 CGPA',),
         ('0-100%','0-100%',),
     ]
-    scale_of_score_ug = models.CharField("Scale of Score",choices=scale_score_list,max_length=20)
+    scale_of_score_ug = models.CharField("Scale of Score",default='Select',choices=scale_score_list,max_length=20)
 
     ug_discipline_list = [
+        ('','Select'),
         ('CSE','CSE'),
         ('EE','EE'),
         ('ME','ME'),
         ('ECE','ECE'),
         ('CE','CE'),
     ]
-    ug_discipline = models.CharField("UG Discipline",choices=ug_discipline_list,max_length=20)
+    ug_discipline = models.CharField("UG Discipline",default='Select',choices=ug_discipline_list,max_length=20)
 
     ug_college_or_university = models.CharField('UG College/University',max_length=200)
 
@@ -93,19 +100,20 @@ class Application(models.Model):
 
     score_in_pg = models.FloatField("Score in PG", default=None ,null=True)
 
-    scale_of_score_pg = models.CharField("Scale of Score",choices=scale_score_list, max_length=20)
+    scale_of_score_pg = models.CharField("Scale of Score",default='Select',choices=scale_score_list, max_length=20)
 
-    pg_discipline = models.CharField("PG Discipline",choices=ug_discipline_list,max_length=50)
+    pg_discipline = models.CharField("PG Discipline",default='Select',choices=ug_discipline_list,max_length=50)
 
     pg_college_or_university = models.CharField('PG College/University', max_length=200)
 
     qualifying_examination_list = [
+        ('','Select'),
         ("GATE","GATE"),
         ("NET","NET"),
     ]
-    qualifying_examination = models.CharField(choices=qualifying_examination_list,max_length=20)
+    qualifying_examination = models.CharField(default='Select',choices=qualifying_examination_list,max_length=20)
 
-    branch_code_for_qualifying_exam = models.CharField(choices=ug_discipline_list, max_length=10)
+    branch_code_for_qualifying_exam = models.CharField(default='Select',choices=ug_discipline_list, max_length=10)
 
     qualifying_exam_score_valid_upto = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')],default=None ,null=True)
 
@@ -116,12 +124,13 @@ class Application(models.Model):
     work_experience_in_year = models.CharField("Work Experpience(in years)",max_length=3)
 
     type_of_work_list = [
+        ('','Select'),
         ('Teaching','Teaching'),
         ('IT Industry','IT Industry'),
         ('Research Organisation','Research Organisation'),
         ('Other','Other'),
     ]
-    type_of_work = models.CharField(choices=type_of_work_list,max_length=50)
+    type_of_work = models.CharField(default='Select',choices=type_of_work_list,max_length=50)
 
     no_of_peer_reviewed_publications = models.IntegerField(default=None ,null=True)
 
