@@ -4,150 +4,250 @@
 {% bootstrap_javascript jquery='full' %}
 {{ form.media }}
 {% block body %}
-  <div class="container">
-    <h1>Application Form</h1>
-    <form action="{% url 'phdfellows:update' pk=application.pk %}" method = "POST">
-      {% csrf_token %}
-      {% bootstrap_form_errors form %}
-      <div class="form-group">{{ form.category.errors }}<label for="id_category">Category</label><select name="category" class="form-control" title="" id="id_category">
-        <option value="">Select</option>
-        <option value="SC" {% ifequal application.category 'SC'  %}selected{% endifequal %}>SC</option>
-        <option value="OBC" {% ifequal application.category 'OBC'  %}selected{% endifequal %}>OBC</option>
-        <option value="ST" {% ifequal application.category 'ST'  %}selected{% endifequal %}>ST</option>
-        <option value="EWS" {% ifequal application.category 'EWS'  %}selected{% endifequal %}>EWS</option>
-        <option value="General" {% ifequal application.category 'General'  %}selected{% endifequal %}>General</option></select>
-      </div>
-
-      <div class="form-group"><div class="form-check"><input type="checkbox" name="having_disability" class="form-check-input" id="id_having_disability" {% if application.having_disability %}checked{% endif %}><label class="form-check-label" for="id_having_disability">Disabled</label></div></div>
-
-      <div class="form-group"><label for="id_research_area">Research area</label><select name="research_area" class="form-control" title="" id="id_research_area">
+<div class="container" style="background-color: #F2F3F4;">
+  <h1>Application Form</h1>
+  <hr>
+  <form action="{% url 'phdfellows:update' pk=application.pk %}" method = "POST">
+    {% csrf_token %}
+    {% bootstrap_form_errors form %}
+    <div class="container"><div class="row">
+      <div class="col-md-6">
+    <div class="form-group"><label for="id_category">Category</label><select name="category" class="form-control" title="" id="id_category" style="max-width:50%;">
       <option value="">Select</option>
-      <option value="Machine Learning" {% ifequal application.research_area 'Machine Learning'  %}selected{% endifequal %}>Machine Learning</option>
-      <option value="Cloud Computing" {% ifequal application.research_area 'Cloud Computing'  %}selected{% endifequal %}>Cloud Computing</option>
-      <option value="Airtifial Intelligence" {% ifequal application.research_area 'Airtifial Intelligence'  %}selected{% endifequal %}>Airtifial Intelligence</option>
-      <option value="Software Development" {% ifequal application.research_area 'Software Development'  %}selected{% endifequal %}>Software Development</option>
-      <option value="Cryptography" {% ifequal application.research_area 'Cryptography'  %}selected{% endifequal %}>Cryptography</option></select>
-      </div>
+      <option value="SC" {% ifequal application.category 'SC'  %}selected{% endifequal %}>SC</option>
+      <option value="OBC" {% ifequal application.category 'OBC'  %}selected{% endifequal %}>OBC</option>
+      <option value="ST" {% ifequal application.category 'ST'  %}selected{% endifequal %}>ST</option>
+      <option value="EWS" {% ifequal application.category 'EWS'  %}selected{% endifequal %}>EWS</option>
+      <option value="General" {% ifequal application.category 'General'  %}selected{% endifequal %}>General</option></select>
+    </div>
+  </div>
 
-      <div class="form-group"><label for="id_applying_for">Applying for</label><select name="applying_for" class="form-control" title="" id="id_applying_for">
-        <option value="">Select</option>
-        <option value="PhD" {% ifequal application.applying_for 'PhD' %}selected{% endifequal %}>PhD</option>
-        <option value="MS" {% ifequal application.applying_for 'MS' %}selected{% endifequal %}>MS</option></select>
-      </div>
+  <div class="col-md-6">
+  <div class="form-group"><label for="id_date_of_birth">Date of Birth (DD-MM-YYYY)</label><input type="date" name="date_of_birth" class="form-control" placeholder="Date of birth" value="{{application.date_of_birth}}" id="id_date_of_birth" style="max-width: 50%;" ></div>
+  </div>
+</div></div>
 
-      <div class="form-group"><label for="id_enrollment_type">Enrollment type</label><select name="enrollment_type" class="form-control" title="" id="id_enrollment_type">
-        <option value="">Select</option>
-        <option value="Full time" {% ifequal application.enrollment_type 'Full time' %}selected{% endifequal %}>Full time</option>
-        <option value="Part time" {% ifequal application.enrollment_type 'Part time'  %}selected{% endifequal %}>Part time</option></select>
-      </div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><div class="form-check"><input type="checkbox" name="having_disability" class="form-check-input" id="id_having_disability" {% if application.having_disability %}checked{% endif %} style="max-width: 50%;"><label class="form-check-label" for="id_having_disability">Differently Abled (PWD) </label></div></div>
+  </div>
+  <div class="col-md-5">
+    <div class="form-group"><div class="form-check"><input type="checkbox" name="married" class="form-check-input" id="id_married" {% if application.married %}checked{% endif %}><label class="form-check-label" for="id_married">Married</label></div></div>
+  </div>
+</div></div>
 
-      <div class="form-group"><label for="id_date_of_birth">Date of birth</label><input type="date" name="date_of_birth" class="form-control" placeholder="Date of birth" value="{{application.date_of_birth|date:"d/m/Y"}}" id="id_date_of_birth" ></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_gender">Gender</label><select name="gender" class="form-control" title="" id="id_gender" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="Male" {% ifequal application.gender 'Male'  %}selected{% endifequal %}>Male</option>
+      <option value="Female" {% ifequal application.gender 'Female'  %}selected{% endifequal %}>Female</option>
+      <option value="Other" {% ifequal application.gender 'Other'  %}selected{% endifequal %}>Other</option></select>
+    </div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><div class="form-check"><input type="checkbox" name="married" class="form-check-input" id="id_married" {% if application.married %}checked{% endif %}><label class="form-check-label" for="id_married">Married</label></div></div>
+<div class="container"><div class="row">
+  <div class="col-md-12">
+    <div class="form-group"><label for="id_address">Address</label><textarea name="address" cols="40" rows="10" class="form-control" placeholder="Address" id="id_address" style="max-width: 80%; max-height: 20%;">{{ application.address }}</textarea></div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_city">City</label><input type="text" name="city" maxlength="50" class="form-control" placeholder="City" value="{{ application.city }}" id="id_city" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_state">State</label><input type="text" name="state" maxlength="40" class="form-control" placeholder="State" value="{{ application.state }}" id="id_state" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_pin_code">Pin Code</label><input type="text" name="pin_code" maxlength="6" class="form-control" placeholder="Pin code" value="{{ application.pin_code }}" id="id_pin_code" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_phone_no">Phone Number(With Country Code)</label><input type="text" name="phone_no" maxlength="13" class="form-control" placeholder="Phone Number(With Country Code)" value="{{ application.phone_no }}" id="id_phone_no" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_gender">Gender</label><select name="gender" class="form-control" title="" id="id_gender">
-        <option value="">Select</option>
-        <option value="Male" {% ifequal application.gender 'Male'  %}selected{% endifequal %}>Male</option>
-        <option value="Female" {% ifequal application.gender 'Female'  %}selected{% endifequal %}>Female</option>
-        <option value="Other" {% ifequal application.gender 'Other'  %}selected{% endifequal %}>Other</option></select>
-      </div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_research_area">Research Area</label><select name="research_area" class="form-control" title="" id="id_research_area" style="max-width:50%;">
+    <option value="">Select</option>
+    <option value="Machine Learning" {% ifequal application.research_area 'Machine Learning'  %}selected{% endifequal %}>Machine Learning</option>
+    <option value="Cloud Computing" {% ifequal application.research_area 'Cloud Computing'  %}selected{% endifequal %}>Cloud Computing</option>
+    <option value="Airtifial Intelligence" {% ifequal application.research_area 'Airtifial Intelligence'  %}selected{% endifequal %}>Airtifial Intelligence</option>
+    <option value="Software Development" {% ifequal application.research_area 'Software Development'  %}selected{% endifequal %}>Software Development</option>
+    <option value="Cryptography" {% ifequal application.research_area 'Cryptography'  %}selected{% endifequal %}>Cryptography</option></select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_applying_for">Applying For</label><select name="applying_for" class="form-control" title="" id="id_applying_for" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="PhD" {% ifequal application.applying_for 'PhD' %}selected{% endifequal %}>PhD</option>
+      <option value="MS" {% ifequal application.applying_for 'MS' %}selected{% endifequal %}>MS</option></select>
+    </div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_enrollment_type">Enrollment Type</label><select name="enrollment_type" class="form-control" title="" id="id_enrollment_type" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="Full time" {% ifequal application.enrollment_type 'Full time' %}selected{% endifequal %}>Full time</option>
+      <option value="Part time" {% ifequal application.enrollment_type 'Part time'  %}selected{% endifequal %}>Part time</option></select>
+    </div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_phone_no">Phone Number(With Country Code)</label><input type="text" name="phone_no" maxlength="13" class="form-control" placeholder="Phone Number(With Country Code)" value="{{ application.phone_no }}" id="id_phone_no"></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_score_in_ug">Score in UG</label><input type="number" name="score_in_ug" step="any" class="form-control" placeholder="Score in UG" value="{{ application.score_in_ug }}" id="id_score_in_ug" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_scale_of_score_ug">Scale of Score (UG)</label><select name="scale_of_score_ug" class="form-control" title="" id="id_scale_of_score_ug" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="0-5 CGPA" {% ifequal application.scale_of_score_ug '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
+      <option value="0-10 CGPA" {% ifequal application.scale_of_score_ug '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
+      <option value="0-100%" {% ifequal application.scale_of_score_ug '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+    </div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_ug_discipline">UG Discipline</label><select name="ug_discipline" class="form-control" title="" id="id_ug_discipline" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="CSE" {% ifequal application.ug_discipline 'CSE'  %}selected{% endifequal %}>CSE</option>
+      <option value="EE" {% ifequal application.ug_discipline 'EE'  %}selected{% endifequal %}>EE</option>
+      <option value="ME" {% ifequal application.ug_discipline 'ME'  %}selected{% endifequal %}>ME</option>
+      <option value="ECE" {% ifequal application.ug_discipline 'ECE'  %}selected{% endifequal %}>ECE</option>
+      <option value="CE" {% ifequal application.ug_discipline 'CE'  %}selected{% endifequal %}>CE</option></select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_ug_college_or_university">UG College/University</label><input type="text" name="ug_college_or_university" maxlength="200" class="form-control" placeholder="UG College/University" value="{{ application.ug_college_or_university }}" id="id_ug_college_or_university" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_address">Address</label><textarea name="address" cols="40" rows="10" class="form-control" placeholder="Address" id="id_address">{{ application.address }}</textarea></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_score_in_pg">Score in PG</label><input type="number" name="score_in_pg" step="any" class="form-control" placeholder="Score in PG" value="{{ application.score_in_pg }}" id="id_score_in_pg" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_scale_of_score_pg">Scale of Score (PG)</label><select name="scale_of_score_pg" class="form-control" title="" id="id_scale_of_score_pg" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="0-5 CGPA" {% ifequal application.scale_of_score_pg '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
+      <option value="0-10 CGPA" {% ifequal application.scale_of_score_pg '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
+      <option value="0-100%" {% ifequal application.scale_of_score_pg '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+    </div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_pg_discipline">PG Discipline</label><select name="pg_discipline" class="form-control" title="" id="id_pg_discipline" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="CSE" {% ifequal application.pg_discipline 'CSE'  %}selected{% endifequal %}>CSE</option>
+      <option value="EE" {% ifequal application.pg_discipline 'EE'  %}selected{% endifequal %}>EE</option>
+      <option value="ME" {% ifequal application.pg_discipline 'ME'  %}selected{% endifequal %}>ME</option>
+      <option value="ECE" {% ifequal application.pg_discipline 'ECE'  %}selected{% endifequal %}>ECE</option>
+      <option value="CE" {% ifequal application.pg_discipline 'CE'  %}selected{% endifequal %}>CE</option></select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_pg_passed_or_expected_to_pass_in_year">PG Passed Year or Expected to Pass in Year</label><input type="number" name="pg_passed_or_expected_to_pass_in_year" class="form-control" placeholder="PG Passed Year or Expected to Pass in Year" value="{{ application.pg_passed_or_expected_to_pass_in_year }}" id="id_pg_passed_or_expected_to_pass_in_year" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_pg_college_or_university">PG College/University</label><input type="text" name="pg_college_or_university" maxlength="200" class="form-control" placeholder="PG College/University" value="{{ application.pg_college_or_university }}" id="id_pg_college_or_university" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_state">State</label><input type="text" name="state" maxlength="40" class="form-control" placeholder="State" value="{{ application.state }}" id="id_state"></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_qualifying_examination">Qualifying Examination</label><select name="qualifying_examination" class="form-control" title="" id="id_qualifying_examination" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="GATE" {% ifequal application.qualifying_examination 'GATE'  %}selected{% endifequal %}>GATE</option>
+      <option value="NET" {% ifequal application.qualifying_examination 'NET'  %}selected{% endifequal %}>NET</option></select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_branch_code_for_qualifying_exam">Branch Code for Qualifying Exam</label><select name="branch_code_for_qualifying_exam" class="form-control" title="" id="id_branch_code_for_qualifying_exam" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="CSE" {% ifequal application.branch_code_for_qualifying_exam 'CSE'  %}selected{% endifequal %}>CSE</option>
+      <option value="EE" {% ifequal application.branch_code_for_qualifying_exam 'EE'  %}selected{% endifequal %}>EE</option>
+      <option value="ME" {% ifequal application.branch_code_for_qualifying_exam 'ME'  %}selected{% endifequal %}>ME</option>
+      <option value="ECE" {% ifequal application.branch_code_for_qualifying_exam 'ECE'  %}selected{% endifequal %}>ECE</option>
+      <option value="CE" {% ifequal application.branch_code_for_qualifying_exam 'CE'  %}selected{% endifequal %}>CE</option></select>
+    </div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_qualifying_exam_score_valid_upto">Qualifying Exam Score Valid Upto (Year)</label><input type="number" name="qualifying_exam_score_valid_upto" class="form-control" placeholder="Qualifying exam score valid upto" value="{{ application.qualifying_exam_score_valid_upto }}" id="id_qualifying_exam_score_valid_upto" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_all_india_rank_in_qualifying_exam">All India Rank in Qualifying Exam</label><input type="number" name="all_india_rank_in_qualifying_exam" class="form-control" placeholder="All India rank in Qualifying Exam" value="{{ application.all_india_rank_in_qualifying_exam }}" id="id_all_india_rank_in_qualifying_exam" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_score_in_qualifying_exam">Score in Qualifying Exam</label><input type="number" name="score_in_qualifying_exam" step="any" class="form-control" placeholder="Score in qualifying exam" value="{{ application.score_in_qualifying_exam }}" id="id_score_in_qualifying_exam" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_city">City</label><input type="text" name="city" maxlength="50" class="form-control" placeholder="City" value="{{ application.city }}" id="id_city"></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_work_experience_in_year">Work Experpience in Year(s)</label><input type="text" name="work_experience_in_year" maxlength="3" class="form-control" placeholder="Work Experpience(in years)" value="{{ application.work_experience_in_year }}" id="id_work_experience_in_year" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_type_of_work">Type of Work</label><select name="type_of_work" class="form-control" title="" id="id_type_of_work" style="max-width: 50%;">
+      <option value="">Select</option>
+      <option value="Teaching" {% ifequal application.type_of_work 'Teaching'  %}selected{% endifequal %}>Teaching</option>
+      <option value="IT Industry" {% ifequal application.type_of_work 'IT Industry'  %}selected{% endifequal %}>IT Industry</option>
+      <option value="Research Organisation" {% ifequal application.type_of_work 'Research Organisation'  %}selected{% endifequal %}>Research Organisation</option>
+      <option value="Other" {% ifequal application.type_of_work 'Other'  %}selected{% endifequal %}>Other</option></select>
+    </div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_no_of_peer_reviewed_publications">No of Peer Reviewed Publication(s)</label><input type="number" name="no_of_peer_reviewed_publications" class="form-control" placeholder="No of peer reviewed publications" value="{{ application.no_of_peer_reviewed_publications }}" id="id_no_of_peer_reviewed_publications" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_no_of_patents_granted">No of Patent(s) Granted</label><input type="number" name="no_of_patents_granted" class="form-control" placeholder="No of patents granted" value="{{ application.no_of_patents_granted }}" id="id_no_of_patents_granted" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_pin_code">Pin code</label><input type="text" name="pin_code" maxlength="6" class="form-control" placeholder="Pin code" value="{{ application.pin_code }}" id="id_pin_code"></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_guide_preference_1">Guide Preference 1</label><input type="text" name="guide_preference_1" maxlength="200" class="form-control" placeholder="Guide preference 1" value="{{ application.guide_preference_1 }}" id="id_guide_preference_1" style="max-width: 50%;"></div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_guide_preference_2">Guide Preference 2</label><input type="text" name="guide_preference_2" maxlength="200" class="form-control" placeholder="Guide preference 2" value="{{ application.guide_preference_2 }}" id="id_guide_preference_2" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <div class="form-group"><label for="id_guide_preference_3">Guide Preference 3</label><input type="text" name="guide_preference_3" maxlength="200" class="form-control" placeholder="Guide preference 3" value="{{ application.guide_preference_3 }}" id="id_guide_preference_3" style="max-width: 50%;"></div>
+  </div>
+</div></div>
+<hr>
 
-      <div class="form-group"><label for="id_score_in_ug">Score in UG</label><input type="number" name="score_in_ug" step="any" class="form-control" placeholder="Score in UG" value="{{ application.score_in_ug }}" id="id_score_in_ug"></div>
-
-      <div class="form-group"><label for="id_scale_of_score_ug">Scale of Score</label><select name="scale_of_score_ug" class="form-control" title="" id="id_scale_of_score_ug">
-        <option value="">Select</option>
-        <option value="0-5 CGPA" {% ifequal application.scale_of_score_ug '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
-        <option value="0-10 CGPA" {% ifequal application.scale_of_score_ug '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
-        <option value="0-100%" {% ifequal application.scale_of_score_ug '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_ug_discipline">UG Discipline</label><select name="ug_discipline" class="form-control" title="" id="id_ug_discipline">
-        <option value="">Select</option>
-        <option value="CSE" {% ifequal application.ug_discipline 'CSE'  %}selected{% endifequal %}>CSE</option>
-        <option value="EE" {% ifequal application.ug_discipline 'EE'  %}selected{% endifequal %}>EE</option>
-        <option value="ME" {% ifequal application.ug_discipline 'ME'  %}selected{% endifequal %}>ME</option>
-        <option value="ECE" {% ifequal application.ug_discipline 'ECE'  %}selected{% endifequal %}>ECE</option>
-        <option value="CE" {% ifequal application.ug_discipline 'CE'  %}selected{% endifequal %}>CE</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_ug_college_or_university">UG College/University</label><input type="text" name="ug_college_or_university" maxlength="200" class="form-control" placeholder="UG College/University" value="{{ application.ug_college_or_university }}" id="id_ug_college_or_university"></div>
-
-      <div class="form-group"><label for="id_pg_passed_or_expected_to_pass_in_year">PG Passed Year or Expected to Pass in Year</label><input type="number" name="pg_passed_or_expected_to_pass_in_year" class="form-control" placeholder="PG Passed Year or Expected to Pass in Year" value="{{ application.pg_passed_or_expected_to_pass_in_year }}" id="id_pg_passed_or_expected_to_pass_in_year"></div>
-
-      <div class="form-group"><label for="id_score_in_pg">Score in PG</label><input type="number" name="score_in_pg" step="any" class="form-control" placeholder="Score in PG" value="{{ application.score_in_pg }}" id="id_score_in_pg"></div>
-
-      <div class="form-group"><label for="id_scale_of_score_pg">Scale of Score</label><select name="scale_of_score_pg" class="form-control" title="" id="id_scale_of_score_pg">
-        <option value="">Select</option>
-        <option value="0-5 CGPA" {% ifequal application.scale_of_score_pg '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
-        <option value="0-10 CGPA" {% ifequal application.scale_of_score_pg '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
-        <option value="0-100%" {% ifequal application.scale_of_score_pg '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_pg_discipline">PG Discipline</label><select name="pg_discipline" class="form-control" title="" id="id_pg_discipline">
-        <option value="">Select</option>
-        <option value="CSE" {% ifequal application.pg_discipline 'CSE'  %}selected{% endifequal %}>CSE</option>
-        <option value="EE" {% ifequal application.pg_discipline 'EE'  %}selected{% endifequal %}>EE</option>
-        <option value="ME" {% ifequal application.pg_discipline 'ME'  %}selected{% endifequal %}>ME</option>
-        <option value="ECE" {% ifequal application.pg_discipline 'ECE'  %}selected{% endifequal %}>ECE</option>
-        <option value="CE" {% ifequal application.pg_discipline 'CE'  %}selected{% endifequal %}>CE</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_pg_college_or_university">PG College/University</label><input type="text" name="pg_college_or_university" maxlength="200" class="form-control" placeholder="PG College/University" value="{{ application.pg_college_or_university }}" id="id_pg_college_or_university"></div>
-
-      <div class="form-group"><label for="id_qualifying_examination">Qualifying examination</label><select name="qualifying_examination" class="form-control" title="" id="id_qualifying_examination">
-        <option value="">Select</option>
-        <option value="GATE" {% ifequal application.qualifying_examination 'GATE'  %}selected{% endifequal %}>GATE</option>
-        <option value="NET" {% ifequal application.qualifying_examination 'NET'  %}selected{% endifequal %}>NET</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_branch_code_for_qualifying_exam">Branch code for qualifying exam</label><select name="branch_code_for_qualifying_exam" class="form-control" title="" id="id_branch_code_for_qualifying_exam">
-        <option value="">Select</option>
-        <option value="CSE" {% ifequal application.branch_code_for_qualifying_exam 'CSE'  %}selected{% endifequal %}>CSE</option>
-        <option value="EE" {% ifequal application.branch_code_for_qualifying_exam 'EE'  %}selected{% endifequal %}>EE</option>
-        <option value="ME" {% ifequal application.branch_code_for_qualifying_exam 'ME'  %}selected{% endifequal %}>ME</option>
-        <option value="ECE" {% ifequal application.branch_code_for_qualifying_exam 'ECE'  %}selected{% endifequal %}>ECE</option>
-        <option value="CE" {% ifequal application.branch_code_for_qualifying_exam 'CE'  %}selected{% endifequal %}>CE</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_qualifying_exam_score_valid_upto">Qualifying exam score valid upto</label><input type="number" name="qualifying_exam_score_valid_upto" class="form-control" placeholder="Qualifying exam score valid upto" value="{{ application.qualifying_exam_score_valid_upto }}" id="id_qualifying_exam_score_valid_upto"></div>
-
-      <div class="form-group"><label for="id_all_india_rank_in_qualifying_exam">All India rank in Qualifying Exam</label><input type="number" name="all_india_rank_in_qualifying_exam" class="form-control" placeholder="All India rank in Qualifying Exam" value="{{ application.all_india_rank_in_qualifying_exam }}" id="id_all_india_rank_in_qualifying_exam"></div>
-
-      <div class="form-group"><label for="id_score_in_qualifying_exam">Score in qualifying exam</label><input type="number" name="score_in_qualifying_exam" step="any" class="form-control" placeholder="Score in qualifying exam" value="{{ application.score_in_qualifying_exam }}" id="id_score_in_qualifying_exam"></div>
-
-      <div class="form-group"><label for="id_work_experience_in_year">Work Experpience(in years)</label><input type="text" name="work_experience_in_year" maxlength="3" class="form-control" placeholder="Work Experpience(in years)" value="{{ application.work_experience_in_year }}" id="id_work_experience_in_year"></div>
-
-      <div class="form-group"><label for="id_type_of_work">Type of work</label><select name="type_of_work" class="form-control" title="" id="id_type_of_work">
-        <option value="">Select</option>
-        <option value="Teaching" {% ifequal application.type_of_work 'Teaching'  %}selected{% endifequal %}>Teaching</option>
-        <option value="IT Industry" {% ifequal application.type_of_work 'IT Industry'  %}selected{% endifequal %}>IT Industry</option>
-        <option value="Research Organisation" {% ifequal application.type_of_work 'Research Organisation'  %}selected{% endifequal %}>Research Organisation</option>
-        <option value="Other" {% ifequal application.type_of_work 'Other'  %}selected{% endifequal %}>Other</option></select>
-      </div>
-
-      <div class="form-group"><label for="id_no_of_peer_reviewed_publications">No of peer reviewed publications</label><input type="number" name="no_of_peer_reviewed_publications" class="form-control" placeholder="No of peer reviewed publications" value="{{ application.no_of_peer_reviewed_publications }}" id="id_no_of_peer_reviewed_publications"></div>
-
-      <div class="form-group"><label for="id_no_of_patents_granted">No of patents granted</label><input type="number" name="no_of_patents_granted" class="form-control" placeholder="No of patents granted" value="{{ application.no_of_patents_granted }}" id="id_no_of_patents_granted"></div>
-
-      <div class="form-group"><label for="id_guide_preference_1">Guide preference 1</label><input type="text" name="guide_preference_1" maxlength="200" class="form-control" placeholder="Guide preference 1" value="{{ application.guide_preference_1 }}" id="id_guide_preference_1"></div>
-
-      <div class="form-group"><label for="id_guide_preference_2">Guide preference 2</label><input type="text" name="guide_preference_2" maxlength="200" class="form-control" placeholder="Guide preference 2" value="{{ application.guide_preference_2 }}" id="id_guide_preference_2"></div>
-
-      <div class="form-group"><label for="id_guide_preference_3">Guide preference 3</label><input type="text" name="guide_preference_3" maxlength="200" class="form-control" placeholder="Guide preference 3" value="{{ application.guide_preference_3 }}" id="id_guide_preference_3"></div>
-
-      <input type="submit" name='save_as_draft' class="btn btn-primary" value="Save as Draft">
-      <input type="submit" name='submit_application' class="btn btn-primary" value="Submit">
-    </form>
+<div class="container"><div class="row">
+  <div class="col-md-6">
+    <input type="submit" name='save_as_draft' class="btn btn-primary" value="Save as Draft">
+  </div>
+  <div class="col-md-6">
+    <input type="submit" name='submit_application' class="btn btn-primary" value="Submit">
+  </div>
+</div></div>
+  </form>
 </div>
 
 {% endblock %}

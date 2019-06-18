@@ -30,7 +30,6 @@ class SignupForm(UserCreationForm):
         return email
 
 class ApplicationForm(forms.ModelForm):
-    date_of_birth = forms.DateField(input_formats=['%Y-%m-%d'])
     class Meta():
         model = Application
         exclude = ('submitted_at','current_status','previous_status','user','application_no','first_name','last_name','email')
