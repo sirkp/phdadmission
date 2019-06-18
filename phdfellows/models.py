@@ -52,7 +52,7 @@ class Application(models.Model):
 
     email = models.EmailField(max_length=200)
 
-    date_of_birth = models.DateField(_("Date of Birth"),null=True)
+    date_of_birth = models.CharField("Date of Birth",null=True,max_length=10)
 
     married = models.BooleanField(default=False)
 
