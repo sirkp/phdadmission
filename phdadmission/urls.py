@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.urls import path
 from phdfellows import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('phdfellows/',include('django.contrib.auth.urls')),
     path('faculty/',include('faculty.urls',namespace='faculty')),
     path('faculty/',include('django.contrib.auth.urls')),
-]
+]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

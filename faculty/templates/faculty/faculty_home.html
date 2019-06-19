@@ -10,5 +10,96 @@
       <p></p>
       <a href="{% url 'faculty:faculty_logout' %}" class="btn btn-primary">Logout</a>
     </div>
+    <div class="container">
+
+      <form action="{% url 'faculty:faculty_home' %}" method = "GET">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" default="" class="form-control " id="name" value="{{ name }}" placeholder="Name">
+        </div>
+
+        <div class="form-group">
+         <label for="air">All India Rank</label>
+         <select type="text" class="form-control" name="air" id="air">
+           <option value="" {% ifequal air ''  %}selected{% endifequal %}>Select</option>
+           <option value="1-500" {% ifequal air '1-500'  %}selected{% endifequal %}>1-500</option>
+           <option value="501-1000" {% ifequal air '501-1000'  %}selected{% endifequal %}>501-1000</option>
+           <option value="1001-1500" {% ifequal air '1001-150'  %}selected{% endifequal %}>1001-1500</option>
+           <option value="1500+" {% ifequal air '1500+'  %}selected{% endifequal %}>1500+</option>
+         </select>
+        </div>
+
+        <div class="form-group"><label for="id_scale_of_score_ug">Scale of Score (UG)</label><select name="scale_of_score_ug" class="form-control" title="" id="id_scale_of_score_ug" style="max-width: 50%;">
+          <option value="">Select</option>
+          <option value="0-5 CGPA" {% ifequal scale_of_score_ug '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
+          <option value="0-10 CGPA" {% ifequal scale_of_score_ug '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
+          <option value="0-100%" {% ifequal scale_of_score_ug '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_score_ug">Score (UG)</label><select name="score_ug" class="form-control" title="" id="id_score_ug" style="max-width: 50%;">
+          <option value="{{ score_ug }}" selected>{% ifequal score_ug ''  %}Select {% else %}{{ score_ug }}{% endifequal %}</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_scale_of_score_pg">Scale of Score (PG)</label><select name="scale_of_score_pg" class="form-control" title="" id="id_scale_of_score_pg" style="max-width: 50%;">
+          <option value="">Select</option>
+          <option value="0-5 CGPA" {% ifequal scale_of_score_pg '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
+          <option value="0-10 CGPA" {% ifequal scale_of_score_pg '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
+          <option value="0-100%" {% ifequal scale_of_score_pg '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_score_pg">Score (PG)</label><select name="score_pg" class="form-control" title="" id="id_score_pg" style="max-width: 50%;">
+          <option value="{{ score_pg }}" selected>{% ifequal score_pg ''  %}Select {% else %}{{ score_pg }}{% endifequal %}</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_ug_branch">UG Branch</label><select name="ug_branch" class="form-control" title="" id="id_ug_branch" style="max-width: 50%;">
+          <option value="">Select</option>
+          <option value="CSE" {% ifequal ug_branch 'CSE'  %}selected{% endifequal %}>CSE</option>
+          <option value="EE" {% ifequal ug_branch 'EE'  %}selected{% endifequal %}>EE</option>
+          <option value="ME" {% ifequal ug_branch 'ME'  %}selected{% endifequal %}>ME</option>
+          <option value="ECE" {% ifequal ug_branch 'ECE'  %}selected{% endifequal %}>ECE</option>
+          <option value="CE" {% ifequal ug_branch 'CE'  %}selected{% endifequal %}>CE</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_pg_branch">PG Branch</label><select name="pg_branch" class="form-control" title="" id="id_pg_branch" style="max-width: 50%;">
+          <option value="">Select</option>
+          <option value="CSE" {% ifequal pg_branch 'CSE'  %}selected{% endifequal %}>CSE</option>
+          <option value="EE" {% ifequal pg_branch 'EE'  %}selected{% endifequal %}>EE</option>
+          <option value="ME" {% ifequal pg_branch 'ME'  %}selected{% endifequal %}>ME</option>
+          <option value="ECE" {% ifequal pg_branch 'ECE'  %}selected{% endifequal %}>ECE</option>
+          <option value="CE" {% ifequal pg_branch 'CE'  %}selected{% endifequal %}>CE</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_gate_or_net_branch">Gate/NET in</label><select name="gate_or_net_branch" class="form-control" title="" id="id_gate_or_net_branch" style="max-width: 50%;">
+          <option value="">Select</option>
+          <option value="CSE" {% ifequal gate_or_net_branch 'CSE'  %}selected{% endifequal %}>CSE</option>
+          <option value="EE" {% ifequal gate_or_net_branch 'EE'  %}selected{% endifequal %}>EE</option>
+          <option value="ME" {% ifequal gate_or_net_branch 'ME'  %}selected{% endifequal %}>ME</option>
+          <option value="ECE" {% ifequal gate_or_net_branch 'ECE'  %}selected{% endifequal %}>ECE</option>
+          <option value="CE" {% ifequal gate_or_net_branch 'CE'  %}selected{% endifequal %}>CE</option></select>
+        </div>
+
+        <div class="form-group"><label for="id_current_status">Status</label><select name="current_status" class="form-control" title="" id="id_current_status" style="max-width: 50%;">
+          <option value="">Select</option>
+          <option value="Submitted" {% ifequal current_status 'Submitted'  %}selected{% endifequal %}>Submitted</option>
+          <option value="Shortlisted for Test" {% ifequal current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
+          <option value="Shortlisted for Interview" {% ifequal current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
+          <option value="Selected" {% ifequal current_status 'Selected'  %}selected{% endifequal %}>Selected</option>
+          <option value="Rejected" {% ifequal current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option></select>
+        </div>
+
+        {# <select class="yearselect"></select>
+        <input class="yearselect" value="2016"> #}
+
+
+        <input type="submit" name='search' class="btn btn-primary " value="Search">
+      </form>
+    </div>
+
+    <div class="container">
+      {% for result in results  %}
+        <h4>{{ result.email }} {{ result.current_status }}</h4>
+      {% endfor %}
+    </div>
   {% endif %}
+
 {% endblock %}
