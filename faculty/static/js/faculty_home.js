@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // ug_scale_score and ug_score
     $("#id_scale_of_score_ug").change(function() {
         var val = $(this).val();
         if (val == "0-5 CGPA") {
@@ -12,6 +13,7 @@ $(document).ready(function() {
         }
     });
 
+    // pg_scale_score and pg_score
     $("#id_scale_of_score_pg").change(function() {
         var val = $(this).val();
         if (val == "0-5 CGPA") {
@@ -23,4 +25,12 @@ $(document).ready(function() {
             $("#id_score_pg").html("<option value=''>Select</option><option value='0-10'>0-10</option><option value='10-20'>1-20</option><option value='20-30'>20-30</option><option value='30-40'>30-40</option><option value='40-50'>40-50</option><option value='50-60'>50-60</option><option value='60-70'>60-70</option><option value='70-80'>70-80</option><option value='80-90'>80-90</option><option value='90-100'>90-100</option>");
         }
     });
+});
+
+// year drop down list
+$(function(){
+    var $select = $("#id_year");
+    for (i=new Date().getFullYear();i>=2015;i--){
+        $select.append($('<option></option>').val(i).html(i))
+    }
 });

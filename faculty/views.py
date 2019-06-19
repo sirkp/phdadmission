@@ -39,6 +39,7 @@ class HomePage(LoginRequiredMixin,ListView):
     pg_branch = ''
     gate_or_net_branch = ''
     current_status = ''
+    year = ''
     login_url = 'faculty:faculty_login'
     template_name = 'faculty/faculty_home.html'
     context_object_name = 'results'
@@ -65,6 +66,7 @@ class HomePage(LoginRequiredMixin,ListView):
         context["pg_branch"] = self.pg_branch
         context["gate_or_net_branch"] = self.gate_or_net_branch
         context["current_status"] = self.current_status
+        context["year"] = self.year
         return context
 
     def get_queryset(self):##all, result, no result
@@ -86,6 +88,7 @@ class HomePage(LoginRequiredMixin,ListView):
 
         self.current_status = self.request.GET.get('current_status')
 
+        self.year = self.request.GET.get('year')
 
 
         print(self.name)
@@ -98,6 +101,7 @@ class HomePage(LoginRequiredMixin,ListView):
         print(self.pg_branch)
         print(self.gate_or_net_branch)
         print(self.current_status)
+        print(self.year)
 
 
         if(self.name == None):
@@ -129,6 +133,9 @@ class HomePage(LoginRequiredMixin,ListView):
 
         if(self.current_status == None):
             self.current_status=''
+
+        if(self.year == None):
+            self.year=''
         ###
         # if (self.name !=''):
         #     first_name = self.name.split(' ')[0]
