@@ -7,13 +7,16 @@
 
     <!--bootstrap js -->
     <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <meta charset="utf-8">
+    <style>
+      .navbar { margin-bottom: 0 }
+    </style>
     <title>
       {% block title %}
 
@@ -21,10 +24,116 @@
     </title>
   </head>
   <body>
+    <div style="background-color: #1A458F;">
+      <header id="header" role="banner">
+      <br>
+      <div class="container">
+        <div class="row">
+                <div class="col-md-1">
+                  <a href="http://www.iitrpr.ac.in/logo-iit-ropar" title="Home">
+                    <span><img src="http://www.iitrpr.ac.in/sites/default/files/logo_0_2.png" style="float: left; width: 70px;"></span>
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <span class="heading english"><font style="font-size:15px; color: white;">Indian Institute of Technology Ropar</font></span><br>
+                    <span class="heading hindi"><font style="font-size:15px; color: white;">भारतीय प्रौद्योगिकी संस्थान रोपड़</font></span>
+                    <div class="container"><div class="row"><div class="col-md-4"><hr></div></div></div>
+                </div>
+                <div class="col-md-2">
+                  <span class="english"><font style="font-size:15px; color: white;">Welcome User</font></span><br>
+                </div>
+            </div>
+        </div>
+       </header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1A458F;">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown" style="border-width: 1px 2px 1px 2px; border-style: solid; border-color: white; border-radius: 5px; margin-bottom: 0; padding-bottom: 0px; navbar-margin-bottom: 0px;">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><font style="color: white;"><b>&nbsp;Home </b></font><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://www.iitrpr.ac.in/"><font style="color: white;">&nbsp;IIT ROPAR</font></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><font style="color: white;">&nbsp;Faculty Login</font></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><font style="color: white;">&nbsp;Admin Login</font></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><font style="color: white;">
+            &nbsp;Departments</font>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/cbme/">CBME</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/chemical">Chemical</a>
+              <a class="dropdown-item" href="https://sites.google.com/a/iitrpr.ac.in/iitropar-chemistry/">Chemistry</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/civil">Civil</a>
+              <a class="dropdown-item" href="http://cse.iitrpr.ac.in/">CSE</a>
+              <a class="dropdown-item" href="http://ee.iitrpr.ac.in/">Electrical</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/humanities-and-social-sciences-hss-0">Humanities</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/math/">Methamatics</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/smmee">Mechanical</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/mme">Metallurigical & Metals</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/department-physics">Physics</a>
+            </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><font style="color: white;">
+            &nbsp;About Us</font>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/directors-message">Director's Message</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/vision-and-mission">Vision And Mission</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/administrators">Administrators</a>
+            </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://www.iitrpr.ac.in/research-iit-ropar"><font style="color: white;">&nbsp;Research</font></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://www.iitrpr.ac.in/TP/"><font style="color: white;">&nbsp;Placements</font></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><font style="color: white;">
+            &nbsp;Facilities</font>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="http://library.iitrpr.ac.in/">Library</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/medical-center/">Medical Center</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/hostel">Hostels</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/sports">Sports</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/guest-house">Guest House</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/institute-bus-facility">Institute Bus</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/nkn">NKN</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/day-care-facility-iit-ropar">Day Care Facilities</a>
+              <a class="dropdown-item" href="http://www.iitrpr.ac.in/downloads/forms.html">Download Forms</a>
+            </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://www.iitrpr.ac.in/job@iitropar"><font style="color: white;">&nbsp;Careers</font></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><font style="color: white;">&nbsp;Logout</font></a>
+            </li>
+          </ul>
+        </div>
+        </nav>
+    </div>
     {% block body %}
 
     {% endblock %}
-
+    <div style="background-color: #1A458F;">
+    <div class="container"><hr>
+      <div class="container"><div class="row">
+        <div class="col-md-6"><font class="copyright" style="color: white;">Copyright © 2019, IIT Ropar</font><br><font style="color: white;">Follow us - </font><br> <a href="https://www.facebook.com/iitrpr"><img src="https://clipart.info/images/ccovers/1509135368facebook-logo-PNG-clear-blue.png" style=" width: 20px;"></a>&nbsp;&nbsp; <a href="https://www.twitter.com/iitrpr"><img src="http://cdn2.hubspot.net/hub/443401/file-2872960874-jpg/blog-files/twitter-logo1.jpg" style=" width: 35px;"></a> </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"><font style="font-size: 13px; color: white;">Indian Institute of Technology Ropar,<br>Nangal Road, Rupnagar, Punjab,<br>INDIA - 140001 </font><br><a href="https://goo.gl/maps/qKiHQ969Z21TGkJT8" target="blank"><img src="https://www.freeiconspng.com/uploads/red-location-icon-map-png-4.png" style="width: 13px;"> <font style="font-size: 13px; color: grey;">How to Reach IIT Ropar</font></a></div>
+      </div></div>
+      <br></div>
+    </div>
     <script type="text/javascript" src="{% static 'js/faculty_home.js' %}"></script>
 
   </body>

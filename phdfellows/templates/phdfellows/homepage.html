@@ -2,31 +2,33 @@
 {% load bootstrap4 %
 {% block body %}
   {% if user.is_authenticated %}
+  <br>
   <div class="container">
     <h1>Welcome  {{user.first_name}} {{user.last_name}}</h1>
     <p></p>
     <a href="{% url 'phdfellows:logout' %}" class="btn btn-primary">Logout</a>
     <a href="{% url 'phdfellows:application' %}" class="btn btn-primary">Apply</a>
   </div>
+  <hr>
   <div class="container">
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
-          <th scope="col">S.No.</th>
-          <th scope="col">Application No</th>
-          <th scope="col">Applied for</th>
-          <th scope="col">Submitted at</th>
-          <th scope="col">Status</th>
+          <th style="text-align: center; vertical-align: middle;" scope="col">S.No.</th>
+          <th style="text-align: center; vertical-align: middle;" scope="col">Application No</th>
+          <th style="text-align: center; vertical-align: middle;" scope="col">Applied for</th>
+          <th style="text-align: center; vertical-align: middle;" scope="col">Submitted at</th>
+          <th style="text-align: center; vertical-align: middle;" scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
         {% for application in applications %}
         <tr>
-          <th scope="row">{{ forloop.counter }}</th>
-          <td>{{application.application_no}}</td>
-          <td>{{application.applying_for}}</td>
-          <td>{{application.submitted_at}}</td>
-          <td>{% ifequal application.current_status "Draft" %}<a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.current_status}}</a>
+          <th style="text-align: center; vertical-align: middle;" scope="row">{{ forloop.counter }}</th>
+          <td style="text-align: center; vertical-align: middle;">{{application.application_no}}</td>
+          <td style="text-align: center; vertical-align: middle;">{{application.applying_for}}</td>
+          <td style="text-align: center; vertical-align: middle;">{{application.submitted_at}}</td>
+          <td style="text-align: center; vertical-align: middle;">{% ifequal application.current_status "Draft" %}<a href="{% url 'phdfellows:update' pk=application.pk %}">{{application.current_status}}</a>
               {% else %}<a href="{% url 'phdfellows:application_detail' pk=application.pk %}">{{application.email }} {{application.current_status}}</a>
               {% endifequal %}
           </td>

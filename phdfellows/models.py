@@ -159,3 +159,6 @@ class Application(models.Model):
 
     def __str__(self):
         return self.first_name+" "+self.last_name+"("+self.user.username+")"
+
+    class Meta:
+        ordering = ('-submitted_at',)    

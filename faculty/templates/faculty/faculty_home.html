@@ -87,7 +87,6 @@
           <option value="Rejected" {% ifequal current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option></select>
         </div>
 
-        {# <select id="id_year" class="1-100"></select> #}
         <div class="form-group"><label for="id_year">Year</label><select name="year" class="form-control" id="id_year" style="max-width: 50%;">
           <option value="{{ year }}" selected>{% ifequal year ''  %}Select {% else %}{{ year }}{% endifequal %}</option></select>
         </div>

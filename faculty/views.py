@@ -136,6 +136,7 @@ class HomePage(LoginRequiredMixin,ListView):
 
         if(self.year == None):
             self.year=''
+            
         ###
         # if (self.name !=''):
         #     first_name = self.name.split(' ')[0]
