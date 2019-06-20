@@ -46,16 +46,50 @@
 
       <div class="container"><div class="row">
         <div class="col-md-4">
-          <div class="form-group"><label for="id_score_ug">Score (UG)</label><select name="score_ug" class="form-control" title="" id="id_score_ug" style="max-width: 60%;">
-          <option value="{{ score_ug }}" selected>{% ifequal score_ug ''  %}Select {% else %}{{ score_ug }}{% endifequal %}</option></select>
+          <div class="form-group"><label for="id_scale_of_score_ug">Scale of Score (UG)</label><select name="scale_of_score_ug" class="form-control" title="" id="id_scale_of_score_ug" style="max-width: 60%;">
+            <option value="">Select</option>
+            <option value="0-5 CGPA" {% ifequal scale_of_score_ug '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
+            <option value="0-10 CGPA" {% ifequal scale_of_score_ug '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
+            <option value="0-100%" {% ifequal scale_of_score_ug '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+
         </div></div>
         <div class="col-md-4">
-        <div class="form-group"><label for="id_scale_of_score_ug">Scale of Score (UG)</label><select name="scale_of_score_ug" class="form-control" title="" id="id_scale_of_score_ug" style="max-width: 60%;">
-          <option value="">Select</option>
-          <option value="0-5 CGPA" {% ifequal scale_of_score_ug '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
-          <option value="0-10 CGPA" {% ifequal scale_of_score_ug '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
-          <option value="0-100%" {% ifequal scale_of_score_ug '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+          <div class="form-group"><label for="id_score_ug">Score (UG)</label><select name="score_ug" class="form-control" title="" id="id_score_ug" style="max-width: 60%;">
+          <option value="" {% ifequal score_ug ''  %}selected{% endifequal %}>Select</option>
+          {% ifequal scale_of_score_ug '0-5 CGPA' %}
+            <option value="0-1" {% ifequal score_ug '0-1'  %}selected{% endifequal %}>0-1</option>
+            <option value="1-2" {% ifequal score_ug '1-2'  %}selected{% endifequal %}>1-2</option>
+            <option value="2-3" {% ifequal score_ug '2-3'  %}selected{% endifequal %}>2-3</option>
+            <option value="3-4" {% ifequal score_ug '3-4'  %}selected{% endifequal %}>3-4</option>
+            <option value="4-5" {% ifequal score_ug '4-5'  %}selected{% endifequal %}>4-5</option>
+          {% endifequal %}
+          {% ifequal scale_of_score_ug '0-10 CGPA' %}
+          <option value="0-1" {% ifequal score_ug '0-1'  %}selected{% endifequal %}>0-1</option>
+          <option value="1-2" {% ifequal score_ug '1-2'  %}selected{% endifequal %}>1-2</option>
+          <option value="2-3" {% ifequal score_ug '2-3'  %}selected{% endifequal %}>2-3</option>
+          <option value="3-4" {% ifequal score_ug '3-4'  %}selected{% endifequal %}>3-4</option>
+          <option value="4-5" {% ifequal score_ug '4-5'  %}selected{% endifequal %}>4-5</option>
+          <option value="5-6" {% ifequal score_ug '5-6'  %}selected{% endifequal %}>5-6</option>
+          <option value="6-7" {% ifequal score_ug '6-7'  %}selected{% endifequal %}>6-7</option>
+          <option value="7-8" {% ifequal score_ug '7-8'  %}selected{% endifequal %}>7-8</option>
+          <option value="8-9" {% ifequal score_ug '8-9'  %}selected{% endifequal %}>8-9</option>
+          <option value="9-10" {% ifequal score_ug '9-10'  %}selected{% endifequal %}>9-10</option>
+          {% endifequal %}
+          {% ifequal scale_of_score_ug '0-100%' %}
+          <option value="0-10" {% ifequal score_ug '0-10'  %}selected{% endifequal %}>0-10</option>
+          <option value="10-20" {% ifequal score_ug '10-20'  %}selected{% endifequal %}>10-20</option>
+          <option value="20-30" {% ifequal score_ug '20-30'  %}selected{% endifequal %}>20-30</option>
+          <option value="30-40" {% ifequal score_ug '30-40'  %}selected{% endifequal %}>30-40</option>
+          <option value="40-50" {% ifequal score_ug '40-50'  %}selected{% endifequal %}>40-50</option>
+          <option value="50-60" {% ifequal score_ug '50-60'  %}selected{% endifequal %}>50-60</option>
+          <option value="60-70" {% ifequal score_ug '60-70'  %}selected{% endifequal %}>60-70</option>
+          <option value="70-80" {% ifequal score_ug '70-80'  %}selected{% endifequal %}>70-80</option>
+          <option value="80-90" {% ifequal score_ug '80-90'  %}selected{% endifequal %}>80-90</option>
+          <option value="90-100" {% ifequal score_ug '90-100'  %}selected{% endifequal %}>90-100</option>
+          {% endifequal %}
+        </select>
         </div></div>
+
         <div class="col-md-4">
         <div class="form-group"><label for="id_ug_branch">UG Branch</label><select name="ug_branch" class="form-control" title="" id="id_ug_branch" style="max-width: 60%;">
           <option value="">Select</option>
@@ -69,15 +103,48 @@
 
       <div class="container"><div class="row">
         <div class="col-md-4">
-          <div class="form-group"><label for="id_score_pg">Score (PG)</label><select name="score_pg" class="form-control" title="" id="id_score_pg" style="max-width: 60%;">
-          <option value="{{ score_pg }}" selected>{% ifequal score_pg ''  %}Select {% else %}{{ score_pg }}{% endifequal %}</option></select>
+          <div class="form-group"><label for="id_scale_of_score_pg">Scale of Score (PG)</label><select name="scale_of_score_pg" class="form-control" title="" id="id_scale_of_score_pg" style="max-width: 60%;">
+            <option value="">Select</option>
+            <option value="0-5 CGPA" {% ifequal scale_of_score_pg '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
+            <option value="0-10 CGPA" {% ifequal scale_of_score_pg '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
+            <option value="0-100%" {% ifequal scale_of_score_pg '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+
         </div></div>
         <div class="col-md-4">
-        <div class="form-group"><label for="id_scale_of_score_pg">Scale of Score (PG)</label><select name="scale_of_score_pg" class="form-control" title="" id="id_scale_of_score_pg" style="max-width: 60%;">
-          <option value="">Select</option>
-          <option value="0-5 CGPA" {% ifequal scale_of_score_pg '0-5 CGPA'  %}selected{% endifequal %}>0-5 CGPA</option>
-          <option value="0-10 CGPA" {% ifequal scale_of_score_pg '0-10 CGPA'  %}selected{% endifequal %}>0-10 CGPA</option>
-          <option value="0-100%" {% ifequal scale_of_score_pg '0-100%'  %}selected{% endifequal %}>0-100%</option></select>
+          <div class="form-group"><label for="id_score_pg">Score (PG)</label><select name="score_pg"  class="form-control" title="" id="id_score_pg" style="max-width: 60%;">
+            <option value="" {% ifequal score_pg ''  %}selected{% endifequal %}>Select</option>
+            {% ifequal scale_of_score_pg '0-5 CGPA' %}
+              <option value="0-1" {% ifequal score_pg '0-1'  %}selected{% endifequal %}>0-1</option>
+              <option value="1-2" {% ifequal score_pg '1-2'  %}selected{% endifequal %}>1-2</option>
+              <option value="2-3" {% ifequal score_pg '2-3'  %}selected{% endifequal %}>2-3</option>
+              <option value="3-4" {% ifequal score_pg '3-4'  %}selected{% endifequal %}>3-4</option>
+              <option value="4-5" {% ifequal score_pg '4-5'  %}selected{% endifequal %}>4-5</option>
+            {% endifequal %}
+            {% ifequal scale_of_score_pg '0-10 CGPA' %}
+            <option value="0-1" {% ifequal score_pg '0-1'  %}selected{% endifequal %}>0-1</option>
+            <option value="1-2" {% ifequal score_pg '1-2'  %}selected{% endifequal %}>1-2</option>
+            <option value="2-3" {% ifequal score_pg '2-3'  %}selected{% endifequal %}>2-3</option>
+            <option value="3-4" {% ifequal score_pg '3-4'  %}selected{% endifequal %}>3-4</option>
+            <option value="4-5" {% ifequal score_pg '4-5'  %}selected{% endifequal %}>4-5</option>
+            <option value="5-6" {% ifequal score_pg '5-6'  %}selected{% endifequal %}>5-6</option>
+            <option value="6-7" {% ifequal score_pg '6-7'  %}selected{% endifequal %}>6-7</option>
+            <option value="7-8" {% ifequal score_pg '7-8'  %}selected{% endifequal %}>7-8</option>
+            <option value="8-9" {% ifequal score_pg '8-9'  %}selected{% endifequal %}>8-9</option>
+            <option value="9-10" {% ifequal score_pg '9-10'  %}selected{% endifequal %}>9-10</option>
+            {% endifequal %}
+            {% ifequal scale_of_score_pg '0-100%' %}
+            <option value="0-10" {% ifequal score_pg '0-10'  %}selected{% endifequal %}>0-10</option>
+            <option value="10-20" {% ifequal score_pg '10-20'  %}selected{% endifequal %}>10-20</option>
+            <option value="20-30" {% ifequal score_pg '20-30'  %}selected{% endifequal %}>20-30</option>
+            <option value="30-40" {% ifequal score_pg '30-40'  %}selected{% endifequal %}>30-40</option>
+            <option value="40-50" {% ifequal score_pg '40-50'  %}selected{% endifequal %}>40-50</option>
+            <option value="50-60" {% ifequal score_pg '50-60'  %}selected{% endifequal %}>50-60</option>
+            <option value="60-70" {% ifequal score_pg '60-70'  %}selected{% endifequal %}>60-70</option>
+            <option value="70-80" {% ifequal score_pg '70-80'  %}selected{% endifequal %}>70-80</option>
+            <option value="80-90" {% ifequal score_pg '80-90'  %}selected{% endifequal %}>80-90</option>
+            <option value="90-100" {% ifequal score_pg '90-100'  %}selected{% endifequal %}>90-100</option>
+            {% endifequal %}
+          </select>
         </div></div>
         <div class="col-md-4">
         <div class="form-group"><label for="id_pg_branch">PG Branch</label><select name="pg_branch" class="form-control" title="" id="id_pg_branch" style="max-width: 60%;">
@@ -104,8 +171,7 @@
         </div></div>
         <div class="col-md-4">
         <div class="form-group"><label for="id_current_status">Status</label><select name="current_status" class="form-control" title="" id="id_current_status" style="max-width: 60%;">
-          <option value="">Select</option>
-          <option value="Submitted" {% ifequal current_status 'Submitted'  %}selected{% endifequal %}>Submitted</option>
+          <option value="Submitted" {% ifequal current_status 'Submitted' %}selected{% endifequal %}>Submitted</option>
           <option value="Shortlisted for Test" {% ifequal current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
           <option value="Shortlisted for Interview" {% ifequal current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
           <option value="Selected" {% ifequal current_status 'Selected'  %}selected{% endifequal %}>Selected</option>
@@ -129,9 +195,32 @@
     <b><br><hr style="border-width: 3px;"></b>
 
     <div class="container">
-      {% for result in results  %}
-        <h4>{{ result.email }} {{ result.current_status }}</h4>
-      {% endfor %}
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="col">S.No.</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Application No</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Name</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">UG</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">PG</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results  %}
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="row">{{ forloop.counter }}</th>
+            <td style="text-align: center; vertical-align: middle;">{{ result.application_no }}</td>
+            <td style="text-align: center; vertical-align: middle;">{{result.first_name}} {{result.last_name}}</td>
+            <td style="text-align: center; vertical-align: middle;">B.Tech in {{result.ug_discipline}} <br>{{result.score_in_ug}} /
+              {% ifequal result.scale_of_score_ug '0-5 CGPA' %}5{% else %}{% ifequal result.scale_of_score_ug '0-10 CGPA' %}10{% else %}100{% endifequal %} {% endifequal %}</td>
+            <td style="text-align: center; vertical-align: middle;">B.Tech in {{result.pg_discipline}} <br>{{result.score_in_pg}} /
+              {% ifequal result.scale_of_score_pg '0-5 CGPA' %}5{% else %}{% ifequal result.scale_of_score_pg '0-10 CGPA' %}10{% else %}100{% endifequal %} {% endifequal %}</td>
+            <td style="text-align: center; vertical-align: middle;">{{result.current_status}}{{result.all_india_rank_in_qualifying_exam}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 </div>
   {% endif %}

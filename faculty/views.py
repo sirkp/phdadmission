@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse
 from django.contrib.auth.models import User
+from django.db.models import Q
 from phdfellows.models import Application
 from faculty.forms import LoginForm, SignupForm
 from faculty.models import Faculty, Email
@@ -23,6 +24,7 @@ class SignUp(CreateView):
 
 class FacultyCustomLoginView(LoginView, RedirectView):
     form_class = LoginForm
+    model = Faculty
     template_name = 'registration/login.html'
 
     def get_redirect_url(self):
@@ -38,7 +40,7 @@ class HomePage(LoginRequiredMixin,ListView):
     ug_branch = ''
     pg_branch = ''
     gate_or_net_branch = ''
-    current_status = ''
+    current_status = 'Submitted'
     year = ''
     login_url = 'faculty:faculty_login'
     template_name = 'faculty/faculty_home.html'
@@ -132,11 +134,90 @@ class HomePage(LoginRequiredMixin,ListView):
             self.gate_or_net_branch=''
 
         if(self.current_status == None):
-            self.current_status=''
+            self.current_status='Submitted'
 
         if(self.year == None):
             self.year=''
-            
+
+        # query
+        applications = Application.objects.all()
+
+        applications = applications.filter(current_status=self.current_status)
+
+        if(self.name != ''):
+            if(' ' in self.name):
+                first_name = self.name.split(' ')[0]
+                last_name = self.name.split(' ')[1]
+                applications = applications.filter(first_name__iexact=first_name, last_name__iexact=last_name)
+            else:
+                applications = applications.filter(Q(first_name__startswith=self.name) | Q(last_name__icontains=self.name))
+
+        if(self.air != ''):# [ )
+            if('-' in self.air):
+                lb = self.air.split('-')[0]
+                ub = self.air.split('-')[1]
+                lower_bound = int(lb,10)
+                upper_bound = int(ub,10)
+                applications = applications.filter(all_india_rank_in_qualifying_exam__gte=lower_bound, all_india_rank_in_qualifying_exam__lt=upper_bound)
+            else:
+                lb = self.air.split('+')[0]
+                lower_bound = int(lb,10)
+                applications = applications.filter(all_india_rank_in_qualifying_exam__gte=lower_bound)
+
+        if(self.scale_of_score_ug != ''):
+            applications = applications.filter(scale_of_score_ug=self.scale_of_score_ug)
+
+        if(self.score_ug != ''):# ( ]
+            lb = self.score_ug.split('-')[0]
+            ub = self.score_ug.split('-')[1]
+            lower_bound = float(lb)
+            upper_bound = float(ub)
+            applications = applications.filter(score_in_ug__gt=lower_bound, score_in_ug__lte=upper_bound)
+
+        if(self.scale_of_score_ug != ''):
+            applications = applications.filter(scale_of_score_ug=self.scale_of_score_ug)
+
+        if(self.score_ug != ''):# ( ]
+            lb = self.score_ug.split('-')[0]
+            ub = self.score_ug.split('-')[1]
+            lower_bound = float(lb)
+            upper_bound = float(ub)
+            applications = applications.filter(score_in_ug__gt=lower_bound, score_in_ug__lte=upper_bound)
+
+        if(self.ug_branch!=''):
+            applications = applications.filter(ug_discipline=self.ug_branch)
+
+        #####
+        if(self.score_pg != ''):# ( ]
+            lb = self.score_pg.split('-')[0]
+            ub = self.score_pg.split('-')[1]
+            lower_bound = float(lb)
+            upper_bound = float(ub)
+            applications = applications.filter(score_in_pg__gt=lower_bound, score_in_pg__lte=upper_bound)
+
+        if(self.scale_of_score_pg != ''):
+            applications = applications.filter(scale_of_score_pg=self.scale_of_score_pg)
+
+        if(self.score_pg != ''):# ( ]
+            lb = self.score_pg.split('-')[0]
+            ub = self.score_pg.split('-')[1]
+            lower_bound = float(lb)
+            upper_bound = float(ub)
+            applications = applications.filter(score_in_pg__gt=lower_bound, score_in_pg__lte=upper_bound)
+
+        if(self.pg_branch!=''):
+            applications = applications.filter(pg_discipline=self.pg_branch)
+
+        if(self.gate_or_net_branch!=''):
+            applications = applications.filter(branch_code_for_qualifying_exam=self.gate_or_net_branch)
+
+        # if(self.current_status != ''):
+        #     applications = applications.filter(current_status=self.current_status)
+
+        if(self.year != ''):
+            current_year = int(year,10)
+            applications = applications.filter(submitted_at__year=current_year)
+        return applications
         ###
         # if (self.name !=''):
         #     first_name = self.name.split(' ')[0]
