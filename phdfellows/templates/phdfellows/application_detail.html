@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block body %}
-  <div class="jumbotron">
-    
-    <h1>Welcome to Detail Page {{ application_detail.first_name}} {{application_detail.last_name }} </h1><br>
-    <hr><br>
+<div class="container">
 
-    <p>Roll NO/Application NO : {{application_detail.application_no}}</p>
+  <div class="jumbotron">
+
+    <h1><center>Application Details</center></h1><br>
+    <hr><br>
+    <div class="container"><div class="row">
+      <div class="col-md-6">
+    <p>Roll No/Application No : {{application_detail.application_no}}</p>
+    </div></div></div>
+    <hr>
 
     <div class="container"><div class="row">
     <div class="col-md-6">First Name : {{application_detail.first_name}}</div>
@@ -91,4 +96,5 @@
 	</div></div>
 	<hr>
   </div>
+</div>
 {% endblock %}
