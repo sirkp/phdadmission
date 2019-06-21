@@ -8,7 +8,6 @@
 
 {% block body %}
   <div class="container">
-    <form><button type="submit" class="btn btn-warning" formaction="{% url 'faculty:faculty_login' %}">Faculty Login</button></form>
     <div class="jumbotron">
       <h1>Welcome to Phd Admission</h1>
         <div class="container">
@@ -21,7 +20,7 @@
 
                 {% bootstrap_form form %}
                 <input type="submit" class="btn btn-primary" value="Login">
-                <a href="{% url 'phdfellows:signup' %}">Sign Up</a>
+                <a href="{% url 'accounts:signup' %}">Sign Up</a>
               </form>
             </div>
         </div>

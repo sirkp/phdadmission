@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %
+{% load bootstrap4 %}
 {% block body %}
   {% if user.is_authenticated %}
   <br>
   <div class="container">
     <h1>Welcome  {{user.first_name}} {{user.last_name}}</h1>
     <p></p>
-    <a href="{% url 'phdfellows:logout' %}" class="btn btn-primary">Logout</a>
     <a href="{% url 'phdfellows:application' %}" class="btn btn-primary">Apply</a>
   </div>
   <hr>

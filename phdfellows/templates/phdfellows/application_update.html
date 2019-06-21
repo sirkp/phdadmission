@@ -7,7 +7,7 @@
 <div class="container" style="background-color: #F2F3F4;">
   <h1>Application Form</h1>
   <hr>
-  {% ifequal application.current_status 'Submitted' %}
+  {% ifequal application.current_status 'Draft' %}
   <form action="{% url 'phdfellows:update' pk=application.pk %}" method = "POST">
     {% csrf_token %}
     {% bootstrap_form_errors form %}

@@ -16,15 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from django.urls import path
-from phdfellows import views
+from accounts import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.CustomLoginView.as_view(),name='home'),
-    path('phdfellows/',include('phdfellows.urls',namespace='phdfellows')),
-    path('phdfellows/',include('django.contrib.auth.urls')),
+    path('accounts/',include('phdfellows.urls',namespace='phdfellows')),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('phdfellows/',include('accounts.urls',namespace='accounts')),
     path('faculty/',include('faculty.urls',namespace='faculty')),
     path('faculty/',include('django.contrib.auth.urls')),
 ]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phdfellows',
     'bootstrap4',
+    'accounts',
     'bootstrap_datepicker_plus',
     'faculty'
 ]

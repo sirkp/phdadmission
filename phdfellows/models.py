@@ -5,10 +5,6 @@ from django.contrib.auth.models import User,AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.core.validators import RegexValidator
 
-class PhdFellows(User,PermissionsMixin):
-    def __str__(self):
-        return self.first_name+" "+self.last_name
-
 class Application(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
@@ -161,4 +157,4 @@ class Application(models.Model):
         return self.first_name+" "+self.last_name+"("+self.user.username+")"
 
     class Meta:
-        ordering = ('-submitted_at',)    
+        ordering = ('-submitted_at',)
