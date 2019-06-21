@@ -41,7 +41,10 @@ class CustomLoginView(LoginView,RedirectView):
     template_name = 'home.html'
 
     def get_redirect_url(self):
-        return reverse('phdfellows:home')
+        if(self.request.user.is_staff):
+            return reverse('faculty:faculty_home')
+        else:
+            return reverse('phdfellows:home')
 
 def signup(request):
     if request.method == 'POST':
