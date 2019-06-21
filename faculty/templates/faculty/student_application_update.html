@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
+{% block body %}
+<div class="container" style="background-color: #F2F3F4;">
+  <h1><center>Application Details</center></h1><br>
+  <hr><br>
+  <div class="container"><div class="row">
+    <div class="col-md-6">
+      <p>Roll No/Application No : {{application.application_no}}</p>
+    </div></div></div>
+  <hr>
+
+  <div class="container"><div class="row">
+  <div class="col-md-6">First Name : {{application.first_name}}</div>
+<div class="col-md-6">Last Name : {{application.last_name}}</div>
+</div></div>
+<hr>
+<div class="container"><div class="row">
+  <div class="col-md-6">Gender : {{application.gender}}</div>
+  <div class="col-md-6">Marital Status : {{application.married}}</div>
+</div></div>
+<hr>
+<div class="container"><div class="row">
+  <div class="col-md-6">Category : {{application.category}}</div>
+  <div class="col-md-6">Specially Abled? : {{application.having_disability}}</div>
+</div></div>
+<hr>
+<div class="container"><div class="row">
+  <div class="col-md-6">Email : {{application.email}}</div>
+  <div class="col-md-6">Phone Number : {{application.phone_no}}</div>
+</div></div>
+  <div class="container"><div class="row">
+  <div class="col-md-6">Date of Birth : {{application.date_of_birth}}</div>
+</div></div>
+<hr>
+  <div class="container"><div class="row">
+  <div class="col-md-6">Address : {{application.address}}</div>
+  <div class="col-md-6">City : {{application.city}}</div>
+  </div></div>
+  <div class="container"><div class="row">
+  <div class="col-md-6">State : {{application.state}}</div>
+  <div class="col-md-6">PIN Code : {{application.pin_code}}</div>
+</div></div>
+<hr>
+<div class="container"><div class="row">
+  <div class="col-md-6">Research Area : {{application.research_area}}</div>
+  <div class="col-md-6">Applying For : {{application.applying_for}}</div>
+</div></div>
+<div class="container"><div class="row">
+<div class="col-md-6">Enrollment Type : {{application.enrollment_type}}</div>
+  <div class="col-md-6">UG Score : {{application.score_in_ug}} &nbsp;&nbsp; Out of (Scale) : {{application.scale_of_score_ug}}</div>
+</div></div>
+<div class="container"><div class="row">
+<div class="col-md-6">UG Discipline : {{application.ug_discipline}}</div>
+  <div class="col-md-6">UG Institute : {{application.ug_college_or_university}}</div>
+  </div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">PG Completion year : {{application.pg_passed_or_expected_to_pass_in_year}} </div>
+  <div class="col-md-6">PG Score : {{application.score_in_pg}} &nbsp;&nbsp; Out of (Scale) : {{application.scale_of_score_pg}}</div>
+</div></div>
+<div class="container"><div class="row">
+<div class="col-md-6">PG Discipline : {{application.pg_discipline}}</div>
+  <div class="col-md-6">PG Institute : {{application.pg_college_or_university}}</div>
+</div></div>
+<hr>
+  <div class="container"><div class="row">
+  <div class="col-md-6">Qualifying Examination : {{application.qualifying_examination}}</div>
+  <div class="col-md-6">Branch Code : {{application.branch_code_for_qualifying_exam}}</div>
+  </div></div>
+  <div class="container"><div class="row">
+  <div class="col-md-6">Score in Qualifying Examination : {{application.score_in_qualifying_exam}}</div>
+  <div class="col-md-6">AIR in Qualifying Exam : {{application.all_india_rank_in_qualifying_exam}}</div>
+  </div></div>
+  <div class="container"><div class="row">
+  <div class="col-md-6">Qualifying Exam Score Validity : {{application.qualifying_exam_score_valid_upto}}</div>
+</div></div>
+<hr>
+<div class="container"><div class="row">
+  <div class="col-md-6">Work Experience (Years) : {{application.work_experience_in_year}}</div>
+  <div class="col-md-6">Type of Work : {{application.type_of_work}}</div>
+  </div></div>
+  <div class="container"><div class="row">
+  <div class="col-md-6">Peer Reviewed Publications : {{application.no_of_peer_reviewed_publications}}</div>
+  <div class="col-md-6">Patents Granted : {{application.no_of_patents_granted}}</div>
+</div></div>
+<hr>
+<div class="container"><div class="row">
+  <div class="col-md-6">Current Status : {{application.current_status}}</div>
+  <div class="col-md-6">Previous Status : {{application.previous_status}}</div>
+  </div></div>
+</div>
+  {% if application.current_status == 'Selected' or application.current_status == 'Rejected' %}
+  {% else %}
+    <div class="container" style="background-color: #F2F3F4;">
+      <form method = "POST">
+        {% csrf_token %}
+        <div class="form-group"><label for="id_current_status">Current status</label>
+          <select name="current_status" class="form-control" title="" id="id_current_status">
+            {% ifequal application.current_status 'Submitted'  %}
+              <option value="Submitted" {% ifequal application.current_status 'Submitted'  %}selected{% endifequal %}>Submitted</option>
+              <option value="Shortlisted for Test" {% ifequal application.current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
+              <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+            {% endifequal %}
+
+            {% ifequal application.current_status 'Shortlisted for Test'  %}
+              <option value="Shortlisted for Test" {% ifequal application.current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
+              <option value="Shortlisted for Interview" {% ifequal application.current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
+              <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+            {% endifequal %}
+
+            {% ifequal application.current_status 'Shortlisted for Interview'  %}
+              <option value="Shortlisted for Interview" {% ifequal application.current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
+              <option value="Selected" {% ifequal application.current_status 'Selected'  %}selected{% endifequal %}>Selected</option>
+              <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+            {% endifequal %}
+          </select>
+        </div>
+        <input type="submit" name='save_as_draft' class="btn btn-primary" value="Update">
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

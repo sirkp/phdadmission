@@ -2,10 +2,10 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.models import User
 from django.db.models import Q
 from phdfellows.models import Application
-from faculty.forms import LoginForm, SignupForm
+from faculty.forms import LoginForm, SignupForm, StudentApplicationForm
 from faculty.models import Faculty, Email
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import CreateView,TemplateView, RedirectView, ListView
+from django.views.generic import CreateView,TemplateView, RedirectView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
@@ -30,6 +30,29 @@ class FacultyCustomLoginView(LoginView, RedirectView):
     def get_redirect_url(self):
         return reverse('faculty:faculty_home')
 
+class StudentApplicationUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'faculty:faculty_login'
+    model = Application
+    form_class = StudentApplicationForm
+    context_object_name = 'application'
+    success_url = reverse_lazy('faculty:faculty_home')
+    template_name = 'faculty/student_application_update.html'
+
+    # def form_valid(self, form):
+    #     if('submit_application' in self.request.POST):
+    #         self.object = form.save(commit=False)
+    #         my_time=datetime.datetime.now()
+    #         my_time=make_aware(my_time)
+    #         n=Application.objects.filter(submitted_at__year=my_time.year,
+    #             submitted_at__month=my_time.month, submitted_at__day=my_time.day,
+    #             current_status='Submitted').count() + 1
+    #         app_no = ((my_time.year*100 + my_time.month)*100 + my_time.day)*1000 + n
+    #         self.object.application_no = app_no
+    #         self.object.previous_status = self.object.current_status
+    #         self.object.current_status = "Submitted"
+    #         self.object.save()
+    #     return super().form_valid(form)
+
 class HomePage(LoginRequiredMixin,ListView):
     name = ''
     air = ''
@@ -40,22 +63,12 @@ class HomePage(LoginRequiredMixin,ListView):
     ug_branch = ''
     pg_branch = ''
     gate_or_net_branch = ''
-    current_status = 'Submitted'
+    current_status = ''
     year = ''
     login_url = 'faculty:faculty_login'
     template_name = 'faculty/faculty_home.html'
     context_object_name = 'results'
 
-    # def get(self, request):
-    #     self.name = self.request.GET.get('name')
-    #     self.air = self.request.GET.get('air')
-    #     print(self.request.GET.get('name'))
-    #     print(self.request.GET.get('air'))
-    #     if(self.name == None):
-    #         self.name=''
-    #     if(self.air == None):
-    #         self.air=''
-    #     return render(request, 'faculty/faculty_home.html', {'name':self.name, 'air':self.air})
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["name"] = self.name
@@ -72,6 +85,7 @@ class HomePage(LoginRequiredMixin,ListView):
         return context
 
     def get_queryset(self):##all, result, no result
+        #getting fields
         self.name = self.request.GET.get('name')
 
         self.air = self.request.GET.get('air')
@@ -92,20 +106,20 @@ class HomePage(LoginRequiredMixin,ListView):
 
         self.year = self.request.GET.get('year')
 
+        #
+        # print(self.name)
+        # print(self.air)
+        # print(self.scale_of_score_ug)
+        # print(self.score_ug)
+        # print(self.scale_of_score_pg)
+        # print(self.score_pg)
+        # print(self.ug_branch)
+        # print(self.pg_branch)
+        # print(self.gate_or_net_branch)
+        # print(self.current_status)
+        # print(self.year)
 
-        print(self.name)
-        print(self.air)
-        print(self.scale_of_score_ug)
-        print(self.score_ug)
-        print(self.scale_of_score_pg)
-        print(self.score_pg)
-        print(self.ug_branch)
-        print(self.pg_branch)
-        print(self.gate_or_net_branch)
-        print(self.current_status)
-        print(self.year)
-
-
+        # checking for null
         if(self.name == None):
             self.name=''
 
@@ -134,7 +148,7 @@ class HomePage(LoginRequiredMixin,ListView):
             self.gate_or_net_branch=''
 
         if(self.current_status == None):
-            self.current_status='Submitted'
+            self.current_status=''
 
         if(self.year == None):
             self.year=''
@@ -142,7 +156,7 @@ class HomePage(LoginRequiredMixin,ListView):
         # query
         applications = Application.objects.all()
 
-        applications = applications.filter(current_status=self.current_status)
+        applications = applications.filter(~Q(current_status='Draft'))
 
         if(self.name != ''):
             if(' ' in self.name):
@@ -211,16 +225,10 @@ class HomePage(LoginRequiredMixin,ListView):
         if(self.gate_or_net_branch!=''):
             applications = applications.filter(branch_code_for_qualifying_exam=self.gate_or_net_branch)
 
-        # if(self.current_status != ''):
-        #     applications = applications.filter(current_status=self.current_status)
-
         if(self.year != ''):
             current_year = int(year,10)
             applications = applications.filter(submitted_at__year=current_year)
+
+        if(self.current_status!=''):
+            applications = applications.filter(branch_code_for_qualifying_exam=self.current_status)
         return applications
-        ###
-        # if (self.name !=''):
-        #     first_name = self.name.split(' ')[0]
-        #     last_name = self.name.split(' ')[1]
-        #     print(Application.objects.filter(first_name=first_name, last_name=last_name))
-        #     return Application.objects.filter(first_name=first_name, last_name=last_name)

@@ -1,5 +1,6 @@
 from django import forms
 from faculty.models import Email,Faculty
+from phdfellows.models import Application
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class LoginForm(AuthenticationForm):
@@ -25,3 +26,8 @@ class SignupForm(UserCreationForm):
         if email not in Email.objects.all().values_list('email', flat=True):
             raise forms.ValidationError(_("This email is not in registered faculty email list, Please try with official IIT Ropar email"))
         return email
+
+class StudentApplicationForm(forms.ModelForm):
+    class Meta():
+        model = Application
+        fields = ('current_status',)

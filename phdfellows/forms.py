@@ -33,7 +33,6 @@ class ApplicationForm(forms.ModelForm):
     class Meta():
         model = Application
         exclude = ('submitted_at','current_status','previous_status','user','application_no','first_name','last_name','email')
-        # widgets = {'date_of_birth': DatePickerInput(format='%d/%m/%Y')}
 
     def __init__(self, *args, **kwargs):
         super(ApplicationForm, self).__init__(*args, **kwargs)

@@ -171,6 +171,7 @@
         </div></div>
         <div class="col-md-4">
         <div class="form-group"><label for="id_current_status">Status</label><select name="current_status" class="form-control" title="" id="id_current_status" style="max-width: 60%;">
+          <option value="" {% ifequal current_status '' %}selected{% endifequal %}>Select</option>
           <option value="Submitted" {% ifequal current_status 'Submitted' %}selected{% endifequal %}>Submitted</option>
           <option value="Shortlisted for Test" {% ifequal current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
           <option value="Shortlisted for Interview" {% ifequal current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
@@ -210,7 +211,7 @@
           {% for result in results  %}
           <tr>
             <th style="text-align: center; vertical-align: middle;" scope="row">{{ forloop.counter }}</th>
-            <td style="text-align: center; vertical-align: middle;">{{ result.application_no }}</td>
+            <td style="text-align: center; vertical-align: middle;"><a href="{% url 'faculty:student_application_update' pk=result.pk %}">{{ result.application_no }}</a></td>
             <td style="text-align: center; vertical-align: middle;">{{result.first_name}} {{result.last_name}}</td>
             <td style="text-align: center; vertical-align: middle;">B.Tech in {{result.ug_discipline}} <br>{{result.score_in_ug}} /
               {% ifequal result.scale_of_score_ug '0-5 CGPA' %}5{% else %}{% ifequal result.scale_of_score_ug '0-10 CGPA' %}10{% else %}100{% endifequal %} {% endifequal %}</td>
