@@ -6,13 +6,18 @@ from faculty.forms import StudentApplicationForm
 from faculty.models import Email
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView,TemplateView, RedirectView, ListView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from braces import views
 
 # Create your views here.
 
 
-class StudentApplicationUpdateView(LoginRequiredMixin, UpdateView):
+class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequiredMixin, UpdateView):#Always put mixins on left
+    redirect_unauthenticated_users = True
+    raise_exception = True
     login_url = 'home'
     model = Application
     form_class = StudentApplicationForm
@@ -35,7 +40,13 @@ class StudentApplicationUpdateView(LoginRequiredMixin, UpdateView):
     #         self.object.save()
     #     return super().form_valid(form)
 
-class HomePage(LoginRequiredMixin,ListView):
+class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin, ListView):
+    redirect_unauthenticated_users = True
+    raise_exception = True
+    login_url = 'home'
+    template_name = 'faculty/faculty_home.html'
+    context_object_name = 'results'
+
     name = ''
     air = ''
     scale_of_score_ug = ''
@@ -47,9 +58,6 @@ class HomePage(LoginRequiredMixin,ListView):
     gate_or_net_branch = ''
     current_status = ''
     year = ''
-    login_url = 'home'
-    template_name = 'faculty/faculty_home.html'
-    context_object_name = 'results'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

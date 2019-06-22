@@ -38,7 +38,7 @@ class HomePage(LoginRequiredMixin,ListView):
 class ApplicationCreateView(LoginRequiredMixin, CreateView):
     login_url = 'home'
     form_class = ApplicationForm
-    success_url = reverse_lazy('phdfellows:home')
+    success_url = reverse_lazy('phdfellows:phdfellows_home')
     template_name = 'phdfellows/application.html'
 
     def form_valid(self, form):
@@ -54,7 +54,7 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'home'
     model = Application
     form_class = ApplicationForm
-    success_url = reverse_lazy('phdfellows:home')
+    success_url = reverse_lazy('phdfellows:phdfellows_home')
     template_name = 'phdfellows/application_update.html'
 
     def form_valid(self, form):

@@ -23,9 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.CustomLoginView.as_view(),name='home'),
-    path('accounts/',include('phdfellows.urls',namespace='phdfellows')),
-    path('accounts/',include('django.contrib.auth.urls')),
-    path('phdfellows/',include('accounts.urls',namespace='accounts')),
+    path('phdfellows/',include('phdfellows.urls',namespace='phdfellows')),
+    path('accounts/',include('accounts.urls',namespace='accounts')),
     path('faculty/',include('faculty.urls',namespace='faculty')),
     path('faculty/',include('django.contrib.auth.urls')),
 ]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

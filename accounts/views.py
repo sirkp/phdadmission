@@ -33,7 +33,7 @@ class CustomLoginView(LoginView,RedirectView):
         if(self.request.user.is_staff):
             return reverse('faculty:faculty_home')
         else:
-            return reverse('phdfellows:home')
+            return reverse('phdfellows:phdfellows_home')
 
 def signup(request):
     if request.method == 'POST':
