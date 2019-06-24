@@ -46,8 +46,24 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.first_name = self.request.user.first_name
         self.object.last_name = self.request.user.last_name
+        if (self.object.country != '' and self.object.country!='India'):
+            self.object.state = self.request.POST.get('state_description')
         self.object.email = self.request.user.email
         self.object.save()
+
+        if('submit_application' in self.request.POST):
+            self.object = form.save(commit=False)
+            my_time=datetime.datetime.now()
+            my_time=make_aware(my_time)
+            n=Application.objects.filter(submitted_at__year=my_time.year,
+                submitted_at__month=my_time.month, submitted_at__day=my_time.day,
+                current_status='Submitted').count() + 1
+            app_no = ((my_time.year*100 + my_time.month)*100 + my_time.day)*1000 + n
+            self.object.application_no = app_no
+            self.object.previous_status = self.object.current_status
+            self.object.current_status = "Submitted"
+            self.object.save()
+        return super().form_valid(form)
         return super().form_valid(form)
 
 class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
@@ -58,6 +74,11 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'phdfellows/application_update.html'
 
     def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if (self.object.country != '' and self.object.country!='India'):
+            self.object.state = self.request.POST.get('state_description')
+            self.object.save()
+
         if('submit_application' in self.request.POST):
             self.object = form.save(commit=False)
             my_time=datetime.datetime.now()

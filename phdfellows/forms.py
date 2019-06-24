@@ -15,7 +15,7 @@ class ApplicationForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].required = False
             self.fields[field].null = True
-
+                        
     def clean_address(self):
         address = self.cleaned_data.get('address')
         if 'save_as_draft' in self.data:

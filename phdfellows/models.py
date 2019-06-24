@@ -65,9 +65,11 @@ class Application(models.Model):
 
     address = models.TextField()
 
-    state = models.CharField(max_length=40)
+    country = models.CharField(max_length=200)
 
-    city = models.CharField(max_length=50)
+    state = models.CharField(null=True,max_length=200)
+
+    city = models.CharField(max_length=200)
 
     pin_code = models.CharField(validators=[RegexValidator(regex='^.{6}$',message='Length has to be 6', code='nomatch')],max_length=6)
 
@@ -146,8 +148,6 @@ class Application(models.Model):
         ('Rejected','Rejected'),
     ]
     current_status = models.CharField(default='Draft',choices=status_list,max_length=30)
-
-    previous_status = models.CharField(max_length=30)
 
     submitted_at = models.DateField(auto_now=True)
 
