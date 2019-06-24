@@ -30,8 +30,10 @@ class CustomLoginView(LoginView,RedirectView):
     template_name = 'home.html'
 
     def get_redirect_url(self):
-        if(self.request.user.is_staff):
-            return reverse('faculty:faculty_home')
+        if(self.request.user.is_superuser):
+            return reverse( 'admin:index' )
+        elif(self.request.user.is_staff):
+            return reverse( 'faculty:faculty_home' )
         else:
             return reverse('phdfellows:phdfellows_home')
 
