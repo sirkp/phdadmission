@@ -3,28 +3,39 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {% block title %}
-    Phd Admission
+Phd Admission
 {% endblock %}
 
 {% block body %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Welcome to Phd Admission</h1>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-7" ><h2>Announcements</h2></div>
-            <div class="col-md-5">
-              <h2>Log In</h2>
-              <form method = "POST">
-                {% csrf_token %}
+<div class="container">
+<div class="jumbotron">
+<h1>Welcome to Phd Admission</h1>
+<hr>
+<div class="container">
+<div class="row">
+<div class="col-md-6" >
+<div class="well" style="background-color: white; border-style: groove; border-radius: 5px; min-height: 300px;"><br>
+<h2><font style="color: red;"><center>Announcements</center></font></h2><br>
+<ul>
+<li>
+<a href="http://www.iitrpr.ac.in/sites/default/files/List%20of%20Eligible%2C%20PE%20%26%20IE_SLA_EE.pdf"><font style="color: blue;">Click Here for Announcements</font></a>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-5">
+<h2>Log In</h2><br>
+<form method = "POST">
+{% csrf_token %}
 
-                {% bootstrap_form form %}
-                <input type="submit" class="btn btn-primary" value="Login">
-                <a href="{% url 'accounts:signup' %}">Sign Up</a>
-              </form>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
+{% bootstrap_form form %}
+<input type="submit" class="btn btn-primary" value="Login">
+<a href="{% url 'accounts:signup' %}">Sign Up</a>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

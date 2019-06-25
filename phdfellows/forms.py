@@ -15,7 +15,7 @@ class ApplicationForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].required = False
             self.fields[field].null = True
-                        
+
     def clean_address(self):
         address = self.cleaned_data.get('address')
         if 'save_as_draft' in self.data:
@@ -258,21 +258,3 @@ class ApplicationForm(forms.ModelForm):
             if (type_of_work == ''):
                 raise forms.ValidationError(_("Type of Work is required"))
             return type_of_work
-
-    def clean_no_of_peer_reviewed_publications(self):
-        no_of_peer_reviewed_publications = self.cleaned_data.get('no_of_peer_reviewed_publications')
-        if 'save_as_draft' in self.data:
-            return no_of_peer_reviewed_publications
-        elif 'submit_application' in self.data:
-            if (no_of_peer_reviewed_publications == None):
-                raise forms.ValidationError(_("No of peer reviewed publications is required"))
-            return no_of_peer_reviewed_publications
-
-    def clean_no_of_patents_granted(self):
-        no_of_patents_granted = self.cleaned_data.get('no_of_patents_granted')
-        if 'save_as_draft' in self.data:
-            return no_of_patents_granted
-        elif 'submit_application' in self.data:
-            if (no_of_patents_granted == None):
-                raise forms.ValidationError(_("No of patents granted is required"))
-            return no_of_patents_granted

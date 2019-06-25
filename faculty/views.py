@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from phdfellows.models import Application
 from faculty.forms import StudentApplicationForm
-from faculty.models import Email
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView,TemplateView, RedirectView, ListView, UpdateView
 from django.urls import reverse_lazy

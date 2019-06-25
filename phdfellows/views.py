@@ -58,7 +58,7 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
             n=Application.objects.filter(submitted_at__year=my_time.year,
                 submitted_at__month=my_time.month, submitted_at__day=my_time.day,
                 current_status='Submitted').count() + 1
-            app_no = ((my_time.year*100 + my_time.month)*100 + my_time.day)*1000 + n
+            app_no = ((my_time.year % 100) * 100000) + n
             self.object.application_no = app_no
             self.object.previous_status = self.object.current_status
             self.object.current_status = "Submitted"
@@ -86,7 +86,7 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
             n=Application.objects.filter(submitted_at__year=my_time.year,
                 submitted_at__month=my_time.month, submitted_at__day=my_time.day,
                 current_status='Submitted').count() + 1
-            app_no = ((my_time.year*100 + my_time.month)*100 + my_time.day)*1000 + n
+            app_no = ((my_time.year % 100) * 100000) + n
             self.object.application_no = app_no
             self.object.previous_status = self.object.current_status
             self.object.current_status = "Submitted"

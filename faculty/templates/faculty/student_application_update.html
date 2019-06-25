@@ -44,6 +44,9 @@
   <div class="col-md-6">State : {{application.state}}</div>
   <div class="col-md-6">PIN Code : {{application.pin_code}}</div>
 </div></div>
+<div class="container"><div class="row">
+  <div class="col-md-6">Country : {{application.country}}</div>
+</div></div>
 <hr>
 <div class="container"><div class="row">
   <div class="col-md-6">Research Area : {{application.research_area}}</div>
@@ -92,12 +95,16 @@
   <div class="col-md-6">Previous Status : {{application.previous_status}}</div>
   </div></div>
 </div>
+<br>
+<div class="container" style="background-color: #F2F3F4;"><br>
+<div class="container"><div class="row">
+  <div class="col-md-6">
   {% if application.current_status == 'Selected' or application.current_status == 'Rejected' %}
   {% else %}
-    <div class="container" style="background-color: #F2F3F4;">
+
       <form method = "POST">
         {% csrf_token %}
-        <div class="form-group"><label for="id_current_status">Current status</label>
+        <div class="form-group"><label for="id_current_status"> Change current status :</label>
           <select name="current_status" class="form-control" title="" id="id_current_status">
             {% ifequal application.current_status 'Submitted'  %}
               <option value="Submitted" {% ifequal application.current_status 'Submitted'  %}selected{% endifequal %}>Submitted</option>
@@ -121,5 +128,9 @@
         <input type="submit" name='save_as_draft' class="btn btn-primary" value="Update">
       </form>
     </div>
+    </div>
+    </div></div>
+
+  </div>
   {% endif %}
 {% endblock %}

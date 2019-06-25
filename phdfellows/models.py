@@ -131,9 +131,9 @@ class Application(models.Model):
     ]
     type_of_work = models.CharField(default='Select',choices=type_of_work_list,max_length=50)
 
-    no_of_peer_reviewed_publications = models.IntegerField(default=None ,null=True)
+    no_of_peer_reviewed_publications = models.IntegerField(default=0 ,null=True)
 
-    no_of_patents_granted = models.IntegerField(default=None ,null=True)
+    no_of_patents_granted = models.IntegerField(default=0 ,null=True)
 
     guide_preference_1 = models.CharField(max_length=200)
     guide_preference_2 = models.CharField(max_length=200)
