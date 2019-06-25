@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django import forms
 from bootstrap_datepicker_plus import DatePickerInput
-from django.contrib.auth.models import User
+from accounts.models import User
 from phdfellows.models import Application
 from django.utils.translation import ugettext_lazy as _
 

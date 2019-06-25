@@ -1,5 +1,6 @@
-from django.shortcuts import render, reverse
-from django.contrib.auth.models import User
+from django.shortcuts import render, reverse, redirect
+from accounts.models import User
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from phdfellows.models import Application
 from faculty.forms import StudentApplicationForm
@@ -12,9 +13,16 @@ from django.contrib.admin.views.decorators import staff_member_required
 from braces import views
 
 # Create your views here.
+class NotLockedRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_locked:
+            raise PermissionDenied
+            return redirect('home')
+        return super(NotLockedRequiredMixin, self).dispatch(request,
+            *args, **kwargs)
 
 
-class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequiredMixin, UpdateView):#Always put mixins on left
+class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRequiredMixin, UpdateView):#Always put mixins on left
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -39,7 +47,7 @@ class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequi
     #         self.object.save()
     #     return super().form_valid(form)
 
-class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin, ListView):
+class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRequiredMixin,ListView):
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'

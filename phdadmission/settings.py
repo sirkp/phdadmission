@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'accounts.User'
+
 # AUTH_USER_MODEL = 'phdfellows.User'
 
 # Application definition

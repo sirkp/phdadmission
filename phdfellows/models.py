@@ -1,8 +1,7 @@
 from django.db import models
+from accounts.models import User
 from datetime import date
 from django.utils.translation import gettext as _
-from django.contrib.auth.models import User,AbstractBaseUser, PermissionsMixin
-from django.contrib.auth.models import BaseUserManager
 from django.core.validators import RegexValidator
 
 class Application(models.Model):
