@@ -104,27 +104,67 @@
 
       <form action="{% url 'faculty:student_application_update' pk=application.pk %}" method = "POST">
         {% csrf_token %}
+
+        {% if application.current_status == 'Shortlisted for Test' or application.current_status == 'Shortlisted for Interview' %}
+            <div>Written Test Score : {{writtentestscore.written_test_score}}</div>
+            <div>Programming Test Score : {{written_test_score.programming_test_score}}</div>
+            <br>
+        {% endif %}
+
         <div class="form-group"><label for="id_current_status"> Change current status :</label>
           <select name="current_status" class="form-control" title="" id="id_current_status">
             {% ifequal application.current_status 'Submitted'  %}
-              <option value="Submitted" {% ifequal application.current_status 'Submitted'  %}selected{% endifequal %}>Submitted</option>
-              <option value="Shortlisted for Test" {% ifequal application.current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
-              <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+                  <option value="Submitted" {% ifequal application.current_status 'Submitted'  %}selected{% endifequal %}>Submitted</option>
+                  <option value="Shortlisted for Test" {% ifequal application.current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
+                  <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+              </select>
             {% endifequal %}
 
             {% ifequal application.current_status 'Shortlisted for Test'  %}
-              <option value="Shortlisted for Test" {% ifequal application.current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
-              <option value="Shortlisted for Interview" {% ifequal application.current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
-              <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
-            {% endifequal %}
-
+                  <option value="Shortlisted for Test" {% ifequal application.current_status 'Shortlisted for Test'  %}selected{% endifequal %}>Shortlisted for Test</option>
+                  <option value="Shortlisted for Interview" {% ifequal application.current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
+                  <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+                </select>
+                {% endifequal %}
             {% ifequal application.current_status 'Shortlisted for Interview'  %}
-              <option value="Shortlisted for Interview" {% ifequal application.current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
-              <option value="Selected" {% ifequal application.current_status 'Selected'  %}selected{% endifequal %}>Selected</option>
-              <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+                  <option value="Shortlisted for Interview" {% ifequal application.current_status 'Shortlisted for Interview'  %}selected{% endifequal %}>Shortlisted for Interview</option>
+                  <option value="Selected" {% ifequal application.current_status 'Selected'  %}selected{% endifequal %}>Selected</option>
+                  <option value="Rejected" {% ifequal application.current_status 'Rejected'  %}selected{% endifequal %}>Rejected</option>
+              </select>
+              <br>
+              <div class="form-group"><label for="id_assesment_score">Assesment Score</label>
+                <select name="assesment_score" class="form-control" title="" id="id_assesment_score">
+                  <option value="">Select</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+              <br>
+
+              <div class="form-group">
+                <label for="id_willing_to_guide">Willing To Guide</label>
+                <div class="radio radio-success" id="id_willing_to_guide">
+                  <label for="id_willing_to_guide_yes">
+                    <input type="radio" name="willing_to_guide" value="Yes" class="" title="" required="" id="id_willing_to_guide_yes">Yes
+                  </label>
+                  <label for="id_willing_to_guide_no">
+                    <input type="radio" name="willing_to_guide" value="No" class="" title="" required="" id="id_willing_to_guide_no">No
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group"><label for="id_remarks">Remarks</label><textarea name="remarks" cols="40" rows="7" class="form-control" placeholder="Remarks" id="id_remarks"></textarea></div>
+
             {% endifequal %}
-          </select>
-        </div>
         <input type="submit" name='update' class="btn btn-primary" value="Update">
       </form>
     </div>

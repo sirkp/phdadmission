@@ -3,6 +3,7 @@ from accounts.models import User
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from phdfellows.models import Application, WrittenTestScore
+from faculty.models import ApplicantScoreByFaculty
 from faculty.forms import StudentApplicationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView,TemplateView, RedirectView, ListView, UpdateView
@@ -33,14 +34,19 @@ class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequi
     template_name = 'faculty/student_application_update.html'
 
     def form_valid(self,form):
-        print(self.object.pk)
-        print(self.request.POST['current_status'])
         if(self.request.POST['current_status']=='Shortlisted for Test'):
             written_test_score = WrittenTestScore(application_no=get_object_or_404(Application,pk=self.object.pk))
             written_test_score.save()
 
         self.object = form.save(commit=False)
+        if(self.request.POST['current_status']=='Shortlisted for Interview'):
+            self.object.was_selected_for_interview = True
+
+        if(self.object.was_selected_for_interview and (self.request.POST['current_status']=='Selected' or self.request.POST['current_status']=='Rejected')):
+            faculty_assessment = ApplicantScoreByFaculty(faculty=self.request.user,application_no=get_object_or_404(Application,pk=self.object.pk),willing_to_guide=self.request.POST['willing_to_guide'],assesment_score=self.request.POST['assesment_score'],remarks=self.request.POST['remarks'])
+            faculty_assessment.save()
         self.object.save()
+
         return super().form_valid(form)
     #
     # def form_valid(self, form):

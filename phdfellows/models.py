@@ -154,6 +154,8 @@ class Application(models.Model):
 
     application_no = models.IntegerField(unique=True,default=None ,null=True)
 
+    was_selected_for_interview = models.BooleanField(default=False)
+
     def __str__(self):
         return str(self.application_no)
 
