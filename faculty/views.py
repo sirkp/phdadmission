@@ -1,8 +1,8 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from accounts.models import User
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from phdfellows.models import Application
+from phdfellows.models import Application, WrittenTestScore
 from faculty.forms import StudentApplicationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView,TemplateView, RedirectView, ListView, UpdateView
@@ -32,6 +32,17 @@ class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequi
     success_url = reverse_lazy('faculty:faculty_home')
     template_name = 'faculty/student_application_update.html'
 
+    def form_valid(self,form):
+        print(self.object.pk)
+        print(self.request.POST['current_status'])
+        if(self.request.POST['current_status']=='Shortlisted for Test'):
+            written_test_score = WrittenTestScore(application_no=get_object_or_404(Application,pk=self.object.pk))
+            written_test_score.save()
+
+        self.object = form.save(commit=False)
+        self.object.save()
+        return super().form_valid(form)
+    #
     # def form_valid(self, form):
     #     if('submit_application' in self.request.POST):
     #         self.object = form.save(commit=False)

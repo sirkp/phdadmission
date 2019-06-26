@@ -102,7 +102,7 @@
   {% if application.current_status == 'Selected' or application.current_status == 'Rejected' %}
   {% else %}
 
-      <form method = "POST">
+      <form action="{% url 'faculty:student_application_update' pk=application.pk %}" method = "POST">
         {% csrf_token %}
         <div class="form-group"><label for="id_current_status"> Change current status :</label>
           <select name="current_status" class="form-control" title="" id="id_current_status">
@@ -125,7 +125,7 @@
             {% endifequal %}
           </select>
         </div>
-        <input type="submit" name='save_as_draft' class="btn btn-primary" value="Update">
+        <input type="submit" name='update' class="btn btn-primary" value="Update">
       </form>
     </div>
     </div>

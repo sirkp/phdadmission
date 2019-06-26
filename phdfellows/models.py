@@ -155,9 +155,16 @@ class Application(models.Model):
     application_no = models.IntegerField(unique=True,default=None ,null=True)
 
     def __str__(self):
-        return self.first_name+" "+self.last_name
+        return str(self.application_no)
 
     class Meta:
         ordering = ('-submitted_at',)
         # unique_together = ('submitted_year','applying_for','email')
 
+class WrittenTestScore(models.Model):
+    application_no = models.OneToOneField(Application,on_delete=models.CASCADE)
+    written_test_score = models.IntegerField(null=True)
+    programming_test_score = models.IntegerField(null=True)
+
+    def __str__(self):
+        return str(self.application_no)
