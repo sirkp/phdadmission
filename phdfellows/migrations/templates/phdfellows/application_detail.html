@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<div class="container">
+
+  <div class="jumbotron">
+
+    <h1><center>Application Details</center></h1><br>
+    <hr><br>
+    <div class="container"><div class="row">
+      <div class="col-md-6">
+    <p>Roll No/Application No : {{application_detail.application_no}}</p>
+    </div></div></div>
+    <hr>
+
+    <div class="container"><div class="row">
+    <div class="col-md-6">First Name : {{application_detail.first_name}}</div>
+	<div class="col-md-6">Last Name : {{application_detail.last_name}}</div>
+	</div></div>
+	<hr>
+	<div class="container"><div class="row">
+    <div class="col-md-6">Gender : {{application_detail.gender}}</div>
+    <div class="col-md-6">Marital Status : {{application_detail.married}}</div>
+	</div></div>
+	<hr>
+	<div class="container"><div class="row">
+    <div class="col-md-6">Category : {{application_detail.category}}</div>
+    <div class="col-md-6">Specially Abled? : {{application_detail.having_disability}}</div>
+	</div></div>
+	<hr>
+	<div class="container"><div class="row">
+    <div class="col-md-6">Email : {{application_detail.email}}</div>
+    <div class="col-md-6">Phone Number : {{application_detail.phone_no}}</div>
+	</div></div>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Date of Birth : {{application_detail.date_of_birth}}</div>
+	</div></div>
+	<hr>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Address : {{application_detail.address}}</div>
+    <div class="col-md-6">City : {{application_detail.city}}</div>
+    </div></div>
+    <div class="container"><div class="row">
+    <div class="col-md-6">State : {{application_detail.state}}</div>
+    <div class="col-md-6">PIN Code : {{application_detail.pin_code}}</div>
+	</div></div>
+  <div class="container"><div class="row">
+    <div class="col-md-6">Country : {{application_detail.country}}</div>
+  </div></div>
+	<hr>
+	<div class="container"><div class="row">
+    <div class="col-md-6">Research Area : {{application_detail.research_area}}</div>
+    <div class="col-md-6">Applying For : {{application_detail.applying_for}}</div>
+	</div></div>
+	<div class="container"><div class="row">
+	<div class="col-md-6">Enrollment Type : {{application_detail.enrollment_type}}</div>
+    <div class="col-md-6">UG Score : {{application_detail.score_in_ug}} &nbsp;&nbsp; Out of (Scale) : {{application_detail.scale_of_score_ug}}</div>
+	</div></div>
+	<div class="container"><div class="row">
+	<div class="col-md-6">UG Discipline : {{application_detail.ug_discipline}}</div>
+    <div class="col-md-6">UG Institute : {{application_detail.ug_college_or_university}}</div>
+    </div></div>
+	<div class="container"><div class="row">
+    <div class="col-md-6">PG Completion year : {{application_detail.pg_passed_or_expected_to_pass_in_year}} </div>
+    <div class="col-md-6">PG Score : {{application_detail.score_in_pg}} &nbsp;&nbsp; Out of (Scale) : {{application_detail.scale_of_score_pg}}</div>
+	</div></div>
+	<div class="container"><div class="row">
+	<div class="col-md-6">PG Discipline : {{application_detail.pg_discipline}}</div>
+    <div class="col-md-6">PG Institute : {{application_detail.pg_college_or_university}}</div>
+	</div></div>
+	<hr>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Qualifying Examination : {{application_detail.qualifying_examination}}</div>
+    <div class="col-md-6">Branch Code : {{application_detail.branch_code_for_qualifying_exam}}</div>
+    </div></div>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Score in Qualifying Examination : {{application_detail.score_in_qualifying_exam}}</div>
+    <div class="col-md-6">AIR in Qualifying Exam : {{application_detail.all_india_rank_in_qualifying_exam}}</div>
+    </div></div>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Qualifying Exam Score Validity : {{application_detail.qualifying_exam_score_valid_upto}}</div>
+	</div></div>
+	<hr>
+	<div class="container"><div class="row">
+    <div class="col-md-6">Work Experience (Years) : {{application_detail.work_experience_in_year}}</div>
+    <div class="col-md-6">Type of Work : {{application_detail.type_of_work}}</div>
+    </div></div>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Peer Reviewed Publications : {{application_detail.no_of_peer_reviewed_publications}}</div>
+    <div class="col-md-6">Patents Granted : {{application_detail.no_of_patents_granted}}</div>
+	</div></div>
+	<hr>
+	<div class="container"><div class="row">
+    <div class="col-md-6">Current Status : {{application_detail.current_status}}</div>
+    </div></div>
+    <div class="container"><div class="row">
+    <div class="col-md-6">Last Modified At : {{application_detail.submitted_at}}</div>
+	</div></div>
+	<hr>
+  </div>
+</div>
+{% endblock %}

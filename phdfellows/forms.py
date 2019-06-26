@@ -250,11 +250,3 @@ class ApplicationForm(forms.ModelForm):
                 raise forms.ValidationError(_("Work Experience is required"))
             return work_experience_in_year
 
-    def clean_type_of_work(self):
-        type_of_work = self.cleaned_data.get('type_of_work')
-        if 'save_as_draft' in self.data:
-            return type_of_work
-        elif 'submit_application' in self.data:
-            if (type_of_work == ''):
-                raise forms.ValidationError(_("Type of Work is required"))
-            return type_of_work

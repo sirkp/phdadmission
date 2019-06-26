@@ -119,7 +119,7 @@ class Application(models.Model):
 
     score_in_qualifying_exam = models.FloatField(default=None ,null=True)
 
-    work_experience_in_year = models.CharField("Work Experpience(in years)",max_length=3)
+    work_experience_in_year = models.IntegerField("Work Experpience(in years)",default=0 ,null=True)
 
     type_of_work_list = [
         ('','Select'),
@@ -148,7 +148,9 @@ class Application(models.Model):
     ]
     current_status = models.CharField(default='Draft',choices=status_list,max_length=30)
 
-    submitted_at = models.DateField(auto_now=True)
+    submitted_at = models.DateField(blank=True,null=True)
+
+    submitted_year = models.CharField(max_length=4)
 
     application_no = models.IntegerField(unique=True,default=None ,null=True)
 
@@ -157,3 +159,5 @@ class Application(models.Model):
 
     class Meta:
         ordering = ('-submitted_at',)
+        # unique_together = ('submitted_year','applying_for','email')
+

@@ -54,10 +54,10 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
             self.object = form.save(commit=False)
             my_time=datetime.datetime.now()
             my_time=make_aware(my_time)
-            n=Application.objects.filter(submitted_at__year=my_time.year,
-                submitted_at__month=my_time.month, submitted_at__day=my_time.day,
-                current_status='Submitted').count() + 1
+            n=Application.objects.filter(submitted_at__year=my_time.year).count() + 1
             app_no = ((my_time.year % 100) * 100000) + n
+            self.object.submitted_at = datetime.date.today()
+            self.object.submitted_year = my_time.year
             self.object.application_no = app_no
             self.object.previous_status = self.object.current_status
             self.object.current_status = "Submitted"
@@ -82,10 +82,10 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
             self.object = form.save(commit=False)
             my_time=datetime.datetime.now()
             my_time=make_aware(my_time)
-            n=Application.objects.filter(submitted_at__year=my_time.year,
-                submitted_at__month=my_time.month, submitted_at__day=my_time.day,
-                current_status='Submitted').count() + 1
+            n=Application.objects.filter(submitted_at__year=my_time.year).count() + 1
             app_no = ((my_time.year % 100) * 100000) + n
+            self.object.submitted_at = datetime.date.today()
+            self.object.submitted_year = my_time.year
             self.object.application_no = app_no
             self.object.previous_status = self.object.current_status
             self.object.current_status = "Submitted"
@@ -96,3 +96,4 @@ class ApplicationDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'application_detail'
     model = Application
     template_name = 'phdfellows/application_detail.html'
+
