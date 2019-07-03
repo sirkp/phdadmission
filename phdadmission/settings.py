@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'phdfellows',
     'bootstrap4',
     'accounts',
+    'dropdown',
     'bootstrap_datepicker_plus',
     'faculty'
 ]

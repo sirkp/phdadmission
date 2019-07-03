@@ -7,15 +7,8 @@ from django.core.validators import RegexValidator
 class Application(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
-    category_choices = [
-        ('','Select'),
-        ('SC','SC'),
-        ('OBC','OBC'),
-        ('ST','ST'),
-        ('EWS','EWS'),
-        ('General','General'),
-    ]
-    category = models.CharField(choices=category_choices, default='Select',max_length=10)
+    category = models.CharField(default='Select',max_length=100)
+    is_category_other = models.BooleanField(default=False)
 
     having_disability = models.BooleanField("Disabled",default=False)
     research_area_choices = [

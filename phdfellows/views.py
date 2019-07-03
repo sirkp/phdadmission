@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 import datetime
 from django.utils.timezone import make_aware
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
@@ -14,6 +14,9 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from phdfellows.models import Application
 from accounts.models import User
+from dropdown.models import (Category, BranchQualifyingExamination, Country,
+                                    PGDiscipline, ResearchArea, State, TypeOfWork,
+                                     UGDiscipline)
 from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth.views import LoginView
@@ -45,6 +48,11 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.first_name = self.request.user.first_name
         self.object.last_name = self.request.user.last_name
+##########
+        if(self.object.category == 'Other'):
+            self.object.is_category_other = True
+            self.object.category = self.request.POST.get('category_other')
+###########
         if (self.object.country != '' and self.object.country!='India'):
             self.object.state = self.request.POST.get('state_description')
         self.object.email = self.request.user.email
@@ -64,6 +72,42 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
             self.object.save()
         return super().form_valid(form)
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        categorys = Category.objects.all()
+        categorys = categorys.order_by('category')
+        context['categorys'] = categorys
+
+        countrys = Country.objects.all()
+        context['countrys'] = countrys
+
+        branch_qualifying_exam = BranchQualifyingExamination.objects.all()
+        branch_qualifying_exam = branch_qualifying_exam.order_by('branch')
+        context['branch_qualifying_exam'] = branch_qualifying_exam
+
+        states = State.objects.all()
+        states = states.order_by('state')
+        context['states'] = states
+
+        research_areas = ResearchArea.objects.all()
+        research_areas = research_areas.order_by('research_area')
+        context['research_areas'] = research_areas
+
+        type_of_works = TypeOfWork.objects.all()
+        type_of_works = type_of_works.order_by('type_of_work')
+        context['type_of_works'] = type_of_works
+
+        ug_disciplines = UGDiscipline.objects.all()
+        ug_disciplines = ug_disciplines.order_by('ug_discipline')
+        context['ug_disciplines'] = ug_disciplines
+
+        pg_disciplines = PGDiscipline.objects.all()
+        pg_disciplines = pg_disciplines.order_by('pg_discipline')
+        context['pg_disciplines'] = pg_disciplines
+
+        return context
 
 class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'home'
@@ -92,8 +136,36 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
             self.object.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        categorys = Category.objects.all()
+        context['categorys'] = categorys
+
+        country = Country.objects.all()
+        context['country'] = country
+
+        branch_qualifying_exam = BranchQualifyingExamination.objects.all()
+        context['branch_qualifying_exam'] = branch_qualifying_exam
+
+        state = State.objects.all()
+        context['state'] = state
+
+        research_area = ResearchArea.objects.all()
+        context['research_area'] = research_area
+
+        type_of_work = TypeOfWork.objects.all()
+        context['type_of_work'] = type_of_work
+
+        ug_discipline = UGDiscipline.objects.all()
+        context['ug_discipline'] = ug_discipline
+
+        pg_discipline = PGDiscipline.objects.all()
+        context['pg_discipline'] = pg_discipline
+
+        return context
+
 class ApplicationDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'application_detail'
     model = Application
     template_name = 'phdfellows/application_detail.html'
-

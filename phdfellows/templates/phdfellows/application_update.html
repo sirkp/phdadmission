@@ -7,17 +7,27 @@
 {% block extrascript %}
 <script type="text/javascript">
   function CheckColors(val){
-  var element1=document.getElementById('id_state_div');
-  var element2=document.getElementById('id_state_description_div');
-  if(val=='India'){
-    element1.style.display='block';
-    element2.style.display='none';
+    var element1=document.getElementById('id_state_div');
+    var element2=document.getElementById('id_state_description_div');
+    if(val=='India'){
+      element1.style.display='block';
+      element2.style.display='none';
+    }
+    else{
+      element2.style.display='block';
+      element1.style.display='none';
+    }
   }
-  else{
-    element2.style.display='block';
-    element1.style.display='none';
+
+  function CheckCategory(val){
+    var element=document.getElementById('id_category_other_div');
+    if(val=='Other'){
+      element.style.display='block';
+    }
+    else{
+      element.style.display='none';
+    }
   }
-}
 
   </script>
 {% endblock %}
@@ -25,6 +35,9 @@
 {% block body %}
 <div class="container" style="background-color: #F2F3F4;">
   <h1>Application Form</h1>
+  {% if application.category in categorys %}YESSS {% else %}NOOO{% endif %}
+  {% if application.category == '' %}YESSS {% else %}NOOO{% endif %}
+
   <hr>
   {% ifequal application.current_status 'Draft' %}
   <form action="{% url 'phdfellows:update' pk=application.pk %}" method = "POST">
@@ -32,13 +45,16 @@
     {% bootstrap_form_errors form %}
     <div class="container"><div class="row">
       <div class="col-md-6">
-    <div class="form-group"><label for="id_category">Category</label><select name="category" class="form-control" title="" id="id_category" style="max-width:50%;">
+    <div class="form-group"><label for="id_category">Category</label><select name="category" class="form-control" title="" id="id_category" onchange='CheckCategory(this.value);' style="max-width:50%;">
       <option value="">Select</option>
-      <option value="SC" {% ifequal application.category 'SC'  %}selected{% endifequal %}>SC</option>
-      <option value="OBC" {% ifequal application.category 'OBC'  %}selected{% endifequal %}>OBC</option>
-      <option value="ST" {% ifequal application.category 'ST'  %}selected{% endifequal %}>ST</option>
-      <option value="EWS" {% ifequal application.category 'EWS'  %}selected{% endifequal %}>EWS</option>
-      <option value="General" {% ifequal application.category 'General'  %}selected{% endifequal %}>General</option></select>
+      {% for category in categorys %}
+        <option value="{{category.category}}" {% ifequal application.category category.category  %}selected{% endifequal %}>{{category.category}}</option>
+      {% endfor %}
+      <option value="Other" {% if application.is_category_other %}selected{% endif %}>Other</option>
+      </select>
+    </div>
+    <div class="form-group" id='id_category_other_div' {% if application.is_category_other %}style='display:block;'{% else %}style='display:none;'{% endif %}>
+      <label for="id_category_other">Specify Your Category</label><input type="text" name="category_other" class="form-control" id="id_category_other" value="{{application.category}}" style="max-width: 50%;"/>
     </div>
   </div>
 
@@ -324,7 +340,7 @@
   </div>
   </div>
   <div class="col-md-6">
-    <div class="form-group" id='id_state_description_div' {% if application.country == '' or application.country == 'India' %}{% endif %}>
+    <div class="form-group" id='id_state_description_div' {% if application.country == '' or application.country == 'India' %}style='display:none;'{% endif %}>
       <label for="id_state_description">State</label><input type="text" name="state_description" class="form-control" id="id_state_description" value="{% if application.state == None %}{% else %}{{application.state}}{% endif %}" style="max-width: 50%;"/>
     </div>
     <div id="id_state_div" {% if application.country == '' or application.country != 'India' %}style='display:none;'{% endif %}>
