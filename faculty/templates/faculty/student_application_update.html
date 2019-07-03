@@ -106,7 +106,7 @@
         {% csrf_token %}
 
         {% if application.current_status == 'Shortlisted for Test' or application.current_status == 'Shortlisted for Interview' %}
-            <div>Written Test Score : {{writtentestscore.written_test_score}}</div>
+            <div>Written Test Score : {{written_test_score.written_test_score}}</div>
             <div>Programming Test Score : {{written_test_score.programming_test_score}}</div>
             <br>
         {% endif %}

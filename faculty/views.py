@@ -48,6 +48,14 @@ class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequi
         self.object.save()
 
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        application = get_object_or_404(Application,pk=self.object.pk)
+        if(application.current_status == 'Shortlisted for Interview' or application.current_status == 'Shortlisted for Test'):
+            written_test_score = get_object_or_404(WrittenTestScore,application_no=application)
+            context["written_test_score"] = written_test_score
+        return context
     #
     # def form_valid(self, form):
     #     if('submit_application' in self.request.POST):
