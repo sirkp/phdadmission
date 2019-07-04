@@ -7,19 +7,15 @@ from django.core.validators import RegexValidator
 class Application(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+
     category = models.CharField(default='Select',max_length=100)
     is_category_other = models.BooleanField(default=False)
 
     having_disability = models.BooleanField("Disabled",default=False)
-    research_area_choices = [
-        ('','Select'),
-        ('Machine Learning','Machine Learning'),
-        ('Cloud Computing','Cloud Computing'),
-        ('Airtifial Intelligence','Airtifial Intelligence'),
-        ('Software Development','Software Development'),
-        ('Cryptography','Cryptography'),
-    ]
-    research_area = models.CharField(default='Select',choices=research_area_choices,max_length=50)
+
+    research_area = models.CharField(default='Select',max_length=50)
+    is_research_area_other = models.BooleanField(default=False)
+
 
     applying_for_list = [
         ('','Select'),
@@ -75,15 +71,8 @@ class Application(models.Model):
     ]
     scale_of_score_ug = models.CharField("Scale of Score",default='Select',choices=scale_score_list,max_length=20)
 
-    ug_discipline_list = [
-        ('','Select'),
-        ('CSE','CSE'),
-        ('EE','EE'),
-        ('ME','ME'),
-        ('ECE','ECE'),
-        ('CE','CE'),
-    ]
-    ug_discipline = models.CharField("UG Discipline",default='Select',choices=ug_discipline_list,max_length=20)
+    ug_discipline = models.CharField("UG Discipline",default='Select',max_length=100)
+    is_ug_discipline_other = models.BooleanField(default=False)
 
     ug_college_or_university = models.CharField('UG College/University',max_length=200)
 
@@ -93,7 +82,8 @@ class Application(models.Model):
 
     scale_of_score_pg = models.CharField("Scale of Score",default='Select',choices=scale_score_list, max_length=20)
 
-    pg_discipline = models.CharField("PG Discipline",default='Select',choices=ug_discipline_list,max_length=50)
+    pg_discipline = models.CharField("PG Discipline",default='Select',max_length=100)
+    is_pg_discipline_other = models.BooleanField(default=False)
 
     pg_college_or_university = models.CharField('PG College/University', max_length=200)
 
@@ -104,7 +94,8 @@ class Application(models.Model):
     ]
     qualifying_examination = models.CharField(default='Select',choices=qualifying_examination_list,max_length=20)
 
-    branch_code_for_qualifying_exam = models.CharField(default='Select',choices=ug_discipline_list, max_length=10)
+    branch_code_for_qualifying_exam = models.CharField(default='Select', max_length=10)
+    is_branch_code_for_qualifying_exam_other = models.BooleanField(default=False)
 
     qualifying_exam_score_valid_upto = models.IntegerField(validators=[RegexValidator(regex='^.{4}$',message='Length has to be 4', code='nomatch')],default=None ,null=True)
 
@@ -114,14 +105,8 @@ class Application(models.Model):
 
     work_experience_in_year = models.IntegerField("Work Experpience(in years)",default=0 ,null=True)
 
-    type_of_work_list = [
-        ('','Select'),
-        ('Teaching','Teaching'),
-        ('IT Industry','IT Industry'),
-        ('Research Organisation','Research Organisation'),
-        ('Other','Other'),
-    ]
-    type_of_work = models.CharField(default='Select',choices=type_of_work_list,max_length=50)
+    type_of_work = models.CharField(default='Select',max_length=100)
+    is_type_of_work_other = models.BooleanField(default=False)
 
     no_of_peer_reviewed_publications = models.IntegerField(default=0 ,null=True)
 

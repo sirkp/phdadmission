@@ -18,8 +18,59 @@
       element1.style.display='none';
     }
   }
+
   function CheckCategory(val){
     var element=document.getElementById('id_category_other_div');
+    if(val=='Other'){
+      element.style.display='block';
+    }
+    else{
+      element.style.display='none';
+    }
+  }
+
+  function CheckUGDiscipline(val){
+    var element=document.getElementById('id_ug_discipline_other_div');
+    if(val=='Other'){
+      element.style.display='block';
+    }
+    else{
+      element.style.display='none';
+    }
+  }
+
+  function CheckPGDiscipline(val){
+    var element=document.getElementById('id_pg_discipline_other_div');
+    if(val=='Other'){
+      element.style.display='block';
+    }
+    else{
+      element.style.display='none';
+    }
+  }
+
+  function CheckResearchArea(val){
+    var element=document.getElementById('id_research_area_other_div');
+    if(val=='Other'){
+      element.style.display='block';
+    }
+    else{
+      element.style.display='none';
+    }
+  }
+
+  function CheckTypeOfWork(val){
+    var element=document.getElementById('id_type_of_work_other_div');
+    if(val=='Other'){
+      element.style.display='block';
+    }
+    else{
+      element.style.display='none';
+    }
+  }
+
+  function CheckQEDiscipline(val){
+    var element=document.getElementById('id_qe_discipline_other_div');
     if(val=='Other'){
       element.style.display='block';
     }
@@ -132,13 +183,16 @@
 
 <div class="container"><div class="row">
   <div class="col-md-6">
-    <div class="form-group"><label for="id_research_area">Research Area</label><select name="research_area" class="form-control" title="" id="id_research_area" style="max-width:50%;">
-    <option value="">Select</option>
-    {% for research_area in research_areas %}
-      <option value="{{research_area.research_area}}">{{research_area.research_area}}</option>
-    {% endfor %}
-    <option value="Other">Other</option>
-    </select>
+    <div class="form-group"><label for="id_research_area">Research Area</label><select name="research_area" class="form-control" onchange='CheckResearchArea(this.value);' id="id_research_area" style="max-width:50%;">
+      <option value="">Select</option>
+      {% for research_area in research_areas %}
+        <option value="{{research_area.research_area}}">{{research_area.research_area}}</option>
+      {% endfor %}
+      <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group" id='id_research_area_other_div' style='display:none;'>
+      <label for="id_research_area_other">Specify Your Research Area</label><input type="text" name="research_area_other" class="form-control" id="id_research_area_other" value="" style="max-width: 50%;"/>
     </div>
   </div>
   <div class="col-md-6">
@@ -175,13 +229,16 @@
 </div></div>
 <div class="container"><div class="row">
   <div class="col-md-6">
-    <div class="form-group"><label for="id_ug_discipline">UG Discipline</label><select name="ug_discipline" class="form-control" title="" id="id_ug_discipline" style="max-width: 50%;">
+    <div class="form-group"><label for="id_ug_discipline">UG Discipline</label><select name="ug_discipline" class="form-control" onchange='CheckUGDiscipline(this.value);' id="id_ug_discipline" style="max-width: 50%;">
       <option value="">Select</option>
       {% for ug_discipline in ug_disciplines %}
         <option value="{{ug_discipline.ug_discipline}}">{{ug_discipline.ug_discipline}}</option>
       {% endfor %}
       <option value="Other">Other</option>
       </select>
+    </div>
+    <div class="form-group" id='id_ug_discipline_other_div' style='display:none;'>
+      <label for="id_ug_discipline_other">Specify Your UG Discipline</label><input type="text" name="ug_discipline_other" class="form-control" id="id_ug_discipline_other" value="" style="max-width: 50%;"/>
     </div>
   </div>
   <div class="col-md-6">
@@ -205,13 +262,16 @@
 </div></div>
 <div class="container"><div class="row">
   <div class="col-md-6">
-    <div class="form-group"><label for="id_pg_discipline">PG Discipline</label><select name="pg_discipline" class="form-control" title="" id="id_pg_discipline" style="max-width: 50%;">
+    <div class="form-group"><label for="id_pg_discipline">PG Discipline</label><select name="pg_discipline" class="form-control" onchange='CheckPGDiscipline(this.value);' id="id_pg_discipline" style="max-width: 50%;">
       <option value="">Select</option>
       {% for pg_discipline in pg_disciplines %}
         <option value="{{pg_discipline.pg_discipline}}">{{pg_discipline.pg_discipline}}</option>
       {% endfor %}
       <option value="Other">Other</option>
       </select>
+    </div>
+    <div class="form-group" id='id_pg_discipline_other_div' style='display:none;'>
+      <label for="id_pg_discipline_other">Specify Your PG Discipline</label><input type="text" name="pg_discipline_other" class="form-control" id="id_pg_discipline_other" value="" style="max-width: 50%;"/>
     </div>
   </div>
   <div class="col-md-6">
@@ -234,13 +294,16 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="form-group"><label for="id_branch_code_for_qualifying_exam">Branch Code for Qualifying Exam</label><select name="branch_code_for_qualifying_exam" class="form-control" title="" id="id_branch_code_for_qualifying_exam" style="max-width: 50%;">
+    <div class="form-group"><label for="id_branch_code_for_qualifying_exam">Branch Code for Qualifying Exam</label><select name="branch_code_for_qualifying_exam" class="form-control" onchange='CheckQEDiscipline(this.value);' id="id_branch_code_for_qualifying_exam" style="max-width: 50%;">
       <option value="">Select</option>
       {% for branch in branch_qualifying_exam %}
         <option value="{{branch.branch}}">{{branch.branch}}</option>
       {% endfor %}
       <option value="Other">Other</option>
       </select>
+    </div>
+    <div class="form-group" id='id_qe_discipline_other_div' style='display:none;'>
+      <label for="id_qe_discipline_other">Specify Your Branch Code</label><input type="text" name="qe_discipline_other" class="form-control" id="id_qe_discipline_other" value="" style="max-width: 50%;"/>
     </div>
   </div>
 </div></div>
@@ -264,7 +327,7 @@
     <div class="form-group"><label for="id_work_experience_in_year">Work Experpience in Year(s)</label><input type="number" name="work_experience_in_year" maxlength="3" class="form-control" placeholder="Work Experpience(in years)" value="" id="id_work_experience_in_year" style="max-width: 50%;"></div>
   </div>
   <div class="col-md-6">
-    <div class="form-group"><label for="id_type_of_work">Type of Work</label><select name="type_of_work" class="form-control" title="" id="id_type_of_work" style="max-width: 50%;">
+    <div class="form-group"><label for="id_type_of_work">Type of Work</label><select name="type_of_work" class="form-control" onchange='CheckTypeOfWork(this.value);' id="id_type_of_work" style="max-width: 50%;">
       <option value="">Select</option>
       {% for type_of_work in type_of_works %}
         <option value="{{type_of_work.type_of_work}}">{{type_of_work.type_of_work}}</option>
@@ -272,6 +335,10 @@
       <option value="Other">Other</option>
       </select>
     </div>
+    <div class="form-group" id='id_type_of_work_other_div' style='display:none;'>
+      <label for="id_type_of_work_other">Specify Your Type of Work</label><input type="text" name="type_of_work_other" class="form-control" id="id_type_of_work_other" value="" style="max-width: 50%;"/>
+    </div>
+  </div>
   </div>
 </div></div>
 <div class="container"><div class="row">
