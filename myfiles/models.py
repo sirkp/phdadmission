@@ -15,3 +15,6 @@ class Announcements(models.Model):
 
     class Meta:
         ordering = ['-date_uploaded']
+
+# class OMRSheets(models.Model):
+#     my_images =
