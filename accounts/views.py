@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-import datetime
+from dateutil.relativedelta import *
+from datetime import *
+from myfiles.models import Announcements
 from django.utils.timezone import make_aware
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
@@ -21,6 +23,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic import (RedirectView, View, TemplateView,
                                     ListView, DetailView, CreateView, UpdateView,
                                     DeleteView)
+from dateutil.relativedelta import relativedelta
 UserModel = get_user_model()
 
 class CustomLoginView(LoginView,RedirectView):
@@ -35,6 +38,16 @@ class CustomLoginView(LoginView,RedirectView):
             return reverse( 'faculty:faculty_home' )
         else:
             return reverse('phdfellows:phdfellows_home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        six_months_ago = datetime.now()+relativedelta(months = -6)
+        announcements = Announcements.objects.all()
+        announcements = announcements.filter(date_uploaded__gte=six_months_ago)
+        context['announcements'] = announcements
+
+        return context
 
 def signup(request):
     if request.method == 'POST':

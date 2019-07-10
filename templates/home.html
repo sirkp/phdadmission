@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 {% bootstrap_css %}
+{% load staticfiles %}
 {% bootstrap_javascript jquery='full' %}
+
+{% block extra_cdn %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+{% endblock %}
+
 {% block title %}
 Phd Admission
 {% endblock %}
@@ -14,13 +20,18 @@ Phd Admission
 <div class="container">
 <div class="row">
 <div class="col-md-6" >
-<div class="well" style="background-color: white; border-style: groove; border-radius: 5px; min-height: 300px;"><br>
-<h2><font style="color: red;"><center>Announcements</center></font></h2><br>
-<ul>
-<li>
-<a href="http://www.iitrpr.ac.in/sites/default/files/List%20of%20Eligible%2C%20PE%20%26%20IE_SLA_EE.pdf"><font style="color: blue;">Click Here for Announcements</font></a>
-</li>
-</ul>
+<div class="container" style="overflow-y:scroll; background-color: white; border-style: groove; border-radius: 5px; height: 300px;"><br>
+  <h2><center>Announcements</center></font></h2>
+  <table style="border-collapse: collapse;">
+    <tbody>
+      {% for announcement in announcements %}
+      <tr>
+        <td style="padding-top: .5em; padding-right: .3em; vertical-align: top;" scope="row"><i class="far fa-file-alt"></i></td>
+        <td style="padding-top: .5em;"><a href="{{ announcement.my_file.url }}" target="_blank"><font style="color: blue;">{{ announcement.title }}</font></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 </div>
 <div class="col-md-1"></div>
@@ -30,8 +41,8 @@ Phd Admission
 {% csrf_token %}
 
 {% bootstrap_form form %}
-<input type="submit" class="btn btn-primary" value="Login">
-<a href="{% url 'accounts:signup' %}">Sign Up</a>
+<input style="margin-right: .5em;" type="submit" class="btn btn-primary" value="Login">
+<a style="margin-right: .5em;" href="{% url 'accounts:signup' %}">Sign Up</a>
 <a href="{% url 'accounts:password_reset' %}">Forgot Password?</a>
 </form>
 </div>

@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, redirect, get_object_or_404
 from accounts.models import User
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from dropdown.models import PGDiscipline, UGDiscipline, BranchQualifyingExamination
 from phdfellows.models import Application, WrittenTestScore
 from faculty.models import ApplicantScoreByFaculty
 from faculty.forms import StudentApplicationForm
@@ -104,6 +105,19 @@ class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRe
         context["gate_or_net_branch"] = self.gate_or_net_branch
         context["current_status"] = self.current_status
         context["year"] = self.year
+
+        ug_disciplines = UGDiscipline.objects.all()
+        ug_disciplines = ug_disciplines.order_by('ug_discipline')
+        context['ug_disciplines'] = ug_disciplines
+
+        branch_qualifying_exam = BranchQualifyingExamination.objects.all()
+        branch_qualifying_exam = branch_qualifying_exam.order_by('branch')
+        context['branch_qualifying_exam'] = branch_qualifying_exam
+
+        pg_disciplines = PGDiscipline.objects.all()
+        pg_disciplines = pg_disciplines.order_by('pg_discipline')
+        context['pg_disciplines'] = pg_disciplines
+
         return context
 
     def get_queryset(self):##all, result, no result

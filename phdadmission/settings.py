@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'phdfellows',
     'bootstrap4',
     'accounts',
+    'myfiles',
     'dropdown',
     'bootstrap_datepicker_plus',
     'faculty'
@@ -139,3 +140,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # STATICFILES_DIR = [os.path.join(BASE_DIR,'static')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

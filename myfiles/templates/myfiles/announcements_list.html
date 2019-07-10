@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<br>
+  <div class="container">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="col">S.No.</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">File Name</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Title</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for announcement in announcements %}
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="row">{{ forloop.counter }}</th>
+            <td style="text-align: center; vertical-align: middle;"><a href="{{ announcement.my_file.url }}">{{ announcement.my_file.name|slice:"14:" }}</a></td>
+            <td style="text-align: center; vertical-align: middle;">{{ announcement.title }}</td>
+            <td style="text-align: center; vertical-align: middle;">
+              <form method="POST" action="{% url 'upload:delete_announcement' announcement.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  </div>
+{% endblock %}

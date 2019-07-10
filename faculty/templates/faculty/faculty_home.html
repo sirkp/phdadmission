@@ -83,11 +83,11 @@
         <div class="col-md-4">
         <div class="form-group"><label for="id_ug_branch">UG Branch</label><select name="ug_branch" class="form-control" title="" id="id_ug_branch" style="max-width: 60%;">
           <option value="">Select</option>
-          <option value="CSE" {% ifequal ug_branch 'CSE'  %}selected{% endifequal %}>CSE</option>
-          <option value="EE" {% ifequal ug_branch 'EE'  %}selected{% endifequal %}>EE</option>
-          <option value="ME" {% ifequal ug_branch 'ME'  %}selected{% endifequal %}>ME</option>
-          <option value="ECE" {% ifequal ug_branch 'ECE'  %}selected{% endifequal %}>ECE</option>
-          <option value="CE" {% ifequal ug_branch 'CE'  %}selected{% endifequal %}>CE</option></select>
+          {% for ug_discipline in ug_disciplines %}
+            <option value="{{ug_discipline.ug_discipline}}" {% ifequal ug_branch ug_discipline.ug_discipline %}selected{% endifequal %}>{{ug_discipline.ug_discipline}}</option>
+          {% endfor %}
+          <option value="Other" {% if ug_branch == 'Other' %}selected{% endif %}>Other</option>
+          </select>
         </div></div>
       </div></div>
 
@@ -139,11 +139,11 @@
         <div class="col-md-4">
         <div class="form-group"><label for="id_pg_branch">PG Branch</label><select name="pg_branch" class="form-control" title="" id="id_pg_branch" style="max-width: 60%;">
           <option value="">Select</option>
-          <option value="CSE" {% ifequal pg_branch 'CSE'  %}selected{% endifequal %}>CSE</option>
-          <option value="EE" {% ifequal pg_branch 'EE'  %}selected{% endifequal %}>EE</option>
-          <option value="ME" {% ifequal pg_branch 'ME'  %}selected{% endifequal %}>ME</option>
-          <option value="ECE" {% ifequal pg_branch 'ECE'  %}selected{% endifequal %}>ECE</option>
-          <option value="CE" {% ifequal pg_branch 'CE'  %}selected{% endifequal %}>CE</option></select>
+          {% for pg_discipline in pg_disciplines %}
+            <option value="{{pg_discipline.pg_discipline}}" {% ifequal pg_branch pg_discipline.pg_discipline %}selected{% endifequal %}>{{pg_discipline.pg_discipline}}</option>
+          {% endfor %}
+          <option value="Other" {% if pg_branch == 'Other' %}selected{% endif %}>Other</option>
+          </select>
         </div></div>
       </div></div>
 
@@ -153,11 +153,11 @@
         <div class="col-md-4">
         <div class="form-group"><label for="id_gate_or_net_branch">Gate/NET in</label><select name="gate_or_net_branch" class="form-control" title="" id="id_gate_or_net_branch" style="max-width: 60%;">
           <option value="">Select</option>
-          <option value="CSE" {% ifequal gate_or_net_branch 'CSE'  %}selected{% endifequal %}>CSE</option>
-          <option value="EE" {% ifequal gate_or_net_branch 'EE'  %}selected{% endifequal %}>EE</option>
-          <option value="ME" {% ifequal gate_or_net_branch 'ME'  %}selected{% endifequal %}>ME</option>
-          <option value="ECE" {% ifequal gate_or_net_branch 'ECE'  %}selected{% endifequal %}>ECE</option>
-          <option value="CE" {% ifequal gate_or_net_branch 'CE'  %}selected{% endifequal %}>CE</option></select>
+          {% for branch in branch_qualifying_exam %}
+            <option value="{{branch.branch}}" {% ifequal gate_or_net_branch branch.branch %}selected{% endifequal %}>{{branch.branch}}</option>
+          {% endfor %}
+          <option value="Other" {% if gate_or_net_branch == 'Other' %}selected{% endif %}>Other</option>
+          </select>
         </div></div>
         <div class="col-md-4">
         <div class="form-group"><label for="id_current_status">Status</label><select name="current_status" class="form-control" title="" id="id_current_status" style="max-width: 60%;">

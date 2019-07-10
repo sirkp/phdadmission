@@ -22,9 +22,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/upload/',include('myfiles.urls', namespace='upload')),
     path('',views.CustomLoginView.as_view(),name='home'),
     path('phdfellows/',include('phdfellows.urls',namespace='phdfellows')),
     path('accounts/',include('accounts.urls',namespace='accounts')),
     path('faculty/',include('faculty.urls',namespace='faculty')),
     path('faculty/',include('django.contrib.auth.urls')),
 ]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
