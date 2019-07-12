@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<br>
+  <div class="container">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="col">S.No.</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Name</th>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for omr_sheet in omr_sheets %}
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="row">{{ forloop.counter }}</th>
+            <td style="text-align: center; vertical-align: middle;"><a href="{{ omr_sheet.my_images.url }} target="_blank"">{{ omr_sheet.my_images.name|slice:"14:" }}</a></td>
+            <td style="text-align: center; vertical-align: middle;">
+              <form method="POST" action="{% url 'upload:delete_omr_sheet' omr_sheet.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  </div>
+{% endblock %}

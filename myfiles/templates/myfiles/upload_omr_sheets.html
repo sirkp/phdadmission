@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% block body %}
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col-md-6"">
+        <h1>Upload OMR Sheets</h1>
+      </div>
+      <div class="col-md-3"">
+      </div>
+      <div class="col-md-3"">
+        <a href="{% url 'upload:omr_sheets_list' %}" class="btn btn-primary">See All Images</a>
+      </div>
+    </div>
+    <form method = "POST" enctype="multipart/form-data" >
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_my_images">My images</label>
+        <div class="row bootstrap4-multi-input">
+          <div class="col-12">
+            <input type="file" name="my_images" accept="image/*" multiple id="id_my_images">
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary  js-upload-images" value="Upload">
+    </form>
+  </div>
+  <br>
+  <br>
+  <div class="container">
+      <table id="gallery" class="table table-bordered ">
+        <thead class="thead-light">
+          <tr>
+            <th style="text-align: center; vertical-align: middle;" scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for omr_sheet in omr_sheets %}
+          <tr>
+            <td><a href="{{ omr_sheet.my_images.url }}" target="_blank">{{ omr_sheet.my_images.name }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+  </div>
+
+  <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block custom_js %}
+  <script src="{% static 'jquery/jquery-ui.js' %}"></script>
+  <script src="{% static 'jquery/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'jquery/jquery.fileupload.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/omr_sheets_status_bar.js' %}"></script>
+{% endblock %}

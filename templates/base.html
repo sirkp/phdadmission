@@ -9,11 +9,8 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 
     <!--bootstrap js -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="{% static 'jquery/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'ajax/popper.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
     {% block extra_cdn %}
@@ -77,14 +74,15 @@
 
     {% endblock %}
     <div style="background-color: #1A458F;">
-    <div class="container"><hr>
-      <div class="container"><div class="row">
-        <div class="col-md-6"><font class="copyright" style="color: white;">Copyright © 2019, IIT Ropar</font><br><font style="color: white;">Follow us - </font><br> <a href="https://www.facebook.com/iitrpr"><img src="https://clipart.info/images/ccovers/1509135368facebook-logo-PNG-clear-blue.png" style=" width: 20px;"></a>&nbsp;&nbsp; <a href="https://www.twitter.com/iitrpr"><img src="http://cdn2.hubspot.net/hub/443401/file-2872960874-jpg/blog-files/twitter-logo1.jpg" style=" width: 35px;"></a> </div>
+      <div class="container"><hr>
+        <div class="container"><div class="row">
+          <div class="col-md-6"><font class="copyright" style="color: white;">Copyright © 2019, IIT Ropar</font><br><font style="color: white;">Follow us - </font><br> <a href="https://www.facebook.com/iitrpr"><img src="https://clipart.info/images/ccovers/1509135368facebook-logo-PNG-clear-blue.png" style=" width: 20px;"></a>&nbsp;&nbsp; <a href="https://www.twitter.com/iitrpr"><img src="http://cdn2.hubspot.net/hub/443401/file-2872960874-jpg/blog-files/twitter-logo1.jpg" style=" width: 35px;"></a> </div>
         <div class="col-md-3"></div>
         <div class="col-md-3"><font style="font-size: 13px; color: white;">Indian Institute of Technology Ropar,<br>Nangal Road, Rupnagar, Punjab,<br>INDIA - 140001 </font><br><a href="https://goo.gl/maps/qKiHQ969Z21TGkJT8" target="blank"><img src="https://www.freeiconspng.com/uploads/red-location-icon-map-png-4.png" style="width: 13px;"> <font style="font-size: 13px; color: grey;">How to Reach IIT Ropar</font></a></div>
       </div></div>
       <br></div>
     </div>
+
     <script type="text/javascript" src="{% static 'js/faculty_home.js' %}"></script>
 
     {% block custom_js %}
