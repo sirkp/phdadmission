@@ -81,3 +81,9 @@ The HTML dropdowns also gets data from database. To add more data in any dropdow
 
 ## Uploaded files
 Uploaded files are saved in phdadmission/media. Announcements(files that are to be displayed in notice board) are saved in phdadmission/media/announcements. OMR Sheets are saved in phdadmission/omr_sheets/YYYY/MM/DD. YYYY/MM/DD is the date when the file were uploaded.
+
+## Editing emails
+- To make changes in account activation email edit line 86 of phdadmission/accounts/views.py
+- To change account activation email subject edit line 82 of phdadmission/accounts/views.py
+- To make changes in password reset email edit phdadmission/templates/registration/password_reset_email.html
+- To change account activation email subject edit phdadmission/templates/registration/password_reset_subject.txt
