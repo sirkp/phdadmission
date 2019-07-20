@@ -16,6 +16,9 @@ from braces import views
 
 # Create your views here.
 class NotLockedRequiredMixin:
+    """
+    Checks if user is locked
+    """
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_locked:
             raise PermissionDenied
@@ -25,6 +28,10 @@ class NotLockedRequiredMixin:
 
 
 class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRequiredMixin, UpdateView):#Always put mixins on left
+    """
+    View to show faculty Student details, assesment score(if given test) and  update their status.
+    This view is linked with phdadmission/faculty/templates/faculty/student_application_update.html
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -57,23 +64,12 @@ class StudentApplicationUpdateView(views.LoginRequiredMixin,views.StaffuserRequi
             written_test_score = get_object_or_404(WrittenTestScore,application_no=application)
             context["written_test_score"] = written_test_score
         return context
-    #
-    # def form_valid(self, form):
-    #     if('submit_application' in self.request.POST):
-    #         self.object = form.save(commit=False)
-    #         my_time=datetime.datetime.now()
-    #         my_time=make_aware(my_time)
-    #         n=Application.objects.filter(submitted_at__year=my_time.year,
-    #             submitted_at__month=my_time.month, submitted_at__day=my_time.day,
-    #             current_status='Submitted').count() + 1
-    #         app_no = ((my_time.year*100 + my_time.month)*100 + my_time.day)*1000 + n
-    #         self.object.application_no = app_no
-    #         self.object.previous_status = self.object.current_status
-    #         self.object.current_status = "Submitted"
-    #         self.object.save()
-    #     return super().form_valid(form)
 
 class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRequiredMixin,ListView):
+    """
+    view to search applications.
+    This view is linked with phdadmission/faculty/templates/faculty/faculty_home.html
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -142,20 +138,6 @@ class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRe
 
         self.year = self.request.GET.get('year')
 
-        #
-        # print(self.name)
-        # print(self.air)
-        # print(self.scale_of_score_ug)
-        # print(self.score_ug)
-        # print(self.scale_of_score_pg)
-        # print(self.score_pg)
-        # print(self.ug_branch)
-        # print(self.pg_branch)
-        # print(self.gate_or_net_branch)
-        # print(self.current_status)
-        # print(self.year)
-
-        # checking for null
         if(self.name == None):
             self.name=''
 
@@ -237,7 +219,6 @@ class HomePage(views.LoginRequiredMixin,views.StaffuserRequiredMixin,NotLockedRe
         if(self.ug_branch!=''):
             applications = applications.filter(ug_discipline=self.ug_branch)
 
-        #####
         if(self.score_pg != ''):# ( ]
             lb = self.score_pg.split('-')[0]
             ub = self.score_pg.split('-')[1]

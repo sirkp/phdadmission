@@ -29,6 +29,10 @@ UserModel = get_user_model()
 
 
 class HomePage(LoginRequiredMixin,ListView):
+    """
+    view for student(phdfellow user) homepage
+    This view is linked with phdadmission/phdfellows/templates/phdfellows/homepage.html
+    """
     login_url = 'home'
     model = User
     template_name = 'phdfellows/homepage.html'
@@ -38,6 +42,10 @@ class HomePage(LoginRequiredMixin,ListView):
         return Application.objects.filter(email=self.request.user.email)
 
 class ApplicationCreateView(LoginRequiredMixin, CreateView):
+    """
+    view for applying form
+    This view is linked with phdadmission/phdfellows/templates/phdfellows/application.html
+    """
     login_url = 'home'
     form_class = ApplicationForm
     success_url = reverse_lazy('phdfellows:phdfellows_home')
@@ -130,6 +138,10 @@ class ApplicationCreateView(LoginRequiredMixin, CreateView):
         return context
 
 class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    view to update form
+    This view is linked with phdadmission/phdfellows/templates/phdfellows/application_update.html
+    """
     login_url = 'home'
     model = Application
     form_class = ApplicationForm
@@ -217,6 +229,10 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 class ApplicationDetailView(LoginRequiredMixin,DetailView):
+    """
+    show application details
+    This view is linked with phdadmission/phdfellows/templates/phdfellows/application_detail.html
+    """
     context_object_name = 'application_detail'
     model = Application
     template_name = 'phdfellows/application_detail.html'

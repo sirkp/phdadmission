@@ -1,0 +1,8 @@
+[
+  {"model": "dropdown.ugdiscipline", "pk": 1, "fields": {"ug_discipline": "Computer Science and Engineering(CSE)"}},
+  {"model": "dropdown.ugdiscipline", "pk": 2, "fields": {"ug_discipline": "Electronics and Communication(ECE)"}},
+  {"model": "dropdown.ugdiscipline", "pk": 3, "fields": {"ug_discipline": "Electrical Engineering(EE)"}},
+  {"model": "dropdown.ugdiscipline", "pk": 4, "fields": {"ug_discipline": "Mechanical Engineering(ME)"}},
+  {"model": "dropdown.ugdiscipline", "pk": 5, "fields": {"ug_discipline": "Civil Engineering(CE)"}},
+  {"model": "dropdown.ugdiscipline", "pk": 6, "fields": {"ug_discipline": "Chemical Engineering(CHE)"}}
+]

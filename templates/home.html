@@ -13,15 +13,18 @@ Phd Admission
 {% endblock %}
 
 {% block body %}
-<div class="container">
-<div class="jumbotron">
-<h1>Welcome to Phd Admission</h1>
-<hr>
+<br>
+<div class="col-lg-1 col-xl-1">
+</div>
+<div class="align-items-center col-lg-10 col-xl-10">
+<div class="align-items-center jumbotron">
+<h1 class="text-center">Welcome to Phd Admission</h1>
+<br>
 <div class="container">
 <div class="row">
 <div class="col-md-6" >
 <div class="container" style="overflow-y:scroll; background-color: white; border-style: groove; border-radius: 5px; height: 300px;"><br>
-  <h2><center>Announcements</center></font></h2>
+  <h2 class="text-center">Announcements</h2>
   <table style="border-collapse: collapse;">
     <tbody>
       {% for announcement in announcements %}
@@ -50,4 +53,10 @@ Phd Admission
 </div>
 </div>
 </div>
+<div class="col-lg-1 col-xl-1">
+</div>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}

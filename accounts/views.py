@@ -28,11 +28,17 @@ from dateutil.relativedelta import relativedelta
 UserModel = get_user_model()
 
 class CustomLoginView(LoginView,RedirectView):
-    model = LoginView
+    """
+    It determines the authenticatation process from log in, and redirects the user.
+    This view is linked with phdadmission/templates/home.html
+    """
     form_class = LoginForm
     template_name = 'home.html'
 
     def get_redirect_url(self):
+        """
+        It redirects to respective homepage of user
+        """
         if(self.request.user.is_superuser):
             return reverse( 'admin:index' )
         elif(self.request.user.is_staff):
@@ -41,6 +47,9 @@ class CustomLoginView(LoginView,RedirectView):
             return reverse('phdfellows:phdfellows_home')
 
     def get_context_data(self, **kwargs):
+        """
+        It provides data to notice board(announcements).It will provide data that six months old
+        """
         context = super().get_context_data(**kwargs)
 
         six_months_ago = datetime.now()+relativedelta(months = -6)
@@ -52,6 +61,10 @@ class CustomLoginView(LoginView,RedirectView):
         return context
 
 def signup(request):
+    """
+    backend for signup, sends activation mail to user
+    This view is linked with phdadmission/accounts/templates/accounts/signup.html
+    """
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -66,7 +79,7 @@ def signup(request):
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-            mail_subject = 'Activate your blog account.'
+            mail_subject = 'Activate your IIT Ropar PhD Portal account.'
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
@@ -76,6 +89,9 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 def activate(request, uidb64, token):
+    """
+    It makes the unique url that is to be sent in email to user for activation
+    """
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)

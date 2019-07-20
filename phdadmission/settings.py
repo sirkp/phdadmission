@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'accounts',
     'myfiles',
     'dropdown',
-    'bootstrap_datepicker_plus',
     'faculty'
 ]
 

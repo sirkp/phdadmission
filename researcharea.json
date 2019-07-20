@@ -1,0 +1,7 @@
+[
+  {"model": "dropdown.researcharea", "pk": 1, "fields": {"research_area": "Artificial Intelligence"}},
+  {"model": "dropdown.researcharea", "pk": 2, "fields": {"research_area": "Machine Learning"}},
+  {"model": "dropdown.researcharea", "pk": 3, "fields": {"research_area": "Cloud Computing"}},
+  {"model": "dropdown.researcharea", "pk": 4, "fields": {"research_area": "Cryptography)"}},
+  {"model": "dropdown.researcharea", "pk": 5, "fields": {"research_area": "Software Automation"}}
+]

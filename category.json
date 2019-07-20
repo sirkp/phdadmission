@@ -1,0 +1,6 @@
+[
+  {"model": "dropdown.category", "pk": 1, "fields": {"category": "General"}},
+  {"model": "dropdown.category", "pk": 2, "fields": {"category": "OBC"}},
+  {"model": "dropdown.category", "pk": 3, "fields": {"category": "SC"}},
+  {"model": "dropdown.category", "pk": 4, "fields": {"category": "ST"}}
+]

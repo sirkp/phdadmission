@@ -1,0 +1,8 @@
+[
+  {"model": "dropdown.branchqualifyingexamination", "pk": 1, "fields": {"branch": "Computer Science and Engineering(CSE)"}},
+  {"model": "dropdown.branchqualifyingexamination", "pk": 2, "fields": {"branch": "Electronics and Communication(ECE)"}},
+  {"model": "dropdown.branchqualifyingexamination", "pk": 3, "fields": {"branch": "Electrical Engineering(EE)"}},
+  {"model": "dropdown.branchqualifyingexamination", "pk": 4, "fields": {"branch": "Mechanical Engineering(ME)"}},
+  {"model": "dropdown.branchqualifyingexamination", "pk": 5, "fields": {"branch": "Civil Engineering(CE)"}},
+  {"model": "dropdown.branchqualifyingexamination", "pk": 6, "fields": {"branch": "Chemical Engineering(CHE)"}}
+]

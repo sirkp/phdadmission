@@ -6,6 +6,11 @@ from django.core.validators import RegexValidator
 
 class Application(models.Model):
 
+    """
+    this is the model for application that needs to be filled for applying for admission in phd or ms.
+    It is linked User model by ForeignKey. It has unique application no
+    """
+
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 
     category = models.CharField(default='Select',max_length=100)
@@ -142,6 +147,9 @@ class Application(models.Model):
         # unique_together = ('submitted_year','applying_for','email')
 
 class WrittenTestScore(models.Model):
+    """
+    model for written test assessment, linked with Application model
+    """
     application_no = models.OneToOneField(Application,on_delete=models.CASCADE)
     written_test_score = models.IntegerField(null=True)
     programming_test_score = models.IntegerField(null=True)

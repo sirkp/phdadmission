@@ -10,6 +10,10 @@ from django.utils.timezone import make_aware
 from dateutil.relativedelta import relativedelta
 # Create your views here.
 class UploadAnnouncementsView(views.LoginRequiredMixin, views.SuperuserRequiredMixin, CreateView):
+    """
+    view for uploading announcements(files or images) by admin only
+    This view is linked with phdadmission/myfiles/templates/myfiles/upload_announcements.html
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -18,6 +22,10 @@ class UploadAnnouncementsView(views.LoginRequiredMixin, views.SuperuserRequiredM
     template_name = 'myfiles/upload_announcements.html'
 
 class AnnouncementsListView(views.LoginRequiredMixin, views.SuperuserRequiredMixin,ListView):
+    """
+    view to display uploaded announcements
+    This view is linked with phdadmission/myfiles/templates/myfiles/announcements_list.html
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -26,6 +34,9 @@ class AnnouncementsListView(views.LoginRequiredMixin, views.SuperuserRequiredMix
     context_object_name = 'announcements'
 
 class AnnouncementsDeleteView(views.LoginRequiredMixin, views.SuperuserRequiredMixin, DeleteView):
+    """
+    view to delete announcements
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -33,6 +44,10 @@ class AnnouncementsDeleteView(views.LoginRequiredMixin, views.SuperuserRequiredM
     success_url = reverse_lazy('upload:announcements_list')
 
 class UploadOMRSheetsView(views.LoginRequiredMixin, views.SuperuserRequiredMixin, CreateView):
+    """
+    view for uploading omrsheet images(multiple) by admin only
+    This view is linked with phdadmission/myfiles/templates/myfiles/upload_omr_sheets.html
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -49,6 +64,9 @@ class UploadOMRSheetsView(views.LoginRequiredMixin, views.SuperuserRequiredMixin
         return JsonResponse(data)
 
     def get_context_data(self, **kwargs):
+        """
+        display uploaded images today
+        """
         context = super().get_context_data(**kwargs)
 
         omr_sheets = OMRSheet.objects.all()
@@ -60,6 +78,10 @@ class UploadOMRSheetsView(views.LoginRequiredMixin, views.SuperuserRequiredMixin
         return context
 
 class OMRSheetsListView(views.LoginRequiredMixin, views.SuperuserRequiredMixin,ListView):
+    """
+    view to display uploaded all omr sheets images
+    This view is linked with phdadmission/myfiles/templates/myfiles/omr_sheets_list.html
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'
@@ -68,6 +90,9 @@ class OMRSheetsListView(views.LoginRequiredMixin, views.SuperuserRequiredMixin,L
     context_object_name = 'omr_sheets'
 
 class OMRSheetDeleteView(views.LoginRequiredMixin, views.SuperuserRequiredMixin, DeleteView):
+    """
+    view to delete omrsheet images
+    """
     redirect_unauthenticated_users = True
     raise_exception = True
     login_url = 'home'

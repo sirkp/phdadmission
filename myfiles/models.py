@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Announcement(models.Model):
+    """
+    model for announcements(notice)
+    """
     title = models.CharField(max_length=500)
     my_file = models.FileField(upload_to='announcements/')
     date_uploaded = models.DateTimeField(auto_now=True)
@@ -17,6 +20,9 @@ class Announcement(models.Model):
         ordering = ['-date_uploaded']
 
 class OMRSheet(models.Model):
+    """
+    model for omr sheet images
+    """
     my_images = models.ImageField(upload_to='omr_sheets/%Y/%m/%d/')
     uploaded_at = models.DateTimeField(auto_now=True)
 

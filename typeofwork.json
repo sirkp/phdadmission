@@ -1,0 +1,5 @@
+[
+  {"model": "dropdown.typeofwork", "pk": 1, "fields": {"type_of_work": "Teaching"}},
+  {"model": "dropdown.typeofwork", "pk": 2, "fields": {"type_of_work": "IT Sector"}},
+  {"model": "dropdown.typeofwork", "pk": 3, "fields": {"type_of_work": "Research"}}
+]

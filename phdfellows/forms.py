@@ -1,6 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django import forms
-from bootstrap_datepicker_plus import DatePickerInput
 from accounts.models import User
 from phdfellows.models import Application
 from django.utils.translation import ugettext_lazy as _
@@ -249,4 +248,3 @@ class ApplicationForm(forms.ModelForm):
             if (work_experience_in_year == ''):
                 raise forms.ValidationError(_("Work Experience is required"))
             return work_experience_in_year
-
