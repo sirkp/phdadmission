@@ -25,13 +25,17 @@ This is the portal for phd admissios of IIT Ropar.
 
 #### Connecting database with django application
 - Insatlling mysqlclient
+  - sudo apt-get install libexpat1=2.2.6-2
+  - sudo apt-get install libexpat1-dev
+  - sudo apt-get install libpython3.7-dev
+  - sudo apt-get install python3.7-dev
   - sudo apt-get install python3-dev
   - sudo apt-get install python3-dev libmysqlclient-dev
   - pip install mysqlclient
 
 - Create a mysql database in Mysql shell
 
-- Edit name(line 94) with your databse name, user(line 95) with your mysql username and  password(line 96)
+- Edit name(line 94) with your databse name, user(line 95) with your mysql username and  password(line 96) in phdadmission/settings.py
 
 ### RUNNING Web Application
 #### migrating apps
@@ -41,9 +45,9 @@ This is the portal for phd admissios of IIT Ropar.
 
 - python manage.py makemigrations faculty
 
-- python manage.py makemigrations faculty
+- python manage.py makemigrations myfiles
 
-- python manage.py makemigrations faculty
+- python manage.py makemigrations phdfellows
 
 - python manage.py migrate
 
