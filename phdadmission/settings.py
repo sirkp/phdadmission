@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'phdadmission.wsgi.application'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sirkpjad@gmail.com'
-EMAIL_HOST_PASSWORD = 'Believe@00'
+EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
 AUTH_USER_EMAIL_UNIQUE = True
 # Database
